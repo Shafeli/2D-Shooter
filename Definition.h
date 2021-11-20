@@ -1,6 +1,6 @@
 #pragma once
 
-
+// TODO: documentation
 /////////////////////////////////////////////////
 //           Definition
 // place for constexpr & golbals
@@ -9,7 +9,6 @@
 // constexpr for global values
 // golbal methods should have G_ followed by name  --- "Not Sure If This Is School Coding Standard" ---
 //
-// TODO: documentation
 /////////////////////////////////////////////////
 
 

@@ -12,6 +12,10 @@
 
 class AssetManager
 {
+private:
+    std::map<std::string, sf::Texture> m_textures;
+    std::map<std::string, sf::Font> m_fonts;
+
 public:
 
     void LoadTexture(std::string name, std::string fileName);
@@ -19,10 +23,5 @@ public:
 
     void LoadFont(std::string name, std::string fileName);
     sf::Font& GetFont(std::string name);
-
-private:
-    std::map<std::string, sf::Texture> m_textures;
-    std::map<std::string, sf::Font> m_fonts;
-
 
 };

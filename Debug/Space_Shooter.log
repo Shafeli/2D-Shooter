@@ -1,2 +1,9 @@
-﻿  SplashState.cpp
+﻿  AssetManager.cpp
+  GameManager.cpp
+  GameOverState.cpp
+  GameState.cpp
+  MainMenuState.cpp
+  SplashState.cpp
+  main.cpp
+  Generating Code...
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe
