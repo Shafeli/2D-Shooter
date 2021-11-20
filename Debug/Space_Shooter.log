@@ -1,6 +1,4 @@
-﻿  AssetManager.cpp
-  GameManager.cpp
-  GameOverState.cpp
+﻿  GameOverState.cpp
   GameState.cpp
   MainMenuState.cpp
   SplashState.cpp
