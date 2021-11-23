@@ -1,7 +1,2 @@
-﻿  GameOverState.cpp
-  GameState.cpp
-  MainMenuState.cpp
-  SplashState.cpp
-  main.cpp
-  Generating Code...
-  Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe
+﻿  main.cpp
+  Space_Shooter.vcxproj -> C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Debug\Space_Shooter.exe

@@ -41,7 +41,7 @@
 		{
 			std::cout << "Exiting Splash State\n";
 
-			//resharper says to use std::make_unique TODO: look in to this and what it does
+			//reSharper says to use std::make_unique TODO: look in to this and what it does
 			m_data->machine.AddState(std::make_unique<MainMenuState>(m_data), true);
 		}
 	}

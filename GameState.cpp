@@ -40,7 +40,7 @@ void GameState::Update(float dt)
 {
 	if (this->m_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
 	{
-		m_data->machine.AddState(StateRef(new GameOverState(m_data)), true);
+		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	}
 }
 
