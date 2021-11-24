@@ -31,6 +31,12 @@
     <Filter Include="Definitions">
       <UniqueIdentifier>{2364e532-8951-465a-b3e4-c60096d8e1b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States\GameState\GameObjects">
+      <UniqueIdentifier>{150450be-887b-4944-99be-2887952a7613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\GameState\GameObjects\Strategies">
+      <UniqueIdentifier>{174871b0-02de-44a6-ba9f-9aab8de8406e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine.cpp">
@@ -58,6 +64,10 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>States\GameOverState</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>States\GameState\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="ITouchStrategies.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -89,6 +99,12 @@
     </ClInclude>
     <ClInclude Include="GameOverState.h">
       <Filter>States\GameOverState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>States\GameState\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="ITouchStrategies.h">
+      <Filter>States\GameState\GameObjects\Strategies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

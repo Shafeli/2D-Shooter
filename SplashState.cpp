@@ -34,7 +34,7 @@
 		}
 	}
 
-    //checks show time and show time after "show time go to main menu"
+    //checks show time and after "show time go to main menu"
 	void SplashState::Update(float dt)
 	{
 		if (this->m_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)

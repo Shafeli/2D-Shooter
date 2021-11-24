@@ -1,2 +1,47 @@
-﻿  main.cpp
-  Space_Shooter.vcxproj -> C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Debug\Space_Shooter.exe
+﻿  AssetManager.cpp
+  GameManager.cpp
+  GameOverState.cpp
+  GameState.cpp
+  InputManager.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,134): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,102): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,74): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,50): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+  main.cpp
+  MainMenuState.cpp
+  SplashState.cpp
+  StateMachine.cpp
+  Generating Code...
+  Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe

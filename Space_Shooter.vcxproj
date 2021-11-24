@@ -147,9 +147,11 @@
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="ITouchStrategies.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="SplashState.cpp" />
@@ -159,9 +161,11 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Definition.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="ITouchStrategies.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="SplashState.h" />
     <ClInclude Include="State.h" />
