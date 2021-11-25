@@ -19,6 +19,11 @@ void GameState::Init()
 	this->m_data->assets.LoadTexture("Game State Background", Game_BACKGROUND_FILEPATH);
 
 	m_background.setTexture(this->m_data->assets.GetTexture("Game State Background"));
+
+	m_data->assets.LoadTexture("Player Sprite", PLAYER_SPRITE);
+
+
+	m_player = new Player(m_data);
 }
 
 
@@ -38,10 +43,11 @@ void GameState::HandleInput()
 
 void GameState::Update(float dt)
 {
-	if (this->m_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
-	{
-		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
-	}
+	//if (this->m_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
+	//{
+	//	m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
+	//}
+	m_player->Update(dt);
 }
 
 //renders state 
@@ -50,6 +56,8 @@ void GameState::Draw(float dt)
 	this->m_data->window.clear(sf::Color::Red);
 
 	this->m_data->window.draw(this->m_background);
+
+	m_player->Draw();
 
 	this->m_data->window.display();
 }

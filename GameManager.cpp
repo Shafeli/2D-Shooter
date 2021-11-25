@@ -4,7 +4,7 @@
 GameManager::GameManager(int width, int height, std::string title)
 {
     m_data->window.create(sf::VideoMode(width, height), title, sf::Style::Close | sf::Style::Titlebar);
-    m_data->machine.AddState(StateRef(new SplashState(this->m_data)));
+    m_data->machine.AddState(std::make_unique<SplashState>(this->m_data));
     this->Run();
 }
 

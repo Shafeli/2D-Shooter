@@ -19,6 +19,16 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
  
  */
 
+ /////////////////////////////////////////////////
+ //         Main & Gerneral Documentation
+ // TODO: documentation
+ /////////////////////////////////////////////////
+/*
+ 
+ 
+ 
+ */
+
 
 int main()
 {

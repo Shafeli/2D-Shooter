@@ -21,7 +21,9 @@ void MainMenuState::Init()
 
 	m_background.setTexture(this->m_data->assets.GetTexture("Main menu Background"));
 	m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
+
 	m_playButton.setTexture(this->m_data->assets.GetTexture("Play Button"));
+	m_playButton.setScale(sf::Vector2f(0.2f, 0.2f));
 
 	m_title.setPosition((SCREEN_WIDTH / 2) -(m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2 );
 	m_playButton.setPosition((SCREEN_WIDTH / 2) - (m_playButton.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - (m_playButton.getGlobalBounds().height / 2));
@@ -41,12 +43,12 @@ void MainMenuState::HandleInput()
 		if (m_data->input.IsSpriteClicked(m_playButton, sf::Mouse::Left, m_data->window))
         {
 			std::cout << "Button CLicked :: Moving TO Game State\n";
-			m_data->machine.AddState(StateRef(new GameState(m_data)), true);
+			m_data->machine.AddState(std::make_unique<GameState>(m_data), true);
 		}
 	}
 }
 
-//blank feels bad man
+
 void MainMenuState::Update(float dt)
 {
 

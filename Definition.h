@@ -22,24 +22,35 @@
 /////////////////////////////////
 //Splash screen 
 #define SPLASH_STATE_SHOW_TIME 3.0
-#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/pia21777-1041.jpg"
+#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/Space.jpg"
 /////////////////////////////////
 
 /////////////////////////////////
 //Main menu background
-#define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/sky.png"
+#define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/Space.jpg"
 //Game Title 
 #define GAME_TITLE_FILEPATH "Resources/res/title.png"
 //Play Button
-#define PLAY_BUTTON_FILEPATH "Resources/res/PlayButton.png"
+#define PLAY_BUTTON_FILEPATH "Resources/res/StartButton.png"
 /////////////////////////////////
 
 /////////////////////////////////
 //Game Background 
-#define Game_BACKGROUND_FILEPATH "Resources/res/Space.png"
+#define Game_BACKGROUND_FILEPATH "Resources/res/Space.jpg"
 /////////////////////////////////
 
 /////////////////////////////////
 //Game Over Screen
 #define Game_OVER_FILEPATH "Resources/res/pia21777-1041.jpg"
 /////////////////////////////////
+
+
+
+/////////////////////////////////
+//Player Sprite
+#define PLAYER_SPRITE "Resources/res/Player.png"
+/////////////////////////////////
+
+
+
+#define  ANIMATION_DURATION 0.4f;

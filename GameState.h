@@ -1,6 +1,7 @@
 #pragma once
 #include "GameManager.h"
 #include "State.h"
+#include "Player.h"
 
 class GameState : public State
 {
@@ -12,12 +13,15 @@ class GameState : public State
 	/////////////////////////////////////////////////
 	//clock to keep track of how much time has passed
 	// temp for testing moving to end game state
-	sf::Clock m_clock;
+	// sf::Clock m_clock;
 	/////////////////////////////////////////////////
 
 
     //sprites
 	sf::Sprite m_background;
+
+
+	Player *m_player;
 
 public:
 

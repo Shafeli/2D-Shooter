@@ -25,9 +25,8 @@ struct GameData
 
 };
 
+
 using GameDataRef = std::shared_ptr<GameData>;
-
-
 
 class GameManager
 {
@@ -43,4 +42,3 @@ private:
 
     void Run();
 };
-
