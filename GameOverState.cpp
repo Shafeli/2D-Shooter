@@ -40,7 +40,7 @@ void GameOverState::Update(float dt)
 }
 
 //renders state 
-void GameOverState::Draw(float dt)
+void GameOverState::Draw(float interpolation)
 {
 	this->m_data->window.clear(sf::Color::Red);
 

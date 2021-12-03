@@ -20,7 +20,6 @@ class GameState : public State
     //sprites
 	sf::Sprite m_background;
 
-
 	Player *m_player;
 
 public:
@@ -32,7 +31,7 @@ public:
 	virtual void Init() override final;
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
-	virtual void Draw(float dt)override final;
+	virtual void Draw(float interpolation)override final;
 
 
 };

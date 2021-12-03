@@ -151,7 +151,6 @@
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="ITouchStrategies.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -165,8 +164,12 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="IControls.h" />
+    <ClInclude Include="IDeathStrategy.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="ITouchStrategies.h" />
+    <ClInclude Include="IOnUseStrategy.h" />
+    <ClInclude Include="IResources.h" />
+    <ClInclude Include="ITouchStrategy.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SplashState.h" />

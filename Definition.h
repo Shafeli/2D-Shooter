@@ -7,7 +7,7 @@
 // single place for file paths for quick and easy changing out files for anything in project
 // format will be Macros for file names
 // constexpr for global values
-// global methods should have G_ followed by name  --- "Not Sure If This Is School Coding Standard" ---
+// global methods should have G_ followed by name  
 //
 /////////////////////////////////////////////////
 
@@ -52,5 +52,8 @@
 /////////////////////////////////
 
 
+///////////////////////////////////////
+//  TODO: prototype animation manager
+///////////////////////////////////////
 
 #define  ANIMATION_DURATION 0.4f;

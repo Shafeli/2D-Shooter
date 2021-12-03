@@ -55,7 +55,7 @@ void MainMenuState::Update(float dt)
 }
 
 //renders state 
-void MainMenuState::Draw(float dt)
+void MainMenuState::Draw(float interpolation)
 {
 	this->m_data->window.clear();
 

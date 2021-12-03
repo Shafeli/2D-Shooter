@@ -32,13 +32,13 @@ class GameManager
 {
     const float DeltaTime = 1.0f / 60.0f;
     sf::Clock m_clock;
+    GameDataRef m_data = std::make_shared<GameData>();
 
 public:
     GameManager(int width, int height, std::string title);
 
 
 private:
-    GameDataRef m_data = std::make_shared<GameData>();
 
     void Run();
 };

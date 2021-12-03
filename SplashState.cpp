@@ -41,13 +41,12 @@
 		{
 			std::cout << "Exiting Splash State\n";
 
-			//reSharper says to use std::make_unique TODO: look in to this and what it does
 			m_data->machine.AddState(std::make_unique<MainMenuState>(m_data), true);
 		}
 	}
 
     //renders state 
-	void SplashState::Draw(float dt)
+	void SplashState::Draw(float interpolation)
 	{
 		//If you see this consider it a error
 		this->m_data->window.clear(sf::Color::Red);
