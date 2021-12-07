@@ -29,7 +29,7 @@
 //Main menu background
 #define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/Space.jpg"
 //Game Title 
-#define GAME_TITLE_FILEPATH "Resources/res/title.png"
+#define GAME_TITLE_FILEPATH "Resources/res/title1.png"
 //Play Button
 #define PLAY_BUTTON_FILEPATH "Resources/res/StartButton.png"
 /////////////////////////////////
@@ -49,6 +49,7 @@
 /////////////////////////////////
 //Player Sprite
 #define PLAYER_SPRITE "Resources/res/Player.png"
+constexpr float gPlayerSpeed = 5.f;
 /////////////////////////////////
 
 
@@ -56,4 +57,12 @@
 //  TODO: prototype animation manager
 ///////////////////////////////////////
 
+#define TARGET_SPRITE "Resources/res/Target.png"
+
+
+
+
+/////////////////////////////////////
+//  TODO: animation system - save for later quite a lot of work in this 
 #define  ANIMATION_DURATION 0.4f;
+/////////////////////////////////////

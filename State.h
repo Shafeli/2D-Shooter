@@ -22,6 +22,6 @@ public:
 // optional state methods
 /////////////////////////////////////////////////
     virtual void Pause() {}
-    virtual void Resume() {};
+    virtual void Resume() {}
 
 };

@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/Graphics/Sprite.hpp>
 
+#include "Definition.h"
 #include "GameManager.h"
 
 class IControls;
@@ -14,14 +15,15 @@ class GameObject
 {
     GameDataRef m_data;
     sf::Sprite m_sprite;
+
+    //TODO get this working for pacing player fire rate
     sf::Clock m_rateOfFire;
 
-    //TODO move to  Definition.h
-    float m_movementSpeed = 5.f;
+    float m_movementSpeed = gPlayerSpeed;
 
-    std::vector<ITouchStrategy*> m_touchStrat;
-    std::vector<IOnUseStrategy*> m_basicStrat;
-    std::vector<IDeathStrategy*> m_deathStrat;
+    std::vector<ITouchStrategy*> m_pTouchStrat;
+    std::vector<IOnUseStrategy*> m_pOnUseStrat;
+    std::vector<IDeathStrategy*> m_pDeathStrat;
     IResourseStrategy* m_pScore;
     IControls* m_pControlType;
 

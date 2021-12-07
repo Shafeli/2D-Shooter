@@ -30,6 +30,16 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
  */
 
 
+
+/////////////////////////////////////////////////////
+//            Large TODO:
+//-Targets spawning
+//-Tartget spawning system 
+//-Shooting system 
+//-score system
+//
+/////////////////////////////////////////////////////
+
 int main()
 {
     GameManager spaceShooter(SCREEN_WIDTH, SCREEN_HEIGHT, "Space Shooter");

@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "State.h"
 #include "Player.h"
+#include "Target.h"
 
 class GameState : public State
 {
@@ -21,6 +22,7 @@ class GameState : public State
 	sf::Sprite m_background;
 
 	Player *m_player;
+	Target* m_target;
 
 public:
 

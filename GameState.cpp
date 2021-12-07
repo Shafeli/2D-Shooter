@@ -21,9 +21,10 @@ void GameState::Init()
 	m_background.setTexture(this->m_data->assets.GetTexture("Game State Background"));
 
 	m_data->assets.LoadTexture("Player Sprite", PLAYER_SPRITE);
-
+	m_data->assets.LoadTexture("Target Sprite", TARGET_SPRITE);
 
 	m_player = new Player(m_data);
+	m_target = new Target(m_data);
 }
 
 
@@ -48,6 +49,7 @@ void GameState::Update(float dt)
 	//	m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	//}
 	m_player->Update(dt);
+	m_target->Update(dt);
 }
 
 //renders state 
@@ -58,6 +60,6 @@ void GameState::Draw(float interpolation)
 	this->m_data->window.draw(this->m_background);
 
 	m_player->Draw();
-
+	m_target->Draw();
 	this->m_data->window.display();
 }

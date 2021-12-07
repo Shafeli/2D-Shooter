@@ -22,6 +22,7 @@ void Player::Update(float dt)
     // Check left side of the window
     if (m_sprite.getGlobalBounds().left <= 0.f)
         m_sprite.move(m_sprite.getGlobalBounds().width / 9 ,0.f);
+
     //check right side of the window 
     if (m_sprite.getGlobalBounds().left + m_sprite.getGlobalBounds().width >= m_data->window.getSize().x)
         m_sprite.move(-m_sprite.getGlobalBounds().width / 9, 0.f);
