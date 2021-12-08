@@ -11,7 +11,7 @@ class Target
     bool m_movementSwitch = false;
   
 public:
-    Target(GameDataRef data);
+    Target(GameDataRef data, size_t targetNum );
 
     void Draw();
 

@@ -2,7 +2,6 @@
 
 #include <iostream>
 
-
 Player::Player(GameDataRef data)
     :m_data(data)
 {
@@ -38,7 +37,6 @@ void Player::Update(float dt)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        
         if (m_rateOfFire.getElapsedTime().asSeconds() > gRateOfFire)
         {
             std::cout << "Bang!\n";

@@ -21,8 +21,9 @@ class GameState : public State
     //sprites
 	sf::Sprite m_background;
 
-	Player *m_player;
-	Target* m_target;
+	Player* m_player;
+	//Target* m_target;
+	std::vector<Target*> m_pTargetList;
 
 public:
 

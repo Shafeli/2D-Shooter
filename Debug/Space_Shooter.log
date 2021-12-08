@@ -9,17 +9,19 @@ C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\GameObject.cpp(43,34): warni
   GameOverState.cpp
 C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\GameOverState.cpp(37,34): warning C4100: 'dt': unreferenced formal parameter
 C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\GameOverState.cpp(43,32): warning C4100: 'interpolation': unreferenced formal parameter
+  GameState.cpp
+C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\GameState.cpp(66,28): warning C4100: 'interpolation': unreferenced formal parameter
   MainMenuState.cpp
 C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\MainMenuState.cpp(52,34): warning C4100: 'dt': unreferenced formal parameter
 C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\MainMenuState.cpp(58,32): warning C4100: 'interpolation': unreferenced formal parameter
   Player.cpp
-C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Player.cpp(20,27): warning C4100: 'dt': unreferenced formal parameter
+C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Player.cpp(19,27): warning C4100: 'dt': unreferenced formal parameter
   SplashState.cpp
 C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\SplashState.cpp(38,33): warning C4100: 'dt': unreferenced formal parameter
 C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\SplashState.cpp(49,31): warning C4100: 'interpolation': unreferenced formal parameter
   Target.cpp
-C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Target.cpp(31,13): warning C4804: '<=': unsafe use of type 'bool' in operation
-C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Target.cpp(17,27): warning C4100: 'dt': unreferenced formal parameter
+C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Target.cpp(65,13): warning C4804: '<=': unsafe use of type 'bool' in operation
+C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Target.cpp(52,27): warning C4100: 'dt': unreferenced formal parameter
   main.cpp
   Generating Code...
   Space_Shooter.vcxproj -> C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Debug\Space_Shooter.exe

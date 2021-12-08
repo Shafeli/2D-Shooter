@@ -58,14 +58,13 @@ constexpr float gRateOfFire = 1.f / 4;
 //////////////////////////////////
 //AI 
 #define TARGET_SPRITE "Resources/res/Target.png"
-constexpr float gTargetSpeed = 5.f;
-constexpr float gTargetYAxisAmount = 15.f;
+constexpr float gTargetSpeed = 10.f;
+constexpr float gTargetYAxisDecreaseAmount = 30.f;
+//////////////////////////////////
 
+// TODO: animation system - save for later quite a lot of work in this
 ///////////////////////////////////////
 //  TODO: prototype animation manager
-///////////////////////////////////////
-
-/////////////////////////////////////
-//  TODO: animation system - save for later quite a lot of work in this 
+// 
 #define  ANIMATION_DURATION 0.4f;
-/////////////////////////////////////
+///////////////////////////////////////
