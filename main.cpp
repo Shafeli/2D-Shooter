@@ -34,9 +34,10 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 /////////////////////////////////////////////////////
 //            Large TODO:
 //-Targets spawning
+//-Target movement
 //-Tartget spawning system 
 //-Shooting system 
-//-score system
+//-Score system
 //
 /////////////////////////////////////////////////////
 

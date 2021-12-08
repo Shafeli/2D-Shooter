@@ -47,20 +47,23 @@
 
 
 /////////////////////////////////
-//Player Sprite
+//Player
 #define PLAYER_SPRITE "Resources/res/Player.png"
 constexpr float gPlayerSpeed = 5.f;
+constexpr float gRateOfFire = 1.f / 4;
 /////////////////////////////////
 
+
+
+//////////////////////////////////
+//AI 
+#define TARGET_SPRITE "Resources/res/Target.png"
+constexpr float gTargetSpeed = 5.f;
+constexpr float gTargetYAxisAmount = 15.f;
 
 ///////////////////////////////////////
 //  TODO: prototype animation manager
 ///////////////////////////////////////
-
-#define TARGET_SPRITE "Resources/res/Target.png"
-
-
-
 
 /////////////////////////////////////
 //  TODO: animation system - save for later quite a lot of work in this 

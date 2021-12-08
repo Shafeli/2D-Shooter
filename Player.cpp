@@ -38,10 +38,11 @@ void Player::Update(float dt)
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-
-        if (m_rateOfFire.getElapsedTime().asSeconds() > 0.4f / 4)
+        
+        if (m_rateOfFire.getElapsedTime().asSeconds() > gRateOfFire)
         {
-            std::cout << "Bang!!\n";
+            std::cout << "Bang!\n";
+            m_rateOfFire.restart();
         }
     }
 }
