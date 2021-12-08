@@ -68,7 +68,7 @@ void Target::Update(float dt)
         }
         if (m_sprite.getGlobalBounds().left <= 0.f)
         {
-            std::cout << "Target has touched left\n";
+            //std::cout << "Target has touched left\n";
             m_sprite.move(0, gTargetYAxisDecreaseAmount);
             m_movementSwitch = true;
             return;
@@ -80,7 +80,7 @@ void Target::Update(float dt)
         if (m_sprite.getGlobalBounds().left + m_sprite.getGlobalBounds().width >= m_data->window.getSize().x)
         {
             m_sprite.move(0, gTargetYAxisDecreaseAmount);
-            std::cout << "Target has touched right\n";
+           // std::cout << "Target has touched right\n";
             m_movementSwitch = false;
         }
     }

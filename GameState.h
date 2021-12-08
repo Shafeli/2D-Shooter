@@ -1,8 +1,11 @@
 #pragma once
 #include "GameManager.h"
 #include "State.h"
-#include "Player.h"
-#include "Target.h"
+
+
+class Target;
+class Player;
+class Bullet;
 
 class GameState : public State
 {
@@ -24,6 +27,7 @@ class GameState : public State
 	Player* m_player;
 	//Target* m_target;
 	std::vector<Target*> m_pTargetList;
+	std::vector<Bullet*> m_bulletList;
 
 public:
 

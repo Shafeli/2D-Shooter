@@ -49,11 +49,15 @@
 /////////////////////////////////
 //Player
 #define PLAYER_SPRITE "Resources/res/Player.png"
-constexpr float gPlayerSpeed = 5.f;
+constexpr float gPlayerSpeed = 7.f;
 constexpr float gRateOfFire = 1.f / 4;
 /////////////////////////////////
 
-
+/////////////////////////////////
+//Bullet
+#define BULLET_SPRITE "Resources/res/Bullet.png"
+constexpr float gBulletYAxisAmount = 30.f;
+/////////////////////////////////
 
 //////////////////////////////////
 //AI 

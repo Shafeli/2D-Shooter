@@ -94,6 +94,9 @@
     <ClCompile Include="Target.cpp">
       <Filter>States\GameState\Prototyping</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>States\GameState\Prototyping</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -148,6 +151,9 @@
       <Filter>States\GameState\Prototyping</Filter>
     </ClInclude>
     <ClInclude Include="Target.h">
+      <Filter>States\GameState\Prototyping</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>States\GameState\Prototyping</Filter>
     </ClInclude>
   </ItemGroup>
