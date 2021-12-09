@@ -76,16 +76,16 @@ void GameState::Update(float dt)
 		}
 	}
 
-	for (auto i : m_pTargetList)
+	for (auto target : m_pTargetList)
 	{
-		for (auto j : m_bulletList)
+		for (auto bullet : m_bulletList)
 		{
 			const auto newEnd = std::remove_if
 		    (
 				m_pTargetList.begin(), m_pTargetList.end(),
-				[i,j](const Target* tar)
+				[bullet](Target* tar)
 				{
-					if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
+					if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
 					{
 						std::cout << "Hit!\n";
 						return true;
