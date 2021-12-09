@@ -10,7 +10,7 @@ class Player
     GameDataRef m_data;
     sf::Sprite m_sprite;
     sf::Clock m_rateOfFire;
-    float m_movementSpeed = 5.f;
+
     bool m_fireShot = false;
 
 public:

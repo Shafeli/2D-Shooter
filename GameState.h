@@ -20,6 +20,7 @@ class GameState : public State
 	// sf::Clock m_clock;
 	/////////////////////////////////////////////////
 
+	sf::Clock m_rateOfFire;
 
     //sprites
 	sf::Sprite m_background;
@@ -27,7 +28,8 @@ class GameState : public State
 	//Player* m_player;
 	//Target* m_target;
 	std::vector<Target*> m_pTargetList;
-	std::vector<Bullet*> m_bulletList;
+	std::vector<Bullet*> m_pPlayerBulletList;
+	std::vector<Bullet*> m_pAIBulletList;
 
 public:
 

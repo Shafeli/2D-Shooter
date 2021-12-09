@@ -34,17 +34,16 @@ void Player::Update(float dt)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        m_sprite.move(-m_movementSpeed, 0.f);
+        m_sprite.move(-gPlayerSpeed, 0.f);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        m_sprite.move(+m_movementSpeed, 0.f);
+        m_sprite.move(+gPlayerSpeed, 0.f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         if (m_rateOfFire.getElapsedTime().asSeconds() > gRateOfFire)
         {
-            //std::cout << "Bang!\n";
             m_fireShot = true;
             m_rateOfFire.restart();
         }

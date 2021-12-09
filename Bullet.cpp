@@ -2,12 +2,14 @@
 
 #include "Definition.h"
 
-Bullet::Bullet(GameDataRef data,const sf::Vector2f& pos)
+Bullet::Bullet(GameDataRef data,const sf::Vector2f& pos, float Direction)
     :m_data(data)
+    ,m_direction(Direction)
 {
     m_sprite.setTexture(m_data->assets.GetTexture("Bullet Sprite"));
     m_sprite.setScale(sf::Vector2f(0.2f, 0.2f));
     m_sprite.setPosition(pos);
+
 }
 
 void Bullet::Draw()
@@ -17,7 +19,7 @@ void Bullet::Draw()
 
 void Bullet::Update(float dt)
 {
-    m_sprite.move(0, -gTargetYAxisDecreaseAmount);
+    m_sprite.move(0, m_direction);
 }
 
 const sf::Vector2f& Bullet::GetPOS()

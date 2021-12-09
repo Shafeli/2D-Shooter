@@ -14,7 +14,7 @@ GameOverState::GameOverState(GameDataRef data)
 void GameOverState::Init()
 {
 	std::cout << "Entered Game Over State\n";
-	this->m_data->assets.LoadTexture("Game Over State Background", Game_OVER_FILEPATH);
+	this->m_data->assets.LoadTexture("Game Over State Background", gGameOverFile);
 
 	m_background.setTexture(this->m_data->assets.GetTexture("Game Over State Background"));
 }

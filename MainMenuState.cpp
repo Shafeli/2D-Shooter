@@ -15,9 +15,9 @@ MainMenuState::MainMenuState(GameDataRef data)
 // loads texture to asset manager
 void MainMenuState::Init()
 {
-	this->m_data->assets.LoadTexture("Main menu Background", MAIN_MENU_BACKGROUND_FILEPATH);
-	this->m_data->assets.LoadTexture("Game TItle", GAME_TITLE_FILEPATH);
-	this->m_data->assets.LoadTexture("Play Button", PLAY_BUTTON_FILEPATH);
+	this->m_data->assets.LoadTexture("Main menu Background", gMainMenuBackgroundFile);
+	this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
+	this->m_data->assets.LoadTexture("Play Button", gPlayButtonFile);
 
 	m_background.setTexture(this->m_data->assets.GetTexture("Main menu Background"));
 	m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
@@ -25,8 +25,8 @@ void MainMenuState::Init()
 	m_playButton.setTexture(this->m_data->assets.GetTexture("Play Button"));
 	m_playButton.setScale(sf::Vector2f(0.2f, 0.2f));
 
-	m_title.setPosition((SCREEN_WIDTH / 2) -(m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2 );
-	m_playButton.setPosition((SCREEN_WIDTH / 2) - (m_playButton.getGlobalBounds().width / 2), (SCREEN_HEIGHT / 2) - (m_playButton.getGlobalBounds().height / 2));
+	m_title.setPosition((gScreenWidth / 2) -(m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2 );
+	m_playButton.setPosition((gScreenWidth / 2) - (m_playButton.getGlobalBounds().width / 2), (gScreenHeight / 2) - (m_playButton.getGlobalBounds().height / 2));
 }
 
 //TODO clicking sprite

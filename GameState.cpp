@@ -18,13 +18,13 @@ GameState::GameState(GameDataRef data)
 void GameState::Init()
 {
 	std::cout << "Entered Game State\n";
-	this->m_data->assets.LoadTexture("Game State Background", Game_BACKGROUND_FILEPATH);
+	this->m_data->assets.LoadTexture("Game State Background", gGameBackgroundFile);
 
 	m_background.setTexture(this->m_data->assets.GetTexture("Game State Background"));
 
-	m_data->assets.LoadTexture("Player Sprite", PLAYER_SPRITE);
-	m_data->assets.LoadTexture("Target Sprite", TARGET_SPRITE);
-	m_data->assets.LoadTexture("Bullet Sprite", BULLET_SPRITE);
+	m_data->assets.LoadTexture("Player Sprite", gPlayerSpriteFile);
+	m_data->assets.LoadTexture("Target Sprite", gTargetSpriteFile);
+	m_data->assets.LoadTexture("Bullet Sprite", gBulletSpriteFile);
 
 	m_player = std::make_unique<Player>(m_data);
 
@@ -60,7 +60,7 @@ void GameState::Update(float dt)
 	m_player->Update(dt);
 	if(m_player->FireShot())
 	{
-		m_bulletList.push_back(new Bullet(m_data, m_player->GetPOS()));
+		m_pPlayerBulletList.push_back(new Bullet(m_data, m_player->GetPOS(), -gPlayerBulletYAxisAmount));
 	}
 
 	for (auto i : m_pTargetList)
@@ -68,19 +68,43 @@ void GameState::Update(float dt)
 		i->Update(dt);
 	}
 
-	if (!m_bulletList.empty())
+	for (auto i : m_pTargetList)
 	{
-		for (auto i : m_bulletList)
+		sf::Time time = m_rateOfFire.getElapsedTime();
+		if (i->FireShot())
+		{
+			if (time > sf::seconds(.5))
+			{
+				std::cout << "Bang!\n";
+				m_pAIBulletList.push_back(new Bullet(m_data, i->GetPOS(), gAIBulletYAxisAmount));
+				m_rateOfFire.restart();
+			}
+			
+		}
+	}
+
+	if (!m_pPlayerBulletList.empty())
+	{
+		for (auto i : m_pPlayerBulletList)
+		{
+			i->Update(dt);
+		}
+	}
+	if (!m_pAIBulletList.empty())
+	{
+		for (auto i : m_pAIBulletList)
 		{
 			i->Update(dt);
 		}
 	}
 
+	////////////////////////////////////////////////////////
+	//TODO: Clean up
 	for (auto target : m_pTargetList)
 	{
-		for (auto bullet : m_bulletList)
+		for (auto bullet : m_pPlayerBulletList)
 		{
-			const auto newEnd = std::remove_if
+			const auto TargetNewEnd = std::remove_if
 		    (
 				m_pTargetList.begin(), m_pTargetList.end(),
 				[bullet](Target* tar)
@@ -93,9 +117,24 @@ void GameState::Update(float dt)
 				    return false;
 				}
 			);
-			m_pTargetList.erase(newEnd, m_pTargetList.end());
+			const auto bulletNewEnd = std::remove_if
+			(
+				m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
+				[target](Bullet* tar)
+				{
+					if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
+					{
+						
+						return true;
+					}
+					return false;
+				}
+			);
+			m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
+			m_pPlayerBulletList.erase(bulletNewEnd, m_pPlayerBulletList.end());
 		}
 	}
+	////////////////////////////////////////////////////////
 }
 
 //renders state 
@@ -107,9 +146,9 @@ void GameState::Draw(float interpolation)
 
 	m_player->Draw();
 
-	if (!m_bulletList.empty())
+	if (!m_pAIBulletList.empty())
 	{
-		for (auto i : m_bulletList)
+		for (auto i : m_pAIBulletList)
 		{
 			if (i == nullptr)
 			{
@@ -119,6 +158,17 @@ void GameState::Draw(float interpolation)
 		}
 	}
 
+	if (!m_pPlayerBulletList.empty())
+	{
+		for (auto i : m_pPlayerBulletList)
+		{
+			if (i == nullptr)
+			{
+				continue;
+			}
+			i->Draw();
+		}
+	}
 	for (auto i : m_pTargetList)
 	{
 		if (i == nullptr)

@@ -1,5 +1,6 @@
 #include "GameManager.h"
 #include "Definition.h"
+#include <ctime>
 
 ////////////////////////////////////////////////
 //                 source:                    //
@@ -33,16 +34,18 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
 /////////////////////////////////////////////////////
 //            Large TODO:
-//-Targets spawning
-//-Target movement
-//-Tartget spawning system 
-//-Shooting system 
-//-Score system
+//-Targets spawning - prototyped
+//-Target movement - prototyped
+//-Tartget spawning system - prototyped 
+//-Shooting system  - prototyped
+//-Score system 
 //
 /////////////////////////////////////////////////////
 
 int main()
 {
-    GameManager spaceShooter(SCREEN_WIDTH, SCREEN_HEIGHT, "Space Shooter");
+    srand(time(nullptr));
+
+    GameManager spaceShooter(gScreenWidth, gScreenHeight, "Space Shooter");
     return 0;
 }

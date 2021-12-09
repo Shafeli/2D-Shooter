@@ -97,3 +97,21 @@ const sf::Sprite& Target::GetSprite()
     // TODO: insert return statement here
     return m_sprite;
 }
+
+bool Target::FireShot()
+{
+    sf::Time time = m_rateOfFire.getElapsedTime();
+
+    if (!m_fireShot)
+    {
+
+        if (time > sf::seconds(rand() % 2 + 1))
+        {
+            m_fireShot = true;
+            return true;
+        }
+    }
+
+    m_fireShot = false;
+    return false;
+}

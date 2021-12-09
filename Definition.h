@@ -12,58 +12,59 @@
 /////////////////////////////////////////////////
 
 
-//TODO Change to constexpr 
+
 /////////////////////////////////
 //size of window 
-#define SCREEN_WIDTH 768
-#define SCREEN_HEIGHT 1024
+constexpr auto gScreenWidth = 768;
+constexpr auto gScreenHeight = 1024;
 /////////////////////////////////
 
 /////////////////////////////////
 //Splash screen 
-#define SPLASH_STATE_SHOW_TIME 3.0
-#define SPLASH_SCENE_BACKGROUND_FILEPATH "Resources/res/Space.jpg"
+constexpr auto gSplashShowTime = 3.0;
+constexpr auto gSplahBackgroundFile = "Resources/res/Space.jpg";
 /////////////////////////////////
 
 /////////////////////////////////
 //Main menu background
-#define MAIN_MENU_BACKGROUND_FILEPATH "Resources/res/Space.jpg"
+constexpr auto gMainMenuBackgroundFile = "Resources/res/Space.jpg";
 //Game Title 
-#define GAME_TITLE_FILEPATH "Resources/res/title1.png"
+constexpr auto gGameTitleFile = "Resources/res/title1.png";
 //Play Button
-#define PLAY_BUTTON_FILEPATH "Resources/res/StartButton.png"
+constexpr auto gPlayButtonFile = "Resources/res/StartButton.png";
 /////////////////////////////////
 
 /////////////////////////////////
 //Game Background 
-#define Game_BACKGROUND_FILEPATH "Resources/res/Space.jpg"
+constexpr auto gGameBackgroundFile = "Resources/res/Space.jpg";
 /////////////////////////////////
 
 /////////////////////////////////
 //Game Over Screen
-#define Game_OVER_FILEPATH "Resources/res/Space.jpg"
+constexpr auto gGameOverFile = "Resources/res/Space.jpg";
 /////////////////////////////////
 
 
 
 /////////////////////////////////
 //Player
-#define PLAYER_SPRITE "Resources/res/Player.png"
-constexpr float gPlayerSpeed = 7.f;
+constexpr auto gPlayerSpriteFile = "Resources/res/Player.png";
+constexpr float gPlayerSpeed = 8.f;
 constexpr float gRateOfFire = 1.f / 4;
 /////////////////////////////////
 
 /////////////////////////////////
 //Bullet
-#define BULLET_SPRITE "Resources/res/Bullet.png"
-constexpr float gBulletYAxisAmount = 30.f;
+constexpr auto gBulletSpriteFile = "Resources/res/Bullet.png";
+constexpr float gAIBulletYAxisAmount = 15.f;
+constexpr float gPlayerBulletYAxisAmount = 30.f;
 /////////////////////////////////
 
 //////////////////////////////////
 //AI 
-#define TARGET_SPRITE "Resources/res/Target.png"
+constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
 constexpr float gTargetSpeed = 10.f;
-constexpr float gTargetYAxisDecreaseAmount = 30.f;
+constexpr float gTargetYAxisDecreaseAmount = 35.f;
 //////////////////////////////////
 
 // TODO: animation system - save for later quite a lot of work in this

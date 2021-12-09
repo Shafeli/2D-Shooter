@@ -15,7 +15,7 @@
 	void SplashState::Init()
 	{
 		std::cout << "Entered Splash State\n";
-		this->m_data->assets.LoadTexture("Splash State Background", SPLASH_SCENE_BACKGROUND_FILEPATH);
+		this->m_data->assets.LoadTexture("Splash State Background", gSplahBackgroundFile);
 
 		m_background.setTexture(this->m_data->assets.GetTexture("Splash State Background"));
 	}
@@ -37,7 +37,7 @@
     //checks show time and after "show time go to main menu"
 	void SplashState::Update(float dt)
 	{
-		if (this->m_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
+		if (this->m_clock.getElapsedTime().asSeconds() > gSplashShowTime)
 		{
 			std::cout << "Exiting Splash State\n";
 
