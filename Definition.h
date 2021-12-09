@@ -7,7 +7,7 @@
 // single place for file paths for quick and easy changing out files for anything in project
 // format will be Macros for file names
 // constexpr for global values
-// global methods should have G_ followed by name  
+// globals should have g followed by name  
 //
 /////////////////////////////////////////////////
 
@@ -41,7 +41,7 @@
 
 /////////////////////////////////
 //Game Over Screen
-#define Game_OVER_FILEPATH "Resources/res/pia21777-1041.jpg"
+#define Game_OVER_FILEPATH "Resources/res/Space.jpg"
 /////////////////////////////////
 
 
@@ -70,5 +70,5 @@ constexpr float gTargetYAxisDecreaseAmount = 30.f;
 ///////////////////////////////////////
 //  TODO: prototype animation manager
 // 
-#define  ANIMATION_DURATION 0.4f;
+//#define  ANIMATION_DURATION 0.4f;
 ///////////////////////////////////////

@@ -23,8 +23,8 @@ class GameState : public State
 
     //sprites
 	sf::Sprite m_background;
-
-	Player* m_player;
+	std::unique_ptr<Player> m_player;
+	//Player* m_player;
 	//Target* m_target;
 	std::vector<Target*> m_pTargetList;
 	std::vector<Bullet*> m_bulletList;

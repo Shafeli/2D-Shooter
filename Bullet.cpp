@@ -19,3 +19,15 @@ void Bullet::Update(float dt)
 {
     m_sprite.move(0, -gTargetYAxisDecreaseAmount);
 }
+
+const sf::Vector2f& Bullet::GetPOS()
+{
+    // TODO: insert return statement here
+    return m_sprite.getPosition();
+}
+
+const sf::Sprite& Bullet::GetSprite()
+{
+    // TODO: insert return statement here
+    return m_sprite;
+}

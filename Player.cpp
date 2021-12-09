@@ -44,7 +44,7 @@ void Player::Update(float dt)
     {
         if (m_rateOfFire.getElapsedTime().asSeconds() > gRateOfFire)
         {
-            std::cout << "Bang!\n";
+            //std::cout << "Bang!\n";
             m_fireShot = true;
             m_rateOfFire.restart();
         }

@@ -1,7 +1,7 @@
 #include "GameState.h"
 
 #include <iostream>
-
+#include "memory"
 #include "Definition.h"
 #include "GameOverState.h"
 #include "Bullet.h"
@@ -26,8 +26,8 @@ void GameState::Init()
 	m_data->assets.LoadTexture("Target Sprite", TARGET_SPRITE);
 	m_data->assets.LoadTexture("Bullet Sprite", BULLET_SPRITE);
 
-	m_player = new Player(m_data);
-	//m_target = new Target(m_data);
+	m_player = std::make_unique<Player>(m_data);
+
 	
 	for (size_t i = 0; i < 10; ++i)
 	{
@@ -52,12 +52,12 @@ void GameState::HandleInput()
 
 void GameState::Update(float dt)
 {
-	//if (this->m_clock.getElapsedTime().asSeconds() > SPLASH_STATE_SHOW_TIME)
-	//{
-	//	m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
-	//}
-	m_player->Update(dt);
+	if (m_pTargetList.empty())
+	{
+		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
+	}
 
+	m_player->Update(dt);
 	if(m_player->FireShot())
 	{
 		m_bulletList.push_back(new Bullet(m_data, m_player->GetPOS()));
@@ -75,6 +75,27 @@ void GameState::Update(float dt)
 			i->Update(dt);
 		}
 	}
+
+	for (auto i : m_pTargetList)
+	{
+		for (auto j : m_bulletList)
+		{
+			const auto newEnd = std::remove_if
+		    (
+				m_pTargetList.begin(), m_pTargetList.end(),
+				[i,j](const Target* tar)
+				{
+					if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
+					{
+						std::cout << "Hit!\n";
+						return true;
+					}
+				    return false;
+				}
+			);
+			m_pTargetList.erase(newEnd, m_pTargetList.end());
+		}
+	}
 }
 
 //renders state 
@@ -90,12 +111,19 @@ void GameState::Draw(float interpolation)
 	{
 		for (auto i : m_bulletList)
 		{
+			if (i == nullptr)
+			{
+				continue;
+			}
 			i->Draw();
 		}
 	}
 
 	for (auto i : m_pTargetList)
 	{
+		if (i == nullptr)
+			continue;
+
 		i->Draw();
 	}
 	this->m_data->window.display();

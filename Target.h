@@ -16,5 +16,9 @@ public:
     void Draw();
 
     void Update(float dt);
+
+    const sf::Vector2f& GetPOS();
+
+    const sf::Sprite& GetSprite();
 };
 

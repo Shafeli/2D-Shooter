@@ -85,3 +85,15 @@ void Target::Update(float dt)
         }
     }
 }
+
+const sf::Vector2f& Target::GetPOS()
+{
+    // TODO: insert return statement here
+    return m_sprite.getPosition();
+}
+
+const sf::Sprite& Target::GetSprite()
+{
+    // TODO: insert return statement here
+    return m_sprite;
+}
