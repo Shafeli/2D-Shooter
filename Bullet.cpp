@@ -7,6 +7,7 @@ Bullet::Bullet(GameDataRef data,const sf::Vector2f& pos, float Direction)
     ,m_direction(Direction)
 {
     m_sprite.setTexture(m_data->assets.GetTexture("Bullet Sprite"));
+    m_fireSound.setBuffer(m_data->assets.GetSound("Lazer Sound"));
     m_sprite.setScale(sf::Vector2f(0.2f, 0.2f));
     m_sprite.setPosition(pos);
 
@@ -15,6 +16,11 @@ Bullet::Bullet(GameDataRef data,const sf::Vector2f& pos, float Direction)
 void Bullet::Draw()
 {
     m_data->window.draw(m_sprite);
+}
+
+void Bullet::Lazer()
+{
+    m_fireSound.play();
 }
 
 void Bullet::Update(float dt)

@@ -94,7 +94,6 @@ const sf::Vector2f& Target::GetPOS()
 
 const sf::Sprite& Target::GetSprite()
 {
-    // TODO: insert return statement here
     return m_sprite;
 }
 
@@ -105,7 +104,7 @@ bool Target::FireShot()
     if (!m_fireShot)
     {
 
-        if (time > sf::seconds(rand() % 2 + 1))
+        if (time > sf::seconds(rand() % 10))
         {
             m_fireShot = true;
             return true;

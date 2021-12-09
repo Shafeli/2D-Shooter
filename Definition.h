@@ -45,7 +45,6 @@ constexpr auto gGameOverFile = "Resources/res/Space.jpg";
 /////////////////////////////////
 
 
-
 /////////////////////////////////
 //Player
 constexpr auto gPlayerSpriteFile = "Resources/res/Player.png";
@@ -56,14 +55,15 @@ constexpr float gRateOfFire = 1.f / 4;
 /////////////////////////////////
 //Bullet
 constexpr auto gBulletSpriteFile = "Resources/res/Bullet.png";
-constexpr float gAIBulletYAxisAmount = 15.f;
+constexpr auto gBulletSoundFile = "Resources/res/Lazer.wav";
+constexpr float gAIBulletYAxisAmount = 10.f;
 constexpr float gPlayerBulletYAxisAmount = 30.f;
 /////////////////////////////////
 
 //////////////////////////////////
 //AI 
 constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
-constexpr float gTargetSpeed = 10.f;
+constexpr float gTargetSpeed = 9.5f;
 constexpr float gTargetYAxisDecreaseAmount = 35.f;
 //////////////////////////////////
 

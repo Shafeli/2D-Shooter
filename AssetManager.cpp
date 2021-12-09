@@ -29,3 +29,18 @@ sf::Font& AssetManager::GetFont(std::string name)
 {
     return this->m_fonts.at(name);
 }
+
+void AssetManager::LoadSound(std::string name, std::string fileName)
+{
+    sf::SoundBuffer sound;
+    
+    if (sound.loadFromFile(fileName))
+    {
+        this->m_sounds[name] = sound;
+    }
+}
+
+sf::SoundBuffer& AssetManager::GetSound(std::string name)
+{
+    return this->m_sounds.at(name);
+}

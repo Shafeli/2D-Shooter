@@ -25,6 +25,7 @@ void GameState::Init()
 	m_data->assets.LoadTexture("Player Sprite", gPlayerSpriteFile);
 	m_data->assets.LoadTexture("Target Sprite", gTargetSpriteFile);
 	m_data->assets.LoadTexture("Bullet Sprite", gBulletSpriteFile);
+	m_data->assets.LoadSound("Lazer Sound", gBulletSoundFile);
 
 	m_player = std::make_unique<Player>(m_data);
 
@@ -60,7 +61,10 @@ void GameState::Update(float dt)
 	m_player->Update(dt);
 	if(m_player->FireShot())
 	{
+		
 		m_pPlayerBulletList.push_back(new Bullet(m_data, m_player->GetPOS(), -gPlayerBulletYAxisAmount));
+
+		m_pPlayerBulletList.at(0)->Lazer();
 	}
 
 	for (auto i : m_pTargetList)
@@ -75,8 +79,9 @@ void GameState::Update(float dt)
 		{
 			if (time > sf::seconds(.5))
 			{
-				std::cout << "Bang!\n";
+				std::cout << "AI Shot!\n";
 				m_pAIBulletList.push_back(new Bullet(m_data, i->GetPOS(), gAIBulletYAxisAmount));
+				m_pAIBulletList.at(0)->Lazer();
 				m_rateOfFire.restart();
 			}
 			
@@ -140,24 +145,12 @@ void GameState::Update(float dt)
 //renders state 
 void GameState::Draw(float interpolation)
 {
+	//Error color
 	this->m_data->window.clear(sf::Color::Red);
-
+	//Background layer
 	this->m_data->window.draw(this->m_background);
 
-	m_player->Draw();
-
-	if (!m_pAIBulletList.empty())
-	{
-		for (auto i : m_pAIBulletList)
-		{
-			if (i == nullptr)
-			{
-				continue;
-			}
-			i->Draw();
-		}
-	}
-
+	//player bullet layer
 	if (!m_pPlayerBulletList.empty())
 	{
 		for (auto i : m_pPlayerBulletList)
@@ -169,6 +162,22 @@ void GameState::Draw(float interpolation)
 			i->Draw();
 		}
 	}
+	//Player layer
+	m_player->Draw();
+
+	//AI bullet layer
+	if (!m_pAIBulletList.empty())
+	{
+		for (auto i : m_pAIBulletList)
+		{
+			if (i == nullptr)
+			{
+				continue;
+			}
+			i->Draw();
+		}
+	}
+	//AI layer
 	for (auto i : m_pTargetList)
 	{
 		if (i == nullptr)
@@ -176,5 +185,6 @@ void GameState::Draw(float interpolation)
 
 		i->Draw();
 	}
+	//Display Window
 	this->m_data->window.display();
 }
