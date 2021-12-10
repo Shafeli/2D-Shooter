@@ -1,9 +1,58 @@
 #pragma once
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Clock.hpp>
+
+#include "GameManager.h"
 
 
 class IControls
 {
 public:
     virtual ~IControls() = default;
-    virtual void Execute() = 0;
+    virtual void Execute(sf::Sprite& m_sprite, float Yaxis) = 0;
+    virtual bool FireShot() = 0;
+};
+
+///////////////////////////////////
+//Movement Controls for a Player
+///////////////////////////////////
+class PlayerControls : public IControls
+{
+    GameDataRef m_data;
+    sf::Clock m_rateOfFire;
+    bool m_fireShot = false;
+   
+public:
+    PlayerControls(GameDataRef data);
+    virtual void Execute(sf::Sprite& m_sprite, float Yaxis) override final;
+    virtual bool FireShot() override final;
+};
+
+/////////////////////////////////////
+//Movement Controls for a AI Enemy
+/////////////////////////////////////
+class AIControls : public IControls
+{
+    GameDataRef m_data;
+    sf::Clock m_rateOfFire;
+    bool m_movementSwitch = false;
+    bool m_fireShot = false;
+
+public:
+    AIControls(GameDataRef data);
+   virtual void Execute(sf::Sprite& m_sprite, float Yaxis) override final;
+   virtual bool FireShot()override final;
+};
+
+//////////////////////////////////////
+//Movement Controls for a Projectile
+/////////////////////////////////////
+class ProjectileControls : public IControls
+{
+    GameDataRef m_data;
+
+public:
+    ProjectileControls(GameDataRef data);
+    virtual void Execute(sf::Sprite& m_sprite, float Yaxis) override final;
+    virtual bool FireShot()override final;
 };

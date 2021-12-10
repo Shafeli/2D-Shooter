@@ -8,7 +8,11 @@
 	SplashState::SplashState(GameDataRef data)
         : m_data(data)
 	{
-
+		this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
+		m_data->assets.LoadSound("Splash Sound", gSplashSoundFile);
+		m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
+		m_title.setPosition((gScreenWidth / 2) - (m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2);
+		m_sound.setBuffer(m_data->assets.GetSound("Splash Sound"));
 	}
 
     // loads texture to asset manager
@@ -16,7 +20,6 @@
 	{
 		std::cout << "Entered Splash State\n";
 		this->m_data->assets.LoadTexture("Splash State Background", gSplahBackgroundFile);
-
 		m_background.setTexture(this->m_data->assets.GetTexture("Splash State Background"));
 	}
 
@@ -37,6 +40,13 @@
     //checks show time and after "show time go to main menu"
 	void SplashState::Update(float dt)
 	{
+		if (soundSwitch)
+		{
+			m_sound.setVolume(50);
+			m_sound.play();
+			soundSwitch = false;
+		}
+
 		if (this->m_clock.getElapsedTime().asSeconds() > gSplashShowTime)
 		{
 			std::cout << "Exiting Splash State\n";
@@ -52,6 +62,6 @@
 		this->m_data->window.clear(sf::Color::Red);
 
 		this->m_data->window.draw(this->m_background);
-
+		this->m_data->window.draw(this->m_title);
 		this->m_data->window.display();
 	}

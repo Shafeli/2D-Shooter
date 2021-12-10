@@ -16,7 +16,6 @@ MainMenuState::MainMenuState(GameDataRef data)
 void MainMenuState::Init()
 {
 	this->m_data->assets.LoadTexture("Main menu Background", gMainMenuBackgroundFile);
-	this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
 	this->m_data->assets.LoadTexture("Play Button", gPlayButtonFile);
 	m_data->assets.LoadSound("Click Sound", gClickSoundFile);
 	m_MenuSound.setBuffer(m_data->assets.GetSound("Click Sound"));
@@ -30,7 +29,6 @@ void MainMenuState::Init()
 	m_playButton.setPosition((gScreenWidth / 2) - (m_playButton.getGlobalBounds().width / 2), (gScreenHeight / 2) - (m_playButton.getGlobalBounds().height / 2));
 }
 
-//TODO clicking sprite
 void MainMenuState::HandleInput()
 {
 	sf::Event event;

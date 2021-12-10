@@ -21,8 +21,9 @@ constexpr auto gScreenHeight = 1024;
 
 /////////////////////////////////
 //Splash screen 
-constexpr auto gSplashShowTime = 3.0;
+constexpr auto gSplashShowTime = 2.7;
 constexpr auto gSplahBackgroundFile = "Resources/res/Space.jpg";
+constexpr auto gSplashSoundFile = "Resources/res/SplashScreen.wav";
 /////////////////////////////////
 
 /////////////////////////////////
@@ -49,6 +50,7 @@ constexpr auto gGameOverFile = "Resources/res/Space.jpg";
 /////////////////////////////////
 //Player
 constexpr auto gPlayerSpriteFile = "Resources/res/Player.png";
+constexpr auto gPlayerSoundFile = "Resources/res/PlayerDeath.wav";
 constexpr float gPlayerSpeed = 8.f;
 constexpr float gRateOfFire = 1.f / 4;
 /////////////////////////////////

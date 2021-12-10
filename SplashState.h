@@ -10,6 +10,9 @@ class SplashState : public State
 	//Ref to Game data local
 	GameDataRef m_data;
 
+
+	bool soundSwitch = true;
+	
 	/////////////////////////////////////////////////
 	//clock to keep track of how much time has passed
 	//after n time move to main menu state
@@ -18,6 +21,8 @@ class SplashState : public State
 
 	//background sprite
 	sf::Sprite m_background;
+	sf::Sprite m_title;
+	sf::Sound m_sound;
 
 public:
 

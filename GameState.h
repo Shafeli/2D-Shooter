@@ -3,9 +3,10 @@
 #include "State.h"
 
 
-class Target;
-class Player;
-class Bullet;
+class GameObject;
+//class Target;
+//class Player;
+//class Bullet;
 
 class GameState : public State
 {
@@ -24,11 +25,13 @@ class GameState : public State
 
 	sf::Clock m_rateOfFire;
 
+	sf::Clock m_spawnTimer;
+
 	sf::Sprite m_background;
-	std::unique_ptr<Player> m_player;
-	std::vector<std::shared_ptr<Target>> m_pTargetList;
-	std::vector<std::shared_ptr<Bullet>> m_pPlayerBulletList;
-	std::vector<std::shared_ptr<Bullet>> m_pAIBulletList;
+	std::vector<std::shared_ptr<GameObject>> m_playerLives;
+	std::vector<std::shared_ptr<GameObject>> m_pTargetList;
+	std::vector<std::shared_ptr<GameObject>> m_pPlayerBulletList;
+	std::vector<std::shared_ptr<GameObject>> m_pAIBulletList;
 
 public:
 

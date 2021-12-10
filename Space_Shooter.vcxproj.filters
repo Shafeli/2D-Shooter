@@ -37,18 +37,6 @@
     <Filter Include="States\GameState\GameObjects\Strategies">
       <UniqueIdentifier>{174871b0-02de-44a6-ba9f-9aab8de8406e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\Touch">
-      <UniqueIdentifier>{d4891f38-9a4e-40db-b882-d33e5bf0d9f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\Death">
-      <UniqueIdentifier>{04b78b38-0757-4545-9fa7-5cf7c4fd9b1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\Resources">
-      <UniqueIdentifier>{f3e527b1-def7-4906-8724-413c9896fd9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\Onuse">
-      <UniqueIdentifier>{742eb207-8b0a-4df0-bae0-df28172c2a6f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States\GameState\GameObjects\Factories">
       <UniqueIdentifier>{4124a6c9-ac8c-4a54-accd-6076c2091cae}</UniqueIdentifier>
     </Filter>
@@ -88,14 +76,8 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>States\GameState\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>States\GameState\Prototyping</Filter>
-    </ClCompile>
-    <ClCompile Include="Target.cpp">
-      <Filter>States\GameState\Prototyping</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>States\GameState\Prototyping</Filter>
+    <ClCompile Include="IControls.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,29 +114,8 @@
     <ClInclude Include="GameObject.h">
       <Filter>States\GameState\GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="IResources.h">
-      <Filter>States\GameState\GameObjects\Strategies\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="ITouchStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\Touch</Filter>
-    </ClInclude>
-    <ClInclude Include="IOnUseStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\Onuse</Filter>
-    </ClInclude>
-    <ClInclude Include="IDeathStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\Death</Filter>
-    </ClInclude>
     <ClInclude Include="IControls.h">
       <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>States\GameState\Prototyping</Filter>
-    </ClInclude>
-    <ClInclude Include="Target.h">
-      <Filter>States\GameState\Prototyping</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>States\GameState\Prototyping</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

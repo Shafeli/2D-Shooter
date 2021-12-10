@@ -1,4 +1,6 @@
-﻿  MainMenuState.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(62,34): warning C4100: 'dt': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(68,32): warning C4100: 'interpolation': unreferenced formal parameter
+﻿  SplashState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(41,33): warning C4100: 'dt': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(59,31): warning C4100: 'interpolation': unreferenced formal parameter
+  StateMachine.cpp
+  Generating Code...
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe
