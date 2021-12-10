@@ -1,6 +1,22 @@
-﻿  SplashState.cpp
+﻿  GameObject.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(74,31): warning C4100: 'dt': unreferenced formal parameter
+  GameOverState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameOverState.cpp(37,34): warning C4100: 'dt': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameOverState.cpp(43,32): warning C4100: 'interpolation': unreferenced formal parameter
+  GameState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(87,28): warning C4100: 'interpolation': unreferenced formal parameter
+  IControls.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\IControls.cpp(19,58): warning C4100: 'Yaxis': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\IControls.cpp(84,13): warning C4804: '<=': unsafe use of type 'bool' in operation
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\IControls.cpp(71,54): warning C4100: 'Yaxis': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\IControls.cpp(115,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MainMenuState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(60,34): warning C4100: 'dt': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(66,32): warning C4100: 'interpolation': unreferenced formal parameter
+  SplashState.cpp
 C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(41,33): warning C4100: 'dt': unreferenced formal parameter
 C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(59,31): warning C4100: 'interpolation': unreferenced formal parameter
-  StateMachine.cpp
+  main.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\main.cpp(55,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating Code...
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe

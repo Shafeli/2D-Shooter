@@ -22,7 +22,6 @@ class GameState : public State
 	/////////////////////////////////////////////////
 
 	//second timer for AI shots with out this only the one in the top of the list shoots
-
 	sf::Clock m_rateOfFire;
 
 	sf::Clock m_spawnTimer;
@@ -43,8 +42,13 @@ public:
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
 	virtual void Draw(float interpolation)override final;
-	void SoundEffect();
 
+private:
+	void EndGameCheck();
+	void PlayerUpdate(float dt);
+	void AIUpdate(float dt);
+	void ProjectileUpdate(float dt);
+	void CollisionDetection();
 
 };
 

@@ -57,127 +57,29 @@ void GameState::HandleInput()
 
 void GameState::Update(float dt)
 {
-	if (m_pTargetList.empty())
-	{
-		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
-	}
-
-	if (m_playerLives.empty())
-	{
-		sf::Sound loss;
-		loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
-		loss.play();
-
-    //boot leg way to sleep the thread and allow the deathsound to play 
-    sf::Time time = sf::seconds(1.f);
-    sleep(time);
-
-		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
-	}
-
-	if (!m_playerLives.empty())
-	m_playerLives.at(0)->Update(dt);
-
-	if (!m_playerLives.empty())
-	if(m_playerLives.at(0)->OnUse())
-	{
-		
-		m_pPlayerBulletList.push_back(std::make_shared<GameObject>(m_data, m_playerLives.at(0)->GetPOS(), -gPlayerBulletYAxisAmount));
-		m_pPlayerBulletList.at(0)->MakeSound();
-	}
-
-	for (auto i : m_pTargetList)
-	{
-		i->Update(dt);
-	}
-
-	for (auto i : m_pTargetList)
-	{
-		sf::Time time = m_rateOfFire.getElapsedTime();
-		if (i->OnUse())
-		{
-			if (time > sf::seconds(1))
-			{
-				std::cout << "AI Shot!\n";
-				m_pAIBulletList.push_back(std::make_shared<GameObject>(m_data, i->GetPOS(), gAIBulletYAxisAmount));
-				m_pAIBulletList.at(0)->MakeSound();
-				m_rateOfFire.restart();
-			}
-			
-		}
-	}
-
-	if (!m_pPlayerBulletList.empty())
-	{
-		for (auto i : m_pPlayerBulletList)
-		{
-			i->Update(dt);
-		}
-	}
-	if (!m_pAIBulletList.empty())
-	{
-		for (auto i : m_pAIBulletList)
-		{
-			i->Update(dt);
-		}
-	}
-
+	//end game check
 	////////////////////////////////////////////////////////
-	//TODO: Clean up
-	for (auto &target : m_pAIBulletList)
-	{
-		for (auto& bullet : m_pPlayerBulletList)
-		{
-			const auto TargetNewEnd = std::remove_if
-			(
-				m_pTargetList.begin(), m_pTargetList.end(),
-				[bullet, this](const std::shared_ptr<GameObject>& tar)
-				{
-					if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
-					{
-						m_pTargetList.at(0)->MakeSound();
+	EndGameCheck();
+	////////////////////////////////////////////////////////
 
-						//boot leg way to sleep the thread and allow the deathsound to play 
-						sf::Time time = sf::seconds(0.01f);
-						sleep(time);
+	//Player Update calls
+	////////////////////////////////////////////////////////
+    PlayerUpdate(dt);
+	////////////////////////////////////////////////////////
 
+	//AI Update calls
+	////////////////////////////////////////////////////////
+	AIUpdate(dt);
+	////////////////////////////////////////////////////////
 
-						return true;
-					}
-					return false;
-				}
-			);
+	//Projectile Update calls
+	////////////////////////////////////////////////////////
+	ProjectileUpdate(dt);
+	////////////////////////////////////////////////////////
 
-
-
-			const auto PlayerLivesNewEnd = std::remove_if
-			(
-				m_playerLives.begin(), m_playerLives.end(),
-				[target, this](const std::shared_ptr<GameObject>& tar)
-				{
-					sf::Time time = m_spawnTimer.getElapsedTime();
-					if (time > sf::seconds(1))
-					{
-						if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
-						{
-							//m_playerLives.at(0)->MakeSound();
-
-							////boot leg way to sleep the thread and allow the deathsound to play 
-							//sf::Time time = sf::seconds(0.3f);
-							//sleep(time);
-							std::cout << m_playerLives.size() << '\n';
-							m_spawnTimer.restart();
-							return true;
-						}
-					}
-					return false;
-				}
-			);
-			m_playerLives.erase(PlayerLivesNewEnd, m_playerLives.end());
-
-			m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
-		}
-	}
+	//Collision Dection 
+	////////////////////////////////////////////////////////
+	CollisionDetection();
 	////////////////////////////////////////////////////////
 }
 
@@ -229,9 +131,150 @@ void GameState::Draw(float interpolation)
 	this->m_data->window.display();
 }
 
-void GameState::SoundEffect()
+
+//end game check
+////////////////////////////////////////////////////////
+void GameState::EndGameCheck()
 {
-	sf::Sound deathsound;
-	deathsound.setBuffer(m_data->assets.GetSound("Boom Sound"));
-	deathsound.play();
+	if (m_pTargetList.empty())
+	{
+		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
+	}
+
+	if (m_playerLives.empty())
+	{
+		sf::Sound loss;
+		loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
+		loss.play();
+
+		//boot leg way to sleep the thread and allow the deathsound to play 
+		sf::Time time = sf::seconds(1.f);
+		sleep(time);
+
+		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
+	}
 }
+
+
+//AI Update calls
+////////////////////////////////////////////////////////
+void GameState::AIUpdate(float dt)
+{
+	for (auto i : m_pTargetList)
+	{
+		i->Update(dt);
+	}
+
+	for (auto i : m_pTargetList)
+	{
+		sf::Time time = m_rateOfFire.getElapsedTime();
+		if (i->OnUse())
+		{
+			if (time > sf::seconds(1))
+			{
+				std::cout << "AI Shot!\n";
+				m_pAIBulletList.push_back(std::make_shared<GameObject>(m_data, i->GetPOS(), gAIBulletYAxisAmount));
+				m_pAIBulletList.at(0)->MakeSound();
+				m_rateOfFire.restart();
+			}
+
+		}
+	}
+}
+
+//Projectile Update calls
+////////////////////////////////////////////////////////
+void GameState::ProjectileUpdate(float dt)
+{
+	if (!m_pPlayerBulletList.empty())
+	{
+		for (auto i : m_pPlayerBulletList)
+		{
+			i->Update(dt);
+		}
+	}
+	if (!m_pAIBulletList.empty())
+	{
+		for (auto i : m_pAIBulletList)
+		{
+			i->Update(dt);
+		}
+	}
+}
+
+//Collision Dection 
+////////////////////////////////////////////////////////
+void GameState::CollisionDetection()
+{	//TODO: Clean up
+	for (auto& target : m_pAIBulletList)
+	{
+		for (auto& bullet : m_pPlayerBulletList)
+		{
+			const auto TargetNewEnd = std::remove_if
+			(
+				m_pTargetList.begin(), m_pTargetList.end(),
+				[bullet, this](const std::shared_ptr<GameObject>& tar)
+				{
+					if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
+					{
+						m_pTargetList.at(0)->MakeSound();
+
+						//boot leg way to sleep the thread and allow the deathsound to play 
+						sf::Time time = sf::seconds(0.01f);
+						sleep(time);
+
+
+						return true;
+					}
+					return false;
+				}
+			);
+
+			const auto PlayerLivesNewEnd = std::remove_if
+			(
+				m_playerLives.begin(), m_playerLives.end(),
+				[target, this](const std::shared_ptr<GameObject>& tar)
+				{
+					sf::Time time = m_spawnTimer.getElapsedTime();
+					if (time > sf::seconds(1))
+					{
+						if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
+						{
+							//m_playerLives.at(0)->MakeSound();
+
+							////boot leg way to sleep the thread and allow the deathsound to play 
+							//sf::Time time = sf::seconds(0.3f);
+							//sleep(time);
+							std::cout << m_playerLives.size() << '\n';
+							m_spawnTimer.restart();
+							return true;
+						}
+					}
+					return false;
+				}
+			);
+			m_playerLives.erase(PlayerLivesNewEnd, m_playerLives.end());
+
+			m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
+		}
+	}
+}
+
+
+//Player Update calls
+////////////////////////////////////////////////////////
+void GameState::PlayerUpdate(float dt)
+{
+	if (!m_playerLives.empty())
+		m_playerLives.at(0)->Update(dt);
+
+	if (!m_playerLives.empty())
+		if (m_playerLives.at(0)->OnUse())
+		{
+
+			m_pPlayerBulletList.push_back(std::make_shared<GameObject>(m_data, m_playerLives.at(0)->GetPOS(), -gPlayerBulletYAxisAmount));
+			m_pPlayerBulletList.at(0)->MakeSound();
+
+		}
+}
+

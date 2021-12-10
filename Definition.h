@@ -21,7 +21,7 @@ constexpr auto gScreenHeight = 1024;
 
 /////////////////////////////////
 //Splash screen 
-constexpr auto gSplashShowTime = 2.7;
+constexpr auto gSplashShowTime = 2.5;
 constexpr auto gSplahBackgroundFile = "Resources/res/Space.jpg";
 constexpr auto gSplashSoundFile = "Resources/res/SplashScreen.wav";
 /////////////////////////////////
