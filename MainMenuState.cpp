@@ -18,7 +18,8 @@ void MainMenuState::Init()
 	this->m_data->assets.LoadTexture("Main menu Background", gMainMenuBackgroundFile);
 	this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
 	this->m_data->assets.LoadTexture("Play Button", gPlayButtonFile);
-
+	m_data->assets.LoadSound("Click Sound", gClickSoundFile);
+	m_MenuSound.setBuffer(m_data->assets.GetSound("Click Sound"));
 	m_background.setTexture(this->m_data->assets.GetTexture("Main menu Background"));
 	m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
 
@@ -43,6 +44,15 @@ void MainMenuState::HandleInput()
 		if (m_data->input.IsSpriteClicked(m_playButton, sf::Mouse::Left, m_data->window))
         {
 			std::cout << "Button CLicked :: Moving TO Game State\n";
+
+			//plays click sound 
+			m_MenuSound.play();
+
+			//wait time for sound to go off boot leg but it works 
+			sf::Time time = sf::seconds(0.1f);
+			sleep(time);
+
+			//after sleep move state
 			m_data->machine.AddState(std::make_unique<GameState>(m_data), true);
 		}
 	}
@@ -64,7 +74,6 @@ void MainMenuState::Draw(float interpolation)
 	this->m_data->window.draw(this->m_title);
 
 	this->m_data->window.draw(this->m_playButton);
-
 
 	this->m_data->window.display();
 }

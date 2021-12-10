@@ -32,6 +32,7 @@ constexpr auto gMainMenuBackgroundFile = "Resources/res/Space.jpg";
 constexpr auto gGameTitleFile = "Resources/res/title1.png";
 //Play Button
 constexpr auto gPlayButtonFile = "Resources/res/StartButton.png";
+constexpr auto gClickSoundFile = "Resources/res/MenuSound.ogg";
 /////////////////////////////////
 
 /////////////////////////////////
@@ -54,6 +55,7 @@ constexpr float gRateOfFire = 1.f / 4;
 
 /////////////////////////////////
 //Bullet
+constexpr auto gMultiKillSoundFile = "Resources/res/QuakeKill.wav";
 constexpr auto gBulletSpriteFile = "Resources/res/Bullet.png";
 constexpr auto gBulletSoundFile = "Resources/res/Lazer.wav";
 constexpr float gAIBulletYAxisAmount = 10.f;
@@ -63,7 +65,8 @@ constexpr float gPlayerBulletYAxisAmount = 30.f;
 //////////////////////////////////
 //AI 
 constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
-constexpr float gTargetSpeed = 9.5f;
+constexpr auto gDeathSoundFile = "Resources/res/Boom.wav";
+constexpr float gTargetSpeed = 10.f;
 constexpr float gTargetYAxisDecreaseAmount = 35.f;
 //////////////////////////////////
 

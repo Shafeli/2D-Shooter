@@ -20,16 +20,15 @@ class GameState : public State
 	// sf::Clock m_clock;
 	/////////////////////////////////////////////////
 
+	//second timer for AI shots with out this only the one in the top of the list shoots
+
 	sf::Clock m_rateOfFire;
 
-    //sprites
 	sf::Sprite m_background;
 	std::unique_ptr<Player> m_player;
-	//Player* m_player;
-	//Target* m_target;
-	std::vector<Target*> m_pTargetList;
-	std::vector<Bullet*> m_pPlayerBulletList;
-	std::vector<Bullet*> m_pAIBulletList;
+	std::vector<std::shared_ptr<Target>> m_pTargetList;
+	std::vector<std::shared_ptr<Bullet>> m_pPlayerBulletList;
+	std::vector<std::shared_ptr<Bullet>> m_pAIBulletList;
 
 public:
 
@@ -41,6 +40,7 @@ public:
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
 	virtual void Draw(float interpolation)override final;
+	void SoundEffect();
 
 
 };

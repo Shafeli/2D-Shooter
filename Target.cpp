@@ -6,6 +6,7 @@ Target::Target(GameDataRef data, size_t targetNum)
 {
     m_sprite.setTexture(m_data->assets.GetTexture("Target Sprite"));
     m_sprite.setScale(sf::Vector2f(0.2f, 0.2f));
+    m_DeathSound.setBuffer(m_data->assets.GetSound("Boom Sound"));
    // m_sprite.setPosition((m_data->window.getSize().x / 2 ) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
     // 5ths .2 .6 .8 
     switch (targetNum)
@@ -44,9 +45,18 @@ Target::Target(GameDataRef data, size_t targetNum)
 
 }
 
+Target::~Target()
+{
+}
+
 void Target::Draw()
 {
     m_data->window.draw(m_sprite);
+}
+
+void Target::DeathSound()
+{
+    m_DeathSound.play();
 }
 
 void Target::Update(float dt)

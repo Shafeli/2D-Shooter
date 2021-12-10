@@ -26,13 +26,15 @@ void GameState::Init()
 	m_data->assets.LoadTexture("Target Sprite", gTargetSpriteFile);
 	m_data->assets.LoadTexture("Bullet Sprite", gBulletSpriteFile);
 	m_data->assets.LoadSound("Lazer Sound", gBulletSoundFile);
+	m_data->assets.LoadSound("Boom Sound", gDeathSoundFile);
+	//m_data->assets.LoadSound("Boom Sound", gMultiKillSoundFile);
 
 	m_player = std::make_unique<Player>(m_data);
 
 	
 	for (size_t i = 0; i < 10; ++i)
 	{
-		m_pTargetList.push_back(new Target(m_data, i));
+		m_pTargetList.push_back(std::make_shared<Target>(m_data, i));
 	}
 }
 
@@ -62,7 +64,7 @@ void GameState::Update(float dt)
 	if(m_player->FireShot())
 	{
 		
-		m_pPlayerBulletList.push_back(new Bullet(m_data, m_player->GetPOS(), -gPlayerBulletYAxisAmount));
+		m_pPlayerBulletList.push_back(std::make_shared<Bullet>(m_data, m_player->GetPOS(), -gPlayerBulletYAxisAmount));
 
 		m_pPlayerBulletList.at(0)->Lazer();
 	}
@@ -77,10 +79,10 @@ void GameState::Update(float dt)
 		sf::Time time = m_rateOfFire.getElapsedTime();
 		if (i->FireShot())
 		{
-			if (time > sf::seconds(.5))
+			if (time > sf::seconds(1))
 			{
 				std::cout << "AI Shot!\n";
-				m_pAIBulletList.push_back(new Bullet(m_data, i->GetPOS(), gAIBulletYAxisAmount));
+				m_pAIBulletList.push_back(std::make_shared<Bullet>(m_data, i->GetPOS(), gAIBulletYAxisAmount));
 				m_pAIBulletList.at(0)->Lazer();
 				m_rateOfFire.restart();
 			}
@@ -105,38 +107,43 @@ void GameState::Update(float dt)
 
 	////////////////////////////////////////////////////////
 	//TODO: Clean up
-	for (auto target : m_pTargetList)
+	for (auto &target : m_pTargetList)
 	{
-		for (auto bullet : m_pPlayerBulletList)
+		for (auto& bullet : m_pPlayerBulletList)
 		{
 			const auto TargetNewEnd = std::remove_if
 		    (
 				m_pTargetList.begin(), m_pTargetList.end(),
-				[bullet](Target* tar)
+				[bullet, this](const std::shared_ptr<Target>& tar)
 				{
 					if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
 					{
-						std::cout << "Hit!\n";
+						m_pTargetList.at(0)->DeathSound();
+
+						//boot leg way to sleep the thread and allow the deathsound to play 
+						sf::Time time = sf::seconds(0.01f);
+						sleep(time);
+
+
 						return true;
 					}
 				    return false;
 				}
 			);
-			const auto bulletNewEnd = std::remove_if
-			(
-				m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
-				[target](Bullet* tar)
-				{
-					if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
-					{
-						
-						return true;
-					}
-					return false;
-				}
-			);
+			//const auto bulletNewEnd = std::remove_if
+			//(
+			//	m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
+			//	[target](const std::shared_ptr<Bullet>& tar)
+			//	{
+			//		if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
+			//		{
+			//			return true;
+			//		}
+			//		return false;
+			//	}
+			//);
+			//m_pPlayerBulletList.erase(bulletNewEnd, m_pPlayerBulletList.end());
 			m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
-			m_pPlayerBulletList.erase(bulletNewEnd, m_pPlayerBulletList.end());
 		}
 	}
 	////////////////////////////////////////////////////////
@@ -187,4 +194,11 @@ void GameState::Draw(float interpolation)
 	}
 	//Display Window
 	this->m_data->window.display();
+}
+
+void GameState::SoundEffect()
+{
+	sf::Sound deathsound;
+	deathsound.setBuffer(m_data->assets.GetSound("Boom Sound"));
+	deathsound.play();
 }

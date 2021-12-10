@@ -11,6 +11,8 @@ class MainMenuState : public State
 	sf::Sprite m_background;
 	sf::Sprite m_title;
 	sf::Sprite m_playButton;
+	sf::Sound m_MenuSound;
+
 
 public:
 	//c'tor takes in reference to Game Data struct

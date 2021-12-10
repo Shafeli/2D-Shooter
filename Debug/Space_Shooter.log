@@ -1,33 +1,4 @@
-﻿  AssetManager.cpp
-  Bullet.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Bullet.cpp(26,27): warning C4100: 'dt': unreferenced formal parameter
-  GameManager.cpp
-  GameObject.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(7,31): warning C4100: 'dt': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(15,48): warning C4100: 'pNewStepStrat': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(19,38): warning C4100: 'pActivator': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(23,48): warning C4100: 'pNewStrat': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(31,48): warning C4100: 'pNewStrat': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(39,51): warning C4100: 'pNewStrat': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameObject.cpp(43,34): warning C4100: 'amount': unreferenced formal parameter
-  GameOverState.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameOverState.cpp(37,34): warning C4100: 'dt': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameOverState.cpp(43,32): warning C4100: 'interpolation': unreferenced formal parameter
-  GameState.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(146,28): warning C4100: 'interpolation': unreferenced formal parameter
-  MainMenuState.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(52,34): warning C4100: 'dt': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(58,32): warning C4100: 'interpolation': unreferenced formal parameter
-  Player.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Player.cpp(24,27): warning C4100: 'dt': unreferenced formal parameter
-  SplashState.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(38,33): warning C4100: 'dt': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(49,31): warning C4100: 'interpolation': unreferenced formal parameter
-  Target.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Target.cpp(65,13): warning C4804: '<=': unsafe use of type 'bool' in operation
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Target.cpp(52,27): warning C4100: 'dt': unreferenced formal parameter
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Target.cpp(107,39): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-  main.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\main.cpp(47,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+﻿  MainMenuState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(62,34): warning C4100: 'dt': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(68,32): warning C4100: 'interpolation': unreferenced formal parameter
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe
