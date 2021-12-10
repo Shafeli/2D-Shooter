@@ -32,6 +32,8 @@ class GameState : public State
 	std::vector<std::shared_ptr<GameObject>> m_pPlayerBulletList;
 	std::vector<std::shared_ptr<GameObject>> m_pAIBulletList;
 
+	std::vector<std::shared_ptr<GameObject>> m_pRemovalPile;
+
 	int m_playerScore = 0;
 	int m_roundCounter = 0;
 public:
@@ -51,6 +53,6 @@ private:
 	void AIUpdate(float dt);
 	void ProjectileUpdate(float dt);
 	void CollisionDetection();
-
+	void CollisionDetection_Prototype();
 };
 

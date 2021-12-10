@@ -82,6 +82,7 @@ void GameState::Update(float dt)
 	//Collision Dection 
 	////////////////////////////////////////////////////////
 	CollisionDetection();
+	//CollisionDetection_Prototype();
 	////////////////////////////////////////////////////////
 	
 	// Projectile delete Manager
@@ -284,6 +285,24 @@ void GameState::CollisionDetection()
 	}
 }
 
+//Collision Dection _prototype
+////////////////////////////////////////////////////////
+void GameState::CollisionDetection_Prototype()
+{
+	for (auto& i: m_pPlayerBulletList)
+	{
+		for (auto& j : m_pTargetList)
+		{
+			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
+			{
+				m_pRemovalPile.push_back(std::move(i));
+				m_pRemovalPile.push_back(std::move(j));
+			}
+
+		}
+	}
+	m_pRemovalPile.clear();
+}
 
 //Player Update calls
 ////////////////////////////////////////////////////////
