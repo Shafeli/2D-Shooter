@@ -4,6 +4,10 @@
 #include <memory>
 #include "IControls.h"
 
+
+///////////////////////////////////////////
+// Create Player
+///////////////////////////////////////////
 GameObject::GameObject(GameDataRef data)
     :m_data(data)
     ,m_direction(0)
@@ -16,6 +20,9 @@ GameObject::GameObject(GameDataRef data)
     m_pControlType = std::make_shared<PlayerControls>(m_data);
 }
 
+///////////////////////////////////////////
+// Create AI
+///////////////////////////////////////////
 GameObject::GameObject(GameDataRef data, size_t targetNum)
     :m_data(data)
     ,m_direction(0)
@@ -60,6 +67,10 @@ GameObject::GameObject(GameDataRef data, size_t targetNum)
     }
 }
 
+
+///////////////////////////////////////////
+// Create Projectile 
+///////////////////////////////////////////
 GameObject::GameObject(GameDataRef data, const sf::Vector2f& pos, float Direction)
     :m_data(data)
     , m_direction(Direction)
@@ -71,34 +82,55 @@ GameObject::GameObject(GameDataRef data, const sf::Vector2f& pos, float Directio
     m_sprite.setPosition(pos);
 }
 
+
+///////////////////////////////////////////
+// pControl -> Exicute
+///////////////////////////////////////////
 void GameObject::Update(float dt)
 {
     m_pControlType->Execute(m_sprite, m_direction);
 }
 
+
+///////////////////////////////////////////
+// Draws Sprite to Window 
+///////////////////////////////////////////
 void GameObject::Draw()
 {
     m_data->window.draw(m_sprite);
 }
 
+
+///////////////////////////////////////////
+// m_sound -> Play
+///////////////////////////////////////////
 void GameObject::MakeSound()
 {
     m_sound.play();
 }
 
-
+///////////////////////////////////////////
+// returns if pControl has used action button
+///////////////////////////////////////////
 bool GameObject::OnUse()
 {
    return m_pControlType->FireShot();
 }
 
 
+//////////////////////////////////////////////////////////////////////////////////////
+//
+///////////////////////////////////////////
+// Current Hit dectection 
+///////////////////////////////////////////
 const sf::Vector2f& GameObject::GetPOS()
 {
     return m_sprite.getPosition();
 }
-
+//
 const sf::Sprite& GameObject::GetSprite()
 {
     return m_sprite;
 }
+//
+//////////////////////////////////////////////////////////////////////////////////////

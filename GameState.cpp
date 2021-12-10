@@ -81,6 +81,13 @@ void GameState::Update(float dt)
 	////////////////////////////////////////////////////////
 	CollisionDetection();
 	////////////////////////////////////////////////////////
+	
+	// Projectile delete Manager
+	////////////////////////////////////////////////////////
+
+
+
+	////////////////////////////////////////////////////////
 }
 
 //renders state 
@@ -136,9 +143,16 @@ void GameState::Draw(float interpolation)
 ////////////////////////////////////////////////////////
 void GameState::EndGameCheck()
 {
-	if (m_pTargetList.empty())
+    if (m_pTargetList.empty())
 	{
-		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
+        static int s_RoundCounter;
+        std::cout << s_RoundCounter << '\n';
+		//m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
+		for (size_t i = 0; i < 10; ++i)
+		{
+			m_pTargetList.push_back(std::make_shared<GameObject>(m_data, i));
+		}
+		s_RoundCounter++;
 	}
 
 	if (m_playerLives.empty())

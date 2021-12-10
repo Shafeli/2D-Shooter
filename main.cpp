@@ -46,7 +46,7 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 //            Bug REport TODO:
 //- Player not getting hit until shoots first shot after that working normal
 //- Bullets keep traveling after they are shot
-//
+//- Bullets need to be deleted if they are off the screen game starts to get overload and slow then crashes
 //
 /////////////////////////////////////////////////////
 
