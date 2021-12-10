@@ -39,14 +39,16 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
  //- End Game Screen UI
  //- Updated Collision System
  //- AI Manager class
- //- Updata AI spawning to make scaleable 
+ //- Updata AI spawning to make scaleable
+ //- Enum system for loading and retrieving assets 
  /////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////
-//            Bug REport TODO:
+//              Bug Report:
 //- Player not getting hit until shoots first shot after that working normal
-//- Bullets keep traveling after they are shot
-//- Bullets need to be deleted if they are off the screen game starts to get overload and slow then crashes
+//- Bullets keep traveling after they "hit something"
+//- Bullets need to be deleted if they are off the screen game starts to get
+// overload and slow then crashes
 //
 /////////////////////////////////////////////////////
 

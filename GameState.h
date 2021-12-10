@@ -32,6 +32,8 @@ class GameState : public State
 	std::vector<std::shared_ptr<GameObject>> m_pPlayerBulletList;
 	std::vector<std::shared_ptr<GameObject>> m_pAIBulletList;
 
+	int m_playerScore = 0;
+	int m_roundCounter = 0;
 public:
 
 	//c'tor takes in reference to Game Data struct

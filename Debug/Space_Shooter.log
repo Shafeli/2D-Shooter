@@ -1,3 +1,9 @@
 ﻿  GameState.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(87,28): warning C4100: 'interpolation': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(96,28): warning C4100: 'interpolation': unreferenced formal parameter
+  MainMenuState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(60,34): warning C4100: 'dt': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(66,32): warning C4100: 'interpolation': unreferenced formal parameter
+  main.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\main.cpp(57,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe
