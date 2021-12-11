@@ -15,10 +15,7 @@ MainMenuState::MainMenuState(GameDataRef data)
 // loads texture to asset manager
 void MainMenuState::Init()
 {
-	this->m_data->assets.LoadFont("Game Font", gGameFontFile);
-	this->m_data->assets.LoadTexture("Main menu Background", gMainMenuBackgroundFile);
-	this->m_data->assets.LoadTexture("Play Button", gPlayButtonFile);
-	m_data->assets.LoadSound("Click Sound", gClickSoundFile);
+
 	m_MenuSound.setBuffer(m_data->assets.GetSound("Click Sound"));
 	m_background.setTexture(this->m_data->assets.GetTexture("Main menu Background"));
 	m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));

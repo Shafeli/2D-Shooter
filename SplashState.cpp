@@ -8,16 +8,21 @@
 	SplashState::SplashState(GameDataRef data)
         : m_data(data)
 	{
-		this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
-		m_data->assets.LoadSound("Splash Sound", gSplashSoundFile);
-		m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
-		m_title.setPosition((gScreenWidth / 2) - (m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2);
-		m_sound.setBuffer(m_data->assets.GetSound("Splash Sound"));
 	}
 
     // loads texture to asset manager
 	void SplashState::Init()
 	{
+		this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
+		this->m_data->assets.LoadSound("Splash Sound", gSplashSoundFile);
+		this->m_data->assets.LoadTexture("Game Over State Background", gGameOverFile);
+		this->m_data->assets.LoadFont("Game Font", gGameFontFile);
+		this->m_data->assets.LoadTexture("Main menu Background", gMainMenuBackgroundFile);
+		this->m_data->assets.LoadTexture("Play Button", gPlayButtonFile);
+		m_data->assets.LoadSound("Click Sound", gClickSoundFile);
+		m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
+		m_title.setPosition((gScreenWidth / 2) - (m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2);
+		m_sound.setBuffer(m_data->assets.GetSound("Splash Sound"));
 		std::cout << "Entered Splash State\n";
 		this->m_data->assets.LoadTexture("Splash State Background", gSplahBackgroundFile);
 		m_background.setTexture(this->m_data->assets.GetTexture("Splash State Background"));

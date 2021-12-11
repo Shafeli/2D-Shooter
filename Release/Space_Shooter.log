@@ -1,2 +1,7 @@
-﻿  main.cpp
-LINK : fatal error LNK1181: cannot open input file 'sfml.winodw.lib'
+﻿  SplashState.cpp
+  Generating code
+  5 of 895 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Space_Shooter.vcxproj -> C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Release\Space_Shooter.exe

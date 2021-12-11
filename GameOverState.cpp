@@ -14,7 +14,7 @@ GameOverState::GameOverState(GameDataRef data)
 void GameOverState::Init()
 {
 	std::cout << "Entered Game Over State\n";
-	this->m_data->assets.LoadTexture("Game Over State Background", gGameOverFile);
+
 	m_MenuSound.setBuffer(m_data->assets.GetSound("Click Sound"));
 	m_background.setTexture(this->m_data->assets.GetTexture("Game Over State Background"));
 	m_button.setTexture(this->m_data->assets.GetTexture("Play Button"));
