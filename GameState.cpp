@@ -40,7 +40,7 @@ void GameState::Init()
 
 	m_scoreText.setFont(m_data->assets.GetFont("Game Font"));
 	m_scoreText.setCharacterSize(80);
-	m_scoreText.setPosition((m_data->window.getSize().x / 2) - 20, 0);
+	m_scoreText.setPosition((m_data->window.getSize().x / 2) - 10, 0);
 
 	m_roundText.setFont(m_data->assets.GetFont("Game Font"));
 	m_roundText.setCharacterSize(80);
@@ -48,7 +48,7 @@ void GameState::Init()
 
 	m_livesText.setFont(m_data->assets.GetFont("Game Font"));
 	m_livesText.setCharacterSize(80);
-	
+	m_livesText.setPosition(40, 0);
 
 	InGameMusic();
 }
@@ -106,6 +106,12 @@ void GameState::Update(float dt)
 	m_livesText.setString(toString(m_playerLives));
 	m_scoreText.setString(toString(m_playerScore));
 	m_roundText.setString(toString(m_roundCounter));
+
+	if (m_musicTimer.getElapsedTime().asSeconds() > 234)
+	{
+		InGameMusic();
+		m_musicTimer.restart();
+	}
 }
 
 //renders state 

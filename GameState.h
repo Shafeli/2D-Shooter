@@ -21,6 +21,7 @@ class GameState : public State
     //top of the list shoots
 	sf::Clock m_rateOfFire;
 	sf::Clock m_spawnTimer;
+	sf::Clock m_musicTimer;
 	////////////////////////////////////////////////
 	
 	//Sprites

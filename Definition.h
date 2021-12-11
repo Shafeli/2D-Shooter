@@ -61,7 +61,7 @@ constexpr float gRateOfFire = 1.f / 4;
 constexpr auto gMultiKillSoundFile = "Resources/res/QuakeKill.wav";
 constexpr auto gBulletSpriteFile = "Resources/res/Bullet.png";
 constexpr auto gBulletSoundFile = "Resources/res/Lazer.wav";
-constexpr float gAIBulletYAxisAmount = 600.f;
+constexpr float gAIBulletYAxisAmount = 500.f;
 constexpr float gPlayerBulletYAxisAmount = 660.f;
 /////////////////////////////////
 

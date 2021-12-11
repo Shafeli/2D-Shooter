@@ -33,14 +33,14 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
  /////////////////////////////////////////////////////
  //              TODO:
  //- End Game if AI Touches Bottom of the screen
- //- Score System 
- //- Score UI
+ //- Score System ---
+ //- Score UI -----
  //- High Score Leaderboards and saving system with User Choice Name
- //- End Game Screen UI
- //- Updated Collision System
- //- AI Manager class
- //- Updata AI spawning to make scaleable
- //- Enum system for loading and retrieving assets 
+ //- End Game Screen UI 
+ //- Updated Collision System 
+ //- AI Manager class 
+ //- Updata AI spawning to make scaleable 
+ //- Enum system for loading and retrieving assets  
  /////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////

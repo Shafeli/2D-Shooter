@@ -1,3 +1,12 @@
-﻿  GameOverState.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameOverState.cpp(42,34): warning C4100: 'dt': unreferenced formal parameter
-  Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe
+﻿  GameState.cpp
+C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\GameState.cpp(43,59): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\GameState.cpp(47,55): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+  Space_Shooter.vcxproj -> C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Debug\Space_Shooter.exe
