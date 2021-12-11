@@ -9,7 +9,7 @@ class IControls
 {
 public:
     virtual ~IControls() = default;
-    virtual void Execute(sf::Sprite& m_sprite, float Yaxis) = 0;
+    virtual void Execute(sf::Sprite& m_sprite, float Yaxis, float dt) = 0;
     virtual bool FireShot() = 0;
 };
 
@@ -24,7 +24,7 @@ class PlayerControls : public IControls
    
 public:
     PlayerControls(GameDataRef data);
-    virtual void Execute(sf::Sprite& m_sprite, float Yaxis) override final;
+    virtual void Execute(sf::Sprite& m_sprite, float Yaxis, float dt) override final;
     virtual bool FireShot() override final;
 };
 
@@ -40,7 +40,7 @@ class AIControls : public IControls
 
 public:
     AIControls(GameDataRef data);
-   virtual void Execute(sf::Sprite& m_sprite, float Yaxis) override final;
+   virtual void Execute(sf::Sprite& m_sprite, float Yaxis, float dt) override final;
    virtual bool FireShot()override final;
 };
 
@@ -53,6 +53,6 @@ class ProjectileControls : public IControls
 
 public:
     ProjectileControls(GameDataRef data);
-    virtual void Execute(sf::Sprite& m_sprite, float Yaxis) override final;
+    virtual void Execute(sf::Sprite& m_sprite, float Yaxis, float dt) override final;
     virtual bool FireShot()override final;
 };

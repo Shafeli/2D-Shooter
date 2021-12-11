@@ -12,8 +12,12 @@ class GameOverState : public State
 	/////////////////////////////////////////////////
 	sf::Clock m_clock;
 
-	//sprites
 	sf::Sprite m_background;
+	sf::Clock m_screenClock;
+	sf::Music m_gameOverMusic;
+	sf::Sound m_MenuSound;
+	//sprites
+	sf::Sprite m_button;
 
 public:
 	//c'tor takes in reference to Game Data struct
@@ -22,7 +26,8 @@ public:
 	virtual void Init()override final;
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
-	virtual void Draw(float interpolation)override final;
+	virtual void Draw()override final;
+	void EndGameMusic();
 
 
 };

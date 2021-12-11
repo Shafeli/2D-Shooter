@@ -77,7 +77,7 @@ GameObject::GameObject(GameDataRef data, const sf::Vector2f& pos, float Directio
 {
     m_sprite.setTexture(m_data->assets.GetTexture("Bullet Sprite"));
     m_sound.setBuffer(m_data->assets.GetSound("Lazer Sound"));
-    m_sprite.setScale(sf::Vector2f(0.2f, 0.2f));
+    m_sprite.setScale(sf::Vector2f(0.1f, 0.2f));
     m_pControlType = std::make_shared<ProjectileControls>(m_data);
     m_sprite.setPosition(pos);
 }
@@ -88,7 +88,7 @@ GameObject::GameObject(GameDataRef data, const sf::Vector2f& pos, float Directio
 ///////////////////////////////////////////
 void GameObject::Update(float dt)
 {
-    m_pControlType->Execute(m_sprite, m_direction);
+    m_pControlType->Execute(m_sprite, m_direction, dt);
 }
 
 

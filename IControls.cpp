@@ -16,7 +16,7 @@ PlayerControls::PlayerControls(GameDataRef data)
 
 }
 
-void PlayerControls::Execute(sf::Sprite& m_sprite, float Yaxis)
+void PlayerControls::Execute(sf::Sprite& m_sprite, float Yaxis, float dt)
 {
     // Check left side of the window
     if (m_sprite.getGlobalBounds().left <= 0.f)
@@ -29,11 +29,11 @@ void PlayerControls::Execute(sf::Sprite& m_sprite, float Yaxis)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
-        m_sprite.move(-gPlayerSpeed, 0.f);
+        m_sprite.move(-gPlayerSpeed * dt, 0.f);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
     {
-        m_sprite.move(+gPlayerSpeed, 0.f);
+        m_sprite.move(+gPlayerSpeed * dt, 0.f);
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
@@ -68,7 +68,7 @@ AIControls::AIControls(GameDataRef data)
 {
 
 }
-void AIControls::Execute(sf::Sprite& m_sprite, float Yaxis)
+void AIControls::Execute(sf::Sprite& m_sprite, float Yaxis ,float dt)
 {
     // Check left side of the window
     if (m_sprite.getGlobalBounds().left <= 0.f)
@@ -83,7 +83,7 @@ void AIControls::Execute(sf::Sprite& m_sprite, float Yaxis)
         // move to left then tell window edge then move right tell window edge repeat
         if (!m_sprite.getGlobalBounds().left <= 0.f)
         {
-            m_sprite.move(-gTargetSpeed, 0.f);
+            m_sprite.move(-gTargetSpeed * dt, 0.f);
         }
         if (m_sprite.getGlobalBounds().left <= 0.f)
         {
@@ -95,7 +95,7 @@ void AIControls::Execute(sf::Sprite& m_sprite, float Yaxis)
     }
     if (m_movementSwitch == true)
     {
-        m_sprite.move(+gTargetSpeed, 0.f);
+        m_sprite.move(+gTargetSpeed * dt, 0.f);
         if (m_sprite.getGlobalBounds().left + m_sprite.getGlobalBounds().width >= m_data->window.getSize().x)
         {
             m_sprite.move(0, gTargetYAxisDecreaseAmount);
@@ -109,14 +109,10 @@ bool AIControls::FireShot()
 {
     sf::Time time = m_rateOfFire.getElapsedTime();
 
-    if (!m_fireShot)
+    if (!m_fireShot && time > sf::seconds(static_cast<float>(rand() % 10)))
     {
-
-        if (time > sf::seconds(rand() % 10))
-        {
-            m_fireShot = true;
-            return true;
-        }
+        m_fireShot = true;
+        return true;
     }
 
     m_fireShot = false;
@@ -132,9 +128,9 @@ ProjectileControls::ProjectileControls(GameDataRef data)
 {
 }
 
-void ProjectileControls::Execute(sf::Sprite& m_sprite, float Yaxis)
+void ProjectileControls::Execute(sf::Sprite& m_sprite, float Yaxis, float dt)
 {
-    m_sprite.move(0, Yaxis);
+    m_sprite.move(0, Yaxis * dt);
 }
 
 bool ProjectileControls::FireShot()

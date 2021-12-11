@@ -40,6 +40,6 @@ void GameManager::Run()
         }
 
         const float interpolation = accumulator / DeltaTime;
-        this->m_data->machine.GetActiveState()->Draw(interpolation);
+        this->m_data->machine.GetActiveState()->Draw();
     }
 }

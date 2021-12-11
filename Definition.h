@@ -17,6 +17,7 @@
 //size of window 
 constexpr auto gScreenWidth = 768;
 constexpr auto gScreenHeight = 1024;
+constexpr auto gGameFontFile = "Resources/fonts/ARCADE.TTF";
 /////////////////////////////////
 
 /////////////////////////////////
@@ -51,7 +52,7 @@ constexpr auto gGameOverFile = "Resources/res/Space.jpg";
 //Player
 constexpr auto gPlayerSpriteFile = "Resources/res/Player.png";
 constexpr auto gPlayerSoundFile = "Resources/res/PlayerDeath.wav";
-constexpr float gPlayerSpeed = 8.f;
+constexpr float gPlayerSpeed = 360.f;
 constexpr float gRateOfFire = 1.f / 4;
 /////////////////////////////////
 
@@ -60,16 +61,17 @@ constexpr float gRateOfFire = 1.f / 4;
 constexpr auto gMultiKillSoundFile = "Resources/res/QuakeKill.wav";
 constexpr auto gBulletSpriteFile = "Resources/res/Bullet.png";
 constexpr auto gBulletSoundFile = "Resources/res/Lazer.wav";
-constexpr float gAIBulletYAxisAmount = 10.f;
-constexpr float gPlayerBulletYAxisAmount = 30.f;
+constexpr float gAIBulletYAxisAmount = 600.f;
+constexpr float gPlayerBulletYAxisAmount = 660.f;
 /////////////////////////////////
 
 //////////////////////////////////
 //AI 
 constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
 constexpr auto gDeathSoundFile = "Resources/res/Boom.wav";
-constexpr float gTargetSpeed = 10.f;
-constexpr float gTargetYAxisDecreaseAmount = 35.f;
+constexpr float gTargetSpeed = 399.f;
+constexpr float gTargetYAxisDecreaseAmount = 30.f;
+constexpr float gAIRateOfFireInSeconds = 0.4f;
 //////////////////////////////////
 
 // TODO: animation system - save for later quite a lot of work in this

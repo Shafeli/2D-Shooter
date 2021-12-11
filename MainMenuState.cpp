@@ -9,12 +9,13 @@
 MainMenuState::MainMenuState(GameDataRef data)
 	: m_data(data)
 {
-
+	InMenuMusic();
 }
 
 // loads texture to asset manager
 void MainMenuState::Init()
 {
+	this->m_data->assets.LoadFont("Game Font", gGameFontFile);
 	this->m_data->assets.LoadTexture("Main menu Background", gMainMenuBackgroundFile);
 	this->m_data->assets.LoadTexture("Play Button", gPlayButtonFile);
 	m_data->assets.LoadSound("Click Sound", gClickSoundFile);
@@ -63,7 +64,7 @@ void MainMenuState::Update(float dt)
 }
 
 //renders state 
-void MainMenuState::Draw(float interpolation)
+void MainMenuState::Draw()
 {
 	this->m_data->window.clear();
 
@@ -74,4 +75,10 @@ void MainMenuState::Draw(float interpolation)
 	this->m_data->window.draw(this->m_playButton);
 
 	this->m_data->window.display();
+}
+
+void MainMenuState::InMenuMusic()
+{
+	m_menuMusic.openFromFile("Resources/res/MainMenuMusic.wav");
+	m_menuMusic.play();
 }

@@ -12,7 +12,7 @@
 		m_data->assets.LoadSound("Splash Sound", gSplashSoundFile);
 		m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
 		m_title.setPosition((gScreenWidth / 2) - (m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2);
-		m_sound.setBuffer(m_data->assets.GetSound("Splash Sound"));
+		//m_sound.setBuffer(m_data->assets.GetSound("Splash Sound"));
 	}
 
     // loads texture to asset manager
@@ -40,12 +40,12 @@
     //checks show time and after "show time go to main menu"
 	void SplashState::Update(float dt)
 	{
-		if (soundSwitch)
+		/*if (soundSwitch)
 		{
 			m_sound.setVolume(50);
 			m_sound.play();
 			soundSwitch = false;
-		}
+		}*/
 
 		if (this->m_clock.getElapsedTime().asSeconds() > gSplashShowTime)
 		{
@@ -56,7 +56,7 @@
 	}
 
     //renders state 
-	void SplashState::Draw(float interpolation)
+	void SplashState::Draw()
 	{
 		//If you see this consider it a error
 		this->m_data->window.clear(sf::Color::Red);

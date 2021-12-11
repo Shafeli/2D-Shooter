@@ -1,41 +1,58 @@
 #pragma once
+#include <sstream>
+
 #include "GameManager.h"
 #include "State.h"
 
 
 class GameObject;
-//class Target;
-//class Player;
-//class Bullet;
 
 class GameState : public State
 {
 
 	//Ref to Game data local
+	////////////////////////////////////////////////
 	GameDataRef m_data;
+	////////////////////////////////////////////////
 
-
-	/////////////////////////////////////////////////
-	//clock to keep track of how much time has passed
-	// temp for testing moving to end game state
-	// sf::Clock m_clock;
-	/////////////////////////////////////////////////
-
-	//second timer for AI shots with out this only the one in the top of the list shoots
+	//Clocks
+	////////////////////////////////////////////////
+	//second timer for AI shots without this only the one in the
+    //top of the list shoots
 	sf::Clock m_rateOfFire;
-
 	sf::Clock m_spawnTimer;
-
+	////////////////////////////////////////////////
+	
+	//Sprites
+	////////////////////////////////////////////////
 	sf::Sprite m_background;
-	std::vector<std::shared_ptr<GameObject>> m_playerLives;
+	////////////////////////////////////////////////
+
+	//Sounds & Fonts
+	////////////////////////////////////////////////
+	sf::Music m_gameMusic;
+	sf::Text m_scoreText;
+	sf::Text m_livesText;
+	sf::Text m_roundText;
+	////////////////////////////////////////////////
+
+	//Objects
+	////////////////////////////////////////////////
+	std::vector<std::shared_ptr<GameObject>> m_player;
 	std::vector<std::shared_ptr<GameObject>> m_pTargetList;
 	std::vector<std::shared_ptr<GameObject>> m_pPlayerBulletList;
 	std::vector<std::shared_ptr<GameObject>> m_pAIBulletList;
+	////////////////////////////////////////////////
 
+	//Object Garbage
+	////////////////////////////////////////////////
 	std::vector<std::shared_ptr<GameObject>> m_pRemovalPile;
+	////////////////////////////////////////////////
 
-	int m_playerScore = 0;
-	int m_roundCounter = 0;
+
+    sf::Int32 m_playerScore = 0;
+	sf::Int32 m_playerLives = 0;
+	sf::Int32 m_roundCounter = 0;
 public:
 
 	//c'tor takes in reference to Game Data struct
@@ -45,7 +62,7 @@ public:
 	virtual void Init() override final;
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
-	virtual void Draw(float interpolation)override final;
+	virtual void Draw()override final;
 
 private:
 	void EndGameCheck();
@@ -54,5 +71,14 @@ private:
 	void ProjectileUpdate(float dt);
 	void CollisionDetection();
 	void CollisionDetection_Prototype();
+	void ProjectileCleaner();
+	void InGameMusic();
+
+    static sf::String toString(sf::Int64 integer)
+	{
+		std::ostringstream os;
+		os << integer;
+		return os.str();
+	}
 };
 

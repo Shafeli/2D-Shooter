@@ -13,6 +13,10 @@ class MainMenuState : public State
 	sf::Sprite m_playButton;
 	sf::Sound m_MenuSound;
 
+	//Sounds
+    ////////////////////////////////////////////////
+	sf::Music m_menuMusic;
+	////////////////////////////////////////////////
 
 public:
 	//c'tor takes in reference to Game Data struct
@@ -21,6 +25,7 @@ public:
 	virtual void Init()override final;
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
-	virtual void Draw(float interpolation)override final;
+	virtual void Draw()override final;
+	void InMenuMusic();
 };
 

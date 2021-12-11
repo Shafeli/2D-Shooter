@@ -1,13 +1,10 @@
 #include "GameState.h"
-
 #include <iostream>
 #include "memory"
 #include "Definition.h"
 #include "GameOverState.h"
-//#include "Bullet.h"
-//#include "Player.h"
-//#include "Target.h"
 #include "GameObject.h"
+
 GameState::GameState(GameDataRef data)
 	: m_data(data)
 {
@@ -31,7 +28,7 @@ void GameState::Init()
 
 	for (size_t i = 0; i < 5; ++i)
 	{
-		m_playerLives.push_back(std::make_shared<GameObject>(m_data));
+		m_player.push_back(std::make_shared<GameObject>(m_data));
 	}
 
 	m_roundCounter++;
@@ -40,6 +37,20 @@ void GameState::Init()
 		
 		m_pTargetList.push_back(std::make_shared<GameObject>(m_data, i));
 	}
+
+	m_scoreText.setFont(m_data->assets.GetFont("Game Font"));
+	m_scoreText.setCharacterSize(80);
+	m_scoreText.setPosition((m_data->window.getSize().x / 2) - 20, 0);
+
+	m_roundText.setFont(m_data->assets.GetFont("Game Font"));
+	m_roundText.setCharacterSize(80);
+	m_roundText.setPosition((m_data->window.getSize().x) - 80, 0);
+
+	m_livesText.setFont(m_data->assets.GetFont("Game Font"));
+	m_livesText.setCharacterSize(80);
+	
+
+	InGameMusic();
 }
 
 
@@ -87,14 +98,18 @@ void GameState::Update(float dt)
 	
 	// Projectile delete Manager
 	////////////////////////////////////////////////////////
-
-
-
+	ProjectileCleaner();
 	////////////////////////////////////////////////////////
+	
+	///
+	m_playerLives = static_cast<sf::Int32>(m_player.size());
+	m_livesText.setString(toString(m_playerLives));
+	m_scoreText.setString(toString(m_playerScore));
+	m_roundText.setString(toString(m_roundCounter));
 }
 
 //renders state 
-void GameState::Draw(float interpolation)
+void GameState::Draw()
 {
 	//Error color
 	this->m_data->window.clear(sf::Color::Red);
@@ -114,8 +129,8 @@ void GameState::Draw(float interpolation)
 		}
 	}
 	//Player layer
-	if (!m_playerLives.empty())
-	m_playerLives.at(0)->Draw();
+	if (!m_player.empty())
+	m_player.at(0)->Draw();
 
 	//AI bullet layer
 	if (!m_pAIBulletList.empty())
@@ -137,8 +152,17 @@ void GameState::Draw(float interpolation)
 
 		i->Draw();
 	}
+	this->m_data->window.draw(m_scoreText);
+	this->m_data->window.draw(m_livesText);
+	this->m_data->window.draw(m_roundText);
 	//Display Window
 	this->m_data->window.display();
+
+	/*sf::String score = static_cast<sf::String>(m_playerScore);*/
+
+	
+
+	
 }
 
 
@@ -163,7 +187,7 @@ void GameState::EndGameCheck()
 		m_roundCounter++;
 	}
 
-	if (m_playerLives.empty())
+	if (m_player.empty())
 	{
 		sf::Sound loss;
 		loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
@@ -199,7 +223,7 @@ void GameState::AIUpdate(float dt)
 		sf::Time time = m_rateOfFire.getElapsedTime();
 		if (i->OnUse())
 		{
-			if (time > sf::seconds(1))
+			if (time > sf::seconds(gAIRateOfFireInSeconds))
 			{
 				//std::cout << "AI Shot!\n";
 				m_pAIBulletList.push_back(std::make_shared<GameObject>(m_data, i->GetPOS(), gAIBulletYAxisAmount));
@@ -246,14 +270,7 @@ void GameState::CollisionDetection()
 				{
 					if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
 					{
-						m_pTargetList.at(0)->MakeSound();
-
-						//boot leg way to sleep the thread and allow the deathsound to play 
-						sf::Time time = sf::seconds(0.01f);
-						sleep(time);
-
 						m_playerScore += m_roundCounter;
-						std::cout << "Player Score is: " << m_playerScore << '\n';
 						return true;
 					}
 					return false;
@@ -262,7 +279,7 @@ void GameState::CollisionDetection()
 
 			const auto PlayerLivesNewEnd = std::remove_if
 			(
-				m_playerLives.begin(), m_playerLives.end(),
+				m_player.begin(), m_player.end(),
 				[target, this](const std::shared_ptr<GameObject>& tar)
 				{
 					sf::Time time = m_spawnTimer.getElapsedTime();
@@ -270,7 +287,7 @@ void GameState::CollisionDetection()
 					{
 						if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
 						{
-							std::cout << "Player Life Count is: " << m_playerLives.size() << '\n';
+							std::cout << "Player Life Count is: " << (m_player.size() - 1) << '\n';
 							m_spawnTimer.restart();
 							return true;
 						}
@@ -278,9 +295,18 @@ void GameState::CollisionDetection()
 					return false;
 				}
 			);
-			m_playerLives.erase(PlayerLivesNewEnd, m_playerLives.end());
+		
+			m_player.erase(PlayerLivesNewEnd, m_player.end());
 
 			m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
+
+			if (!m_pTargetList.empty())
+			{
+				//m_pTargetList.at(0)->MakeSound();
+				//boot leg way to sleep the thread and allow the deathsound to play 
+				//sf::Time time = sf::seconds(0.01f);
+				//sleep(time);
+			}
 		}
 	}
 }
@@ -304,17 +330,66 @@ void GameState::CollisionDetection_Prototype()
 	m_pRemovalPile.clear();
 }
 
+void GameState::ProjectileCleaner()
+{
+	for (auto& bullet : m_pPlayerBulletList)
+	{
+		const auto PlayerBulletsNewEnd = std::remove_if
+		(
+			m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
+			[bullet, this](const std::shared_ptr<GameObject>& tar)
+			{
+				if (tar->GetSprite().getPosition().y < m_data->window.getSize().y / m_data->window.getSize().y)
+				{
+					//std::cout << "Player Bullet removed \n";
+					return true;
+				}
+				return false;
+			}
+		);
+
+		m_pPlayerBulletList.erase(PlayerBulletsNewEnd, m_pPlayerBulletList.end());
+	}
+
+	for (auto& bullet : m_pAIBulletList)
+	{
+		const auto PlayerBulletsNewEnd = std::remove_if
+		(
+			m_pAIBulletList.begin(), m_pAIBulletList.end(),
+			[bullet, this](const std::shared_ptr<GameObject>& tar)
+			{
+				if (tar->GetSprite().getPosition().y > static_cast<float>(m_data->window.getSize().y))
+				{
+					//std::cout << "AI Bullet removed \n";
+					return true;
+				}
+				return false;
+			}
+		);
+
+		m_pAIBulletList.erase(PlayerBulletsNewEnd, m_pAIBulletList.end());
+	}
+}
+
+//In-Game Music Player
+////////////////////////////////////////////////////////
+void GameState::InGameMusic()
+{
+	m_gameMusic.openFromFile("Resources/res/GameStateMusic.wav");
+	m_gameMusic.play();
+}
+
 //Player Update calls
 ////////////////////////////////////////////////////////
 void GameState::PlayerUpdate(float dt)
 {
-	if (!m_playerLives.empty())
-		m_playerLives.at(0)->Update(dt);
+	if (!m_player.empty())
+		m_player.at(0)->Update(dt);
 
-	if (!m_playerLives.empty())
-		if (m_playerLives.at(0)->OnUse())
+	if (!m_player.empty())
+		if (m_player.at(0)->OnUse())
 		{
-			m_pPlayerBulletList.push_back(std::make_shared<GameObject>(m_data, m_playerLives.at(0)->GetPOS(), -gPlayerBulletYAxisAmount));
+			m_pPlayerBulletList.push_back(std::make_shared<GameObject>(m_data, m_player.at(0)->GetPOS(), -gPlayerBulletYAxisAmount));
 			m_pPlayerBulletList.at(0)->MakeSound();
 
 		}

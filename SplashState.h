@@ -11,7 +11,7 @@ class SplashState : public State
 	GameDataRef m_data;
 
 
-	bool soundSwitch = true;
+	//bool soundSwitch = true;
 	
 	/////////////////////////////////////////////////
 	//clock to keep track of how much time has passed
@@ -22,7 +22,7 @@ class SplashState : public State
 	//background sprite
 	sf::Sprite m_background;
 	sf::Sprite m_title;
-	sf::Sound m_sound;
+	//sf::Sound m_sound;
 
 public:
 
@@ -32,7 +32,7 @@ public:
 	virtual void Init()override final;
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
-	virtual void Draw(float interpolation)override final;
+	virtual void Draw()override final;
 
 
 
