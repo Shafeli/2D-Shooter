@@ -13,6 +13,7 @@ class GameObject : std::enable_shared_from_this<GameObject>
     GameDataRef m_data;
     sf::Sprite m_sprite;
     sf::Clock m_rateOfFire;
+    sf::Clock m_DeathTimer;
 
     std::shared_ptr<IControls> m_pControlType;
     std::vector<std::shared_ptr<ISpawnStrategy>> m_pSpawnStrategy;
@@ -20,11 +21,7 @@ class GameObject : std::enable_shared_from_this<GameObject>
     std::vector<std::shared_ptr<IAppearanceStrategy>> m_pAppearanceStrategy;
     std::vector<std::shared_ptr<ISoundStrategy>> m_pSoundStrategy;
 
-    //////////////////////////////////////////////
-    // TODO: Rework this projectile requrement
-    //////////////////////////////////////////////
-    float m_direction;
-
+    bool m_isAlive = true;
 public:
 
     ///////////////////////////////////////////
@@ -50,7 +47,8 @@ public:
     // Appearance Startegy
     ///////////////////////////////////////////
     void SetAppearanceStrategy(std::shared_ptr<IAppearanceStrategy>pAppearanceStrategy);
-    void SetAppearance();
+    void SetStartAppearance();
+    void SetDeathAppearance();
     ///////////////////////////////////////////
     // Draws Sprite to Window 
     ///////////////////////////////////////////
@@ -81,4 +79,15 @@ public:
     ///////////////////////////////////////////
     const sf::Vector2f& GetPOS();
     const sf::Sprite& GetSprite();
+    void MarkedForDeath();
+    bool IsDead() const
+    {
+        bool isdead = false;
+
+        if (m_isAlive == false)
+            return isdead == true;
+
+        return isdead;
+    }
+    sf::Clock GetTimer() { return m_DeathTimer; }
 };

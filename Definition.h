@@ -66,7 +66,8 @@ constexpr float gPlayerBulletYAxisAmount = 660.f;
 /////////////////////////////////
 
 //////////////////////////////////
-//AI 
+//AI
+constexpr auto gDeathSpriteFile = "Resources/res/Death.png";
 constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
 constexpr auto gDeathSoundFile = "Resources/res/Boom.wav";
 constexpr float gTargetSpeed = 399.f;

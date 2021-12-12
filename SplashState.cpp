@@ -13,6 +13,7 @@
     // loads texture to asset manager
 	void SplashState::Init()
 	{
+		this->m_data->assets.LoadTexture("Death Sprite", gDeathSpriteFile);
 		this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
 		this->m_data->assets.LoadSound("Splash Sound", gSplashSoundFile);
 		this->m_data->assets.LoadTexture("Game Over State Background", gGameOverFile);

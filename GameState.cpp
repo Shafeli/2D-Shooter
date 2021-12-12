@@ -28,6 +28,8 @@ void GameState::Init()
 	{
 		m_pTargetList.push_back(m_factory->MakeAI());
 	}
+	//////////////////////////////////////////////////////////////////////////////////
+	//TODO: Move to function
 	m_scoreText.setFont(m_data->assets.GetFont("Game Font"));
 	m_scoreText.setCharacterSize(80);
 	m_scoreText.setPosition((m_data->window.getSize().x / 2) - 10, 0);
@@ -39,7 +41,8 @@ void GameState::Init()
 	m_livesText.setFont(m_data->assets.GetFont("Game Font"));
 	m_livesText.setCharacterSize(80);
 	m_livesText.setPosition(40, 0);
-
+	//////////////////////////////////////////////////////////////////////////////////
+	
 	InGameMusic();
 }
 
@@ -84,13 +87,15 @@ void GameState::Update(float dt)
 	////////////////////////////////////////////////////////
 	CollisionDetection();
 	//CollisionDetection_Prototype();
+	//CollisionDetection_Prototype_Two();
 	////////////////////////////////////////////////////////
 	
 	// Projectile delete Manager
 	////////////////////////////////////////////////////////
-	ProjectileCleaner();
+	ProjectileOutOfBoundsCleaner();
 	////////////////////////////////////////////////////////
-	
+
+	//TODO: Move to function
 	//Text
     ////////////////////////////////////////////////////////
 	m_playerLives = static_cast<sf::Int32>(m_player.size());
@@ -98,6 +103,7 @@ void GameState::Update(float dt)
 	m_scoreText.setString(toString(m_playerScore));
 	m_roundText.setString(toString(m_roundCounter));
 
+	//TODO: Move to function
 	//Music
     ////////////////////////////////////////////////////////
 	if (m_musicTimer.getElapsedTime().asSeconds() > 234)
@@ -156,12 +162,6 @@ void GameState::Draw()
 	this->m_data->window.draw(m_roundText);
 	//Display Window
 	this->m_data->window.display();
-
-	/*sf::String score = static_cast<sf::String>(m_playerScore);*/
-
-	
-
-	
 }
 
 
@@ -256,8 +256,21 @@ void GameState::ProjectileUpdate(float dt)
 
 //Collision Dection 
 ////////////////////////////////////////////////////////
-void GameState::CollisionDetection()
+void GameState::CollisionDetection() 
 {	//TODO: Clean up
+    //loops over sprites if two touch mark for death / deletion
+	for (const auto& i : m_pPlayerBulletList)
+	{
+		for (const auto& j : m_pTargetList)
+		{
+			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
+			{
+				i->MarkedForDeath();
+				j->MarkedForDeath();
+			}
+		}
+	}
+
 	for (auto& target : m_pAIBulletList)
 	{
 		for (auto& bullet : m_pPlayerBulletList)
@@ -267,11 +280,13 @@ void GameState::CollisionDetection()
 				m_pTargetList.begin(), m_pTargetList.end(),
 				[bullet, this](const std::shared_ptr<GameObject>& tar)
 				{
+					if(!bullet->IsDead())
 					if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
 					{
 						m_playerScore += m_roundCounter;
 						return true;
 					}
+
 					return false;
 				}
 			);
@@ -294,18 +309,8 @@ void GameState::CollisionDetection()
 					return false;
 				}
 			);
-		
 			m_player.erase(PlayerLivesNewEnd, m_player.end());
-
 			m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
-
-			if (!m_pTargetList.empty())
-			{
-				//m_pTargetList.at(0)->MakeSound();
-				//boot leg way to sleep the thread and allow the deathsound to play 
-				//sf::Time time = sf::seconds(0.01f);
-				//sleep(time);
-			}
 		}
 	}
 }
@@ -314,29 +319,70 @@ void GameState::CollisionDetection()
 ////////////////////////////////////////////////////////
 void GameState::CollisionDetection_Prototype()
 {
-	for (auto& i: m_pPlayerBulletList)
+	KillMarkMachine();
+	TargetClearner();
+	PlayerBulletCleaner();
+	PlayerCleaner();
+}
+
+void GameState::CollisionDetection_Prototype_Two()
+{
+	//loops over sprites if two touch mark for death / deletion
+	for (auto i : m_pPlayerBulletList)
 	{
-		for (auto& j : m_pTargetList)
+		for (auto j : m_pTargetList)
 		{
 			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
 			{
-				m_pRemovalPile.push_back(std::move(i));
-				m_pRemovalPile.push_back(std::move(j));
-			}
+				std::cout << "Hit!\n";
+				i->MarkedForDeath();
+				j->MarkedForDeath();
 
+			}
 		}
 	}
-	m_pRemovalPile.clear();
+
+	for (auto i : m_pPlayerBulletList)
+	{
+		for (auto j : m_pTargetList)
+		{
+			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
+			{
+				std::vector<std::shared_ptr<GameObject>> tempBullet;
+				std::vector<std::shared_ptr<GameObject>> tempTarget;
+
+				for (size_t i = 0; i < m_pTargetList.size(); ++i)
+				{
+					if (!m_pTargetList.at(i)->IsDead())
+					{
+						tempTarget.push_back(m_pTargetList.at(i));
+					}
+				}
+
+				for (size_t i = 0; i < m_pPlayerBulletList.size(); ++i)
+				{
+					if (!m_pPlayerBulletList.at(i)->IsDead())
+					{
+						tempTarget.push_back(m_pPlayerBulletList.at(i));
+					}
+				}
+				m_pPlayerBulletList = tempBullet;
+				m_pTargetList = tempTarget;
+
+			}
+		}
+	}
+
 }
 
-void GameState::ProjectileCleaner()
+void GameState::ProjectileOutOfBoundsCleaner()
 {
 	for (auto& bullet : m_pPlayerBulletList)
 	{
 		const auto PlayerBulletsNewEnd = std::remove_if
 		(
 			m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
-			[bullet, this](const std::shared_ptr<GameObject>& tar)
+			[this](const std::shared_ptr<GameObject>& tar)
 			{
 				if (tar->GetSprite().getPosition().y < m_data->window.getSize().y / m_data->window.getSize().y)
 				{
@@ -346,7 +392,6 @@ void GameState::ProjectileCleaner()
 				return false;
 			}
 		);
-
 		m_pPlayerBulletList.erase(PlayerBulletsNewEnd, m_pPlayerBulletList.end());
 	}
 
@@ -355,7 +400,7 @@ void GameState::ProjectileCleaner()
 		const auto PlayerBulletsNewEnd = std::remove_if
 		(
 			m_pAIBulletList.begin(), m_pAIBulletList.end(),
-			[bullet, this](const std::shared_ptr<GameObject>& tar)
+			[this](const std::shared_ptr<GameObject>& tar)
 			{
 				if (tar->GetSprite().getPosition().y > static_cast<float>(m_data->window.getSize().y))
 				{
@@ -365,7 +410,6 @@ void GameState::ProjectileCleaner()
 				return false;
 			}
 		);
-
 		m_pAIBulletList.erase(PlayerBulletsNewEnd, m_pAIBulletList.end());
 	}
 }
@@ -376,6 +420,102 @@ void GameState::InGameMusic()
 {
 	m_gameMusic.openFromFile("Resources/res/GameStateMusic.wav");
 	m_gameMusic.play();
+}
+
+void GameState::KillMarkMachine()
+{	//loops over sprites if two touch mark for death / deletion
+	for (const auto& i : m_pPlayerBulletList)
+	{
+		for (const auto& j : m_pTargetList)
+		{
+			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
+			{
+				i->MarkedForDeath();
+				j->MarkedForDeath();
+
+			}
+		}
+	}
+	//loops over sprites if two touch mark for death / deletion
+	for (auto& i : m_player)
+	{
+		for (auto& j : m_pAIBulletList)
+		{
+			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
+			{
+				i->MarkedForDeath();
+			}
+		}
+	}
+}
+
+void GameState::TargetClearner()
+{	//loops over targets / if any are marked remove
+	for (auto& target : m_pTargetList)
+	{
+		const auto TargetNewEnd = std::remove_if
+		(
+			m_pTargetList.begin(), m_pTargetList.end(),
+			[this, target](const std::shared_ptr<GameObject>tar)
+			{
+				//std::shared_ptr<GameObject> pTemp = tar->lock();
+				//allows for death sound to play
+				if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
+				{
+					m_playerScore += m_roundCounter;
+					return true;
+				}
+				return false;
+
+			}
+		);
+		//resize the vector after removale
+		m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
+	}
+}
+
+void GameState::PlayerBulletCleaner()
+{	//loops over player bullet vector / if any are marked remove
+	for (auto& PlayerBullet : m_pPlayerBulletList)
+	{
+		const auto PlayerBulletNewEnd = std::remove_if
+		(
+			m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
+			[PlayerBullet](const std::shared_ptr<GameObject>& tar)
+			{
+
+				if (PlayerBullet->IsDead())
+				{
+					return true;
+				}
+				return false;
+			});
+		//resize the vector after removale
+		m_pPlayerBulletList.erase(PlayerBulletNewEnd, m_pPlayerBulletList.end());
+	}
+}
+
+void GameState::PlayerCleaner()
+{
+	//loops over player vector / if any are marked remove
+	for (auto& player : m_player)
+	{
+		const auto PlayerLivesNewEnd = std::remove_if
+		(
+			m_player.begin(), m_player.end(),
+			[player](const std::shared_ptr<GameObject>& tar)
+			{
+				//allows for death sound to play
+				if (player->IsDead())
+				{
+					return true;
+				}
+				return false;
+			}
+		);
+		//resize the vector after removale
+		m_player.erase(PlayerLivesNewEnd, m_player.end());
+	}
 }
 
 //Player Update calls

@@ -58,6 +58,9 @@
     <Filter Include="States\GameState\GameObjects\Strategies\SoundStrategies">
       <UniqueIdentifier>{4d4a26dd-5189-4e0d-9ba5-f460ada8e43f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States\GameState\GameObjects\Strategies\SpawnStrategies\DeathStrategies">
+      <UniqueIdentifier>{506dac92-86d0-4978-989e-b63f112fb694}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine.cpp">
@@ -129,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="PlayerSoundStrategy.cpp">
       <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="DeathAppearanceStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +224,9 @@
     </ClInclude>
     <ClInclude Include="AISoundStrategy.h">
       <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="DeathAppearanceStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

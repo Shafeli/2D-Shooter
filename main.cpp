@@ -17,7 +17,10 @@ https://en.sfml-dev.org/forums/index.php?topic=16607.0 - SFML Resource Manager D
 https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderTexture.php - RenderTexture Documentation of SFML 2.5.1
 https://www.sfml-dev.org/tutorials/2.5/window-inputs.php - Keyboard, mouse and joystick Documentation of SFML 2.5.1
 https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and music Documentation of SFML 2.5.1
- 
+
+
+
+
  */
 
  /////////////////////////////////////////////////
@@ -32,18 +35,18 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
  /////////////////////////////////////////////////////
  //              TODO:
- //- End Game if AI Touches Bottom of the screen
- //- Score System ---
- //- Score UI -----
+ //- 
+ //- Improve AI spawning system
+ //- Improve Player Life count
  //- High Score Leaderboards and saving system with User Choice Name
- //- End Game Screen UI 
+ //- 
  //- Updated Collision System 
  //- AI Manager class 
- //- Updata AI spawning to make scaleable 
- //- Enum system for loading and retrieving assets  
- //- Spawner behavior 
- //- Hit / step behavior
  //- 
+ //- Enum system for loading and retrieving assets  
+ //- 
+ //- Hit / step behavior
+ //- Update srand for better distribution
  /////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////

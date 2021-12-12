@@ -13,14 +13,12 @@
 ///////////////////////////////////////////
 GameObject::GameObject(GameDataRef data)
     :m_data(data)
-    ,m_direction(0)
 {
-  
 }
 
 void GameObject::GameObjectInit()
 {
-    SetAppearance();
+    SetStartAppearance();
     Scale();
     Spawn();
 }
@@ -46,7 +44,7 @@ void GameObject::Spawn()
 ///////////////////////////////////////////
 void GameObject::SetScale(std::shared_ptr<IScaleStrategy>pSacleStrategy)
 {
-    m_pSacleStrategy.push_back(pSacleStrategy);
+    m_pSacleStrategy.push_back(std::move(pSacleStrategy));
 }
 void GameObject::Scale()
 {
@@ -63,25 +61,31 @@ void GameObject::Scale()
 
 void GameObject::SetAppearanceStrategy(std::shared_ptr<IAppearanceStrategy> pAppearanceStrategy)
 {
-    m_pAppearanceStrategy.push_back(pAppearanceStrategy);
+    m_pAppearanceStrategy.push_back(std::move(pAppearanceStrategy));
 }
-void GameObject::SetAppearance()
+void GameObject::SetStartAppearance()
 {
-    for (auto& i : m_pAppearanceStrategy)
-    {
-        i->SetAppearance(&m_sprite);
-    }
+    m_pAppearanceStrategy.at(0)->SetAppearance(&m_sprite);
 }
-
+void GameObject::SetDeathAppearance()
+{
+    if (m_pAppearanceStrategy.capacity() > 1)
+    {
+        m_pAppearanceStrategy.at(1)->SetAppearance(&m_sprite);
+        return;
+    }
+    std::cout << "NO Death Appearance set\n";
+}
 ///////////////////////////////////////////
 // Controls
 ///////////////////////////////////////////
 void GameObject::SetControls(std::shared_ptr<IControls> controls)
 {
-    m_pControlType = controls;
+    m_pControlType = std::move(controls);
 }
 void GameObject::Update(float dt)
 {
+    //if(m_isAlive)
     m_pControlType->Execute(m_sprite, dt);
 }
 
@@ -92,6 +96,7 @@ void GameObject::Update(float dt)
 ///////////////////////////////////////////
 void GameObject::Draw()
 {
+    if(m_isAlive)
     m_data->window.draw(m_sprite);
 }
 
@@ -102,7 +107,7 @@ void GameObject::Draw()
 
 void GameObject::SetSound(std::shared_ptr<ISoundStrategy> sound)
 {
-    m_pSoundStrategy.push_back(sound);
+    m_pSoundStrategy.push_back(std::move(sound));
 }
 void GameObject::MakeSound()
 {
@@ -117,6 +122,10 @@ void GameObject::MakeSound()
 ///////////////////////////////////////////
 bool GameObject::OnUse()
 {
+    if (!m_isAlive)
+    {
+        return false;
+    }
    return m_pControlType->FireShot();
 }
 
@@ -134,6 +143,17 @@ const sf::Vector2f& GameObject::GetPOS()
 const sf::Sprite& GameObject::GetSprite()
 {
     return m_sprite;
+}
+
+void GameObject::MarkedForDeath()
+{
+    m_isAlive = false;
+    m_DeathTimer.restart();
+    if (m_pAppearanceStrategy.capacity() > 1)
+    {
+        m_pAppearanceStrategy.at(1)->SetAppearance(&m_sprite);
+        MakeSound();
+    }
 }
 //
 //////////////////////////////////////////////////////////////////////////////////////

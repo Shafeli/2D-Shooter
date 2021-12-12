@@ -25,6 +25,7 @@ class GameState : public State
 	sf::Clock m_rateOfFire;
 	sf::Clock m_spawnTimer;
 	sf::Clock m_musicTimer;
+	
 	////////////////////////////////////////////////
 	
 	//Sprites
@@ -76,9 +77,13 @@ private:
 	void ProjectileUpdate(float dt);
 	void CollisionDetection();
 	void CollisionDetection_Prototype();
-	void ProjectileCleaner();
+	void CollisionDetection_Prototype_Two();
+	void ProjectileOutOfBoundsCleaner();
 	void InGameMusic();
-
+	void KillMarkMachine();
+	void TargetClearner();
+	void PlayerBulletCleaner();
+	void PlayerCleaner();
     static sf::String toString(sf::Int64 integer)
 	{
 		std::ostringstream os;
