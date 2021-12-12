@@ -1,1 +1,2 @@
 C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Release\Space_Shooter.exe
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Release\Space_Shooter.exe

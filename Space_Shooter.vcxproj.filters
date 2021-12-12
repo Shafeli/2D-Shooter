@@ -46,6 +46,18 @@
     <Filter Include="States\GameState\Prototyping">
       <UniqueIdentifier>{c9c958d4-6124-466d-a9e4-d85ffb38b7f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="States\GameState\GameObjects\Strategies\SpawnStrategies">
+      <UniqueIdentifier>{08e6d065-2ea0-4f2e-8dec-61f05b1c5e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\GameState\GameObjects\Strategies\SizeStrategies">
+      <UniqueIdentifier>{805c9e61-fb4a-4e60-b5db-4f4c966bb739}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\GameState\GameObjects\Strategies\AppearanceStrategies">
+      <UniqueIdentifier>{2cea5c56-3b0b-4944-a575-542e3cac2ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\GameState\GameObjects\Strategies\SoundStrategies">
+      <UniqueIdentifier>{4d4a26dd-5189-4e0d-9ba5-f460ada8e43f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine.cpp">
@@ -78,6 +90,45 @@
     </ClCompile>
     <ClCompile Include="IControls.cpp">
       <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
+    </ClCompile>
+    <ClCompile Include="AISpawnStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectFactory.cpp">
+      <Filter>States\GameState\GameObjects\Factories</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSpawnStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileSpawnStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="AIScale.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerScale.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileScale.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAppearanceStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="AIAppearanceStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjetileAppearanceStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileSoundStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="AISoundStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerSoundStrategy.cpp">
+      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +167,57 @@
     </ClInclude>
     <ClInclude Include="IControls.h">
       <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
+    </ClInclude>
+    <ClInclude Include="AISpawnStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ISpawnStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectFactory.h">
+      <Filter>States\GameState\GameObjects\Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSpawnStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileSpawnStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="IScaleStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerScale.h">
+      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileScale.h">
+      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="AIScale.h">
+      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="IAppearanceStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAppearanceStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="AIAppearanceStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjetileAppearanceStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ISoundStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileSoundStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSoundStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="AISoundStrategy.h">
+      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

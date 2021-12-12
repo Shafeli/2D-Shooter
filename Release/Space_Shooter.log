@@ -1,7 +1,17 @@
-﻿  SplashState.cpp
+﻿  GameState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(34,59): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(38,55): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
   Generating code
-  5 of 895 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
+  1 of 1496 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Space_Shooter.vcxproj -> C:\Users\silas\OneDrive\Documents\GitHub\2D-Shooter\Release\Space_Shooter.exe
+  Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Release\Space_Shooter.exe

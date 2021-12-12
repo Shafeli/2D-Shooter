@@ -2,10 +2,13 @@
 #include <sstream>
 
 #include "GameManager.h"
+#include "ObjectFactory.h"
+
 #include "State.h"
 
 
 class GameObject;
+
 
 class GameState : public State
 {
@@ -39,6 +42,7 @@ class GameState : public State
 
 	//Objects
 	////////////////////////////////////////////////
+    std::shared_ptr<ObjectFactory> m_factory;
 	std::vector<std::shared_ptr<GameObject>> m_player;
 	std::vector<std::shared_ptr<GameObject>> m_pTargetList;
 	std::vector<std::shared_ptr<GameObject>> m_pPlayerBulletList;

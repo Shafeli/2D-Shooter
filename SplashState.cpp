@@ -26,6 +26,13 @@
 		std::cout << "Entered Splash State\n";
 		this->m_data->assets.LoadTexture("Splash State Background", gSplahBackgroundFile);
 		m_background.setTexture(this->m_data->assets.GetTexture("Splash State Background"));
+		this->m_data->assets.LoadTexture("Game State Background", gGameBackgroundFile);
+		m_data->assets.LoadTexture("Player Sprite", gPlayerSpriteFile);
+		m_data->assets.LoadTexture("Target Sprite", gTargetSpriteFile);
+		m_data->assets.LoadTexture("Bullet Sprite", gBulletSpriteFile);
+		m_data->assets.LoadSound("Lazer Sound", gBulletSoundFile);
+		m_data->assets.LoadSound("Boom Sound", gDeathSoundFile);
+		m_data->assets.LoadSound("PlayerDeath Sound", gPlayerSoundFile);
 	}
 
 	

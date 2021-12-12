@@ -5,39 +5,29 @@
 #include "GameOverState.h"
 #include "GameObject.h"
 
+
 GameState::GameState(GameDataRef data)
 	: m_data(data)
 {
-
+	m_factory = std::make_shared<ObjectFactory>(data);
 }
 
 // loads texture to asset manager
 void GameState::Init()
 {
 	std::cout << "Entered Game State\n";
-	this->m_data->assets.LoadTexture("Game State Background", gGameBackgroundFile);
 
 	m_background.setTexture(this->m_data->assets.GetTexture("Game State Background"));
-
-	m_data->assets.LoadTexture("Player Sprite", gPlayerSpriteFile);
-	m_data->assets.LoadTexture("Target Sprite", gTargetSpriteFile);
-	m_data->assets.LoadTexture("Bullet Sprite", gBulletSpriteFile);
-	m_data->assets.LoadSound("Lazer Sound", gBulletSoundFile);
-	m_data->assets.LoadSound("Boom Sound", gDeathSoundFile);
-	m_data->assets.LoadSound("PlayerDeath Sound", gPlayerSoundFile);
-
 	for (size_t i = 0; i < 5; ++i)
 	{
-		m_player.push_back(std::make_shared<GameObject>(m_data));
+		m_player.push_back(m_factory->MakePlayer());
 	}
-
 	m_roundCounter++;
+
 	for (size_t i = 0; i < 10; ++i)
 	{
-		
-		m_pTargetList.push_back(std::make_shared<GameObject>(m_data, i));
+		m_pTargetList.push_back(m_factory->MakeAI());
 	}
-
 	m_scoreText.setFont(m_data->assets.GetFont("Game Font"));
 	m_scoreText.setCharacterSize(80);
 	m_scoreText.setPosition((m_data->window.getSize().x / 2) - 10, 0);
@@ -101,12 +91,15 @@ void GameState::Update(float dt)
 	ProjectileCleaner();
 	////////////////////////////////////////////////////////
 	
-	///
+	//Text
+    ////////////////////////////////////////////////////////
 	m_playerLives = static_cast<sf::Int32>(m_player.size());
 	m_livesText.setString(toString(m_playerLives));
 	m_scoreText.setString(toString(m_playerScore));
 	m_roundText.setString(toString(m_roundCounter));
 
+	//Music
+    ////////////////////////////////////////////////////////
 	if (m_musicTimer.getElapsedTime().asSeconds() > 234)
 	{
 		InGameMusic();
@@ -136,7 +129,7 @@ void GameState::Draw()
 	}
 	//Player layer
 	if (!m_player.empty())
-	m_player.at(0)->Draw();
+		m_player.at(0)->Draw();
 
 	//AI bullet layer
 	if (!m_pAIBulletList.empty())
@@ -188,7 +181,7 @@ void GameState::EndGameCheck()
         std::cout << "Round Count is: " << m_roundCounter << '\n';
 		for (size_t i = 0; i < 10; ++i)
 		{
-			m_pTargetList.push_back(std::make_shared<GameObject>(m_data, i));
+			m_pTargetList.push_back(m_factory->MakeAI());
 		}
 		m_roundCounter++;
 	}
@@ -232,7 +225,7 @@ void GameState::AIUpdate(float dt)
 			if (time > sf::seconds(gAIRateOfFireInSeconds))
 			{
 				//std::cout << "AI Shot!\n";
-				m_pAIBulletList.push_back(std::make_shared<GameObject>(m_data, i->GetPOS(), gAIBulletYAxisAmount));
+				m_pAIBulletList.push_back(std::shared_ptr<GameObject>(m_factory->MakeProjectile(i->GetPOS(), gAIBulletYAxisAmount)));
 				m_pAIBulletList.at(0)->MakeSound();
 				m_rateOfFire.restart();
 			}
@@ -395,7 +388,7 @@ void GameState::PlayerUpdate(float dt)
 	if (!m_player.empty())
 		if (m_player.at(0)->OnUse())
 		{
-			m_pPlayerBulletList.push_back(std::make_shared<GameObject>(m_data, m_player.at(0)->GetPOS(), -gPlayerBulletYAxisAmount));
+			m_pPlayerBulletList.push_back(std::shared_ptr<GameObject>(m_factory->MakeProjectile(m_player.at(0)->GetPOS(), -gPlayerBulletYAxisAmount)));
 			m_pPlayerBulletList.at(0)->MakeSound();
 
 		}

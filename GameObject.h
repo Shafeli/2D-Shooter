@@ -1,20 +1,24 @@
 ﻿#pragma once
 #include <vector>
-#include <SFML/Graphics/Sprite.hpp>
-
-#include "Definition.h"
 #include "GameManager.h"
 
+class ISoundStrategy;
+class IAppearanceStrategy;
+class IScaleStrategy;
+class ISpawnStrategy;
 class IControls;
 
-class GameObject
+class GameObject : std::enable_shared_from_this<GameObject>
 {
     GameDataRef m_data;
     sf::Sprite m_sprite;
     sf::Clock m_rateOfFire;
-    sf::Sound m_sound;
 
     std::shared_ptr<IControls> m_pControlType;
+    std::vector<std::shared_ptr<ISpawnStrategy>> m_pSpawnStrategy;
+    std::vector<std::shared_ptr<IScaleStrategy>> m_pSacleStrategy;
+    std::vector<std::shared_ptr<IAppearanceStrategy>> m_pAppearanceStrategy;
+    std::vector<std::shared_ptr<ISoundStrategy>> m_pSoundStrategy;
 
     //////////////////////////////////////////////
     // TODO: Rework this projectile requrement
@@ -22,45 +26,54 @@ class GameObject
     float m_direction;
 
 public:
+
     ///////////////////////////////////////////
-    // different C'tor overloads for Different Object Types
-    // Player = just Game Data
-    // Projectile = Game Data,const sf::Vector2f& Position
-    // AI = Game Data, size_t
-    ///////////////////////////////////////////
-    
-    ///////////////////////////////////////////
-    // Create Player
+    // Create Object
     ///////////////////////////////////////////
     GameObject(GameDataRef data);
-    ///////////////////////////////////////////
-    // Create AI
-    ///////////////////////////////////////////
-    GameObject(GameDataRef data, size_t targetNum);
-    ///////////////////////////////////////////
-    // Create Projectile 
-    ///////////////////////////////////////////
-    GameObject(GameDataRef data, const sf::Vector2f& pos, float Direction);
+    void GameObjectInit();
 
     ///////////////////////////////////////////
-    // pControl -> Exicute
+    // Spawn Startegy
     ///////////////////////////////////////////
-    void Update(float dt);
+    void SetSpawn(std::shared_ptr<ISpawnStrategy>);
+    void Spawn();
 
+    ///////////////////////////////////////////
+    // Scale Startegy
+    ///////////////////////////////////////////
+    void SetScale(std::shared_ptr<IScaleStrategy>pSacleStrategy);
+    void Scale();
+
+    //////////////////////////////////////////////////////
+    ///////////////////////////////////////////
+    // Appearance Startegy
+    ///////////////////////////////////////////
+    void SetAppearanceStrategy(std::shared_ptr<IAppearanceStrategy>pAppearanceStrategy);
+    void SetAppearance();
     ///////////////////////////////////////////
     // Draws Sprite to Window 
     ///////////////////////////////////////////
     void Draw();
+    //////////////////////////////////////////////////////
 
+    /////////////////////////////////////////////////////
     ///////////////////////////////////////////
-    // m_sound -> Play
-    ///////////////////////////////////////////
-    void MakeSound();
-
+    // Control
+    /////////////////////////////////////////////////
+    void SetControls(std::shared_ptr<IControls> controls);
+    void Update(float dt);
     ///////////////////////////////////////////
     // returns if pControl has used action button
     ///////////////////////////////////////////
     bool OnUse();
+    /////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////
+    // Sound
+    ///////////////////////////////////////////
+    void SetSound(std::shared_ptr<ISoundStrategy> sound);
+    void MakeSound();
 
 
     ///////////////////////////////////////////

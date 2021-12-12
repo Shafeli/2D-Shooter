@@ -16,7 +16,7 @@ PlayerControls::PlayerControls(GameDataRef data)
 
 }
 
-void PlayerControls::Execute(sf::Sprite& m_sprite, float Yaxis, float dt)
+void PlayerControls::Execute(sf::Sprite& m_sprite, float dt)
 {
     // Check left side of the window
     if (m_sprite.getGlobalBounds().left <= 0.f)
@@ -68,7 +68,7 @@ AIControls::AIControls(GameDataRef data)
 {
 
 }
-void AIControls::Execute(sf::Sprite& m_sprite, float Yaxis ,float dt)
+void AIControls::Execute(sf::Sprite& m_sprite, float dt)
 {
     // Check left side of the window
     if (m_sprite.getGlobalBounds().left <= 0.f)
@@ -123,14 +123,15 @@ bool AIControls::FireShot()
 //////////////////////////////////////
 //Movement Controls for a Projectile
 /////////////////////////////////////
-ProjectileControls::ProjectileControls(GameDataRef data)
+ProjectileControls::ProjectileControls(GameDataRef data, float direction)
     :m_data(data)
+    ,m_direction(direction)
 {
 }
 
-void ProjectileControls::Execute(sf::Sprite& m_sprite, float Yaxis, float dt)
+void ProjectileControls::Execute(sf::Sprite& m_sprite, float dt)
 {
-    m_sprite.move(0, Yaxis * dt);
+    m_sprite.move(0, m_direction * dt);
 }
 
 bool ProjectileControls::FireShot()

@@ -3,93 +3,88 @@
 #include <iostream>
 #include <memory>
 #include "IControls.h"
-
+#include "IScaleStrategy.h"
+#include "ISpawnStrategy.h"
+#include "IAppearanceStrategy.h"
+#include "ISoundStrategy.h"
 
 ///////////////////////////////////////////
-// Create Player
+// Create Object
 ///////////////////////////////////////////
 GameObject::GameObject(GameDataRef data)
     :m_data(data)
     ,m_direction(0)
 {
-    m_sprite.setTexture(m_data->assets.GetTexture("Player Sprite"));
-    m_sound.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
-    m_sprite.setScale(sf::Vector2f(0.2f, 0.2f));
-    m_sprite.setPosition((m_data->window.getSize().x / 2) - (m_sprite.getGlobalBounds().width / 2),
-    m_data->window.getSize().y - m_sprite.getGlobalBounds().height);
-    m_pControlType = std::make_shared<PlayerControls>(m_data);
+  
+}
+
+void GameObject::GameObjectInit()
+{
+    SetAppearance();
+    Scale();
+    Spawn();
 }
 
 ///////////////////////////////////////////
-// Create AI
+// Spawn Startegy
 ///////////////////////////////////////////
-GameObject::GameObject(GameDataRef data, size_t targetNum)
-    :m_data(data)
-    ,m_direction(0)
+void GameObject::SetSpawn(std::shared_ptr<ISpawnStrategy> pSpawnStrategy)
 {
-    m_sprite.setTexture(m_data->assets.GetTexture("Target Sprite"));
-    m_sprite.setScale(sf::Vector2f(0.2f, 0.2f));
-   
-    m_pControlType = std::make_shared<AIControls>(m_data);
-    switch (targetNum)
+    m_pSpawnStrategy.push_back(std::move(pSpawnStrategy));
+}
+
+void GameObject::Spawn()
+{
+    for(auto&i : m_pSpawnStrategy)
     {
-    case 0:
-        m_sprite.setPosition((m_data->window.getSize().x - 725) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 1:
-        m_sprite.setPosition((m_data->window.getSize().x - 650) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 2:
-        m_sprite.setPosition((m_data->window.getSize().x - 50) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 3:
-        m_sprite.setPosition((m_data->window.getSize().x - 125) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 4:
-        m_sprite.setPosition((m_data->window.getSize().x - 200) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 5:
-        m_sprite.setPosition((m_data->window.getSize().x - 275) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 6:
-        m_sprite.setPosition((m_data->window.getSize().x - 350) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 7:
-        m_sprite.setPosition((m_data->window.getSize().x - 425) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 8:
-        m_sprite.setPosition((m_data->window.getSize().x - 500) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    case 9:
-        m_sprite.setPosition((m_data->window.getSize().x - 575) - (m_sprite.getGlobalBounds().width / 2), 0 + (m_sprite.getGlobalBounds().height / 2));
-        break;
-    default: std::cout << "Failed AI Spawn\n";
+        i->Spawn(&m_sprite);
+    }
+}
+
+///////////////////////////////////////////
+// Spawn Startegy
+///////////////////////////////////////////
+void GameObject::SetScale(std::shared_ptr<IScaleStrategy>pSacleStrategy)
+{
+    m_pSacleStrategy.push_back(pSacleStrategy);
+}
+void GameObject::Scale()
+{
+    for (auto& i : m_pSacleStrategy)
+    {
+        i->Scale(&m_sprite);
     }
 }
 
 
 ///////////////////////////////////////////
-// Create Projectile 
+// Appearance Startegy
 ///////////////////////////////////////////
-GameObject::GameObject(GameDataRef data, const sf::Vector2f& pos, float Direction)
-    :m_data(data)
-    , m_direction(Direction)
+
+void GameObject::SetAppearanceStrategy(std::shared_ptr<IAppearanceStrategy> pAppearanceStrategy)
 {
-    m_sprite.setTexture(m_data->assets.GetTexture("Bullet Sprite"));
-    m_sound.setBuffer(m_data->assets.GetSound("Lazer Sound"));
-    m_sprite.setScale(sf::Vector2f(0.1f, 0.2f));
-    m_pControlType = std::make_shared<ProjectileControls>(m_data);
-    m_sprite.setPosition(pos);
+    m_pAppearanceStrategy.push_back(pAppearanceStrategy);
+}
+void GameObject::SetAppearance()
+{
+    for (auto& i : m_pAppearanceStrategy)
+    {
+        i->SetAppearance(&m_sprite);
+    }
 }
 
-
 ///////////////////////////////////////////
-// pControl -> Exicute
+// Controls
 ///////////////////////////////////////////
+void GameObject::SetControls(std::shared_ptr<IControls> controls)
+{
+    m_pControlType = controls;
+}
 void GameObject::Update(float dt)
 {
-    m_pControlType->Execute(m_sprite, m_direction, dt);
+    m_pControlType->Execute(m_sprite, dt);
 }
+
 
 
 ///////////////////////////////////////////
@@ -102,11 +97,19 @@ void GameObject::Draw()
 
 
 ///////////////////////////////////////////
-// m_sound -> Play
+// Sound
 ///////////////////////////////////////////
+
+void GameObject::SetSound(std::shared_ptr<ISoundStrategy> sound)
+{
+    m_pSoundStrategy.push_back(sound);
+}
 void GameObject::MakeSound()
 {
-    m_sound.play();
+    for (auto& i : m_pSoundStrategy)
+    {
+        i->MakeSound();
+    }
 }
 
 ///////////////////////////////////////////

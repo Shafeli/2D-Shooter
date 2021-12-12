@@ -145,6 +145,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AIAppearanceStrategy.cpp" />
+    <ClCompile Include="AIScale.cpp" />
+    <ClCompile Include="AISoundStrategy.cpp" />
+    <ClCompile Include="AISpawnStrategy.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -154,19 +158,45 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="ObjectFactory.cpp" />
+    <ClCompile Include="PlayerAppearanceStrategy.cpp" />
+    <ClCompile Include="PlayerScale.cpp" />
+    <ClCompile Include="PlayerSoundStrategy.cpp" />
+    <ClCompile Include="PlayerSpawnStrategy.cpp" />
+    <ClCompile Include="ProjectileScale.cpp" />
+    <ClCompile Include="ProjectileSoundStrategy.cpp" />
+    <ClCompile Include="ProjectileSpawnStrategy.cpp" />
+    <ClCompile Include="ProjetileAppearanceStrategy.cpp" />
     <ClCompile Include="SplashState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AIAppearanceStrategy.h" />
+    <ClInclude Include="AIScale.h" />
+    <ClInclude Include="AISoundStrategy.h" />
+    <ClInclude Include="AISpawnStrategy.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Definition.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="IAppearanceStrategy.h" />
     <ClInclude Include="IControls.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="IScaleStrategy.h" />
+    <ClInclude Include="ISoundStrategy.h" />
+    <ClInclude Include="ISpawnStrategy.h" />
     <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="ObjectFactory.h" />
+    <ClInclude Include="PlayerAppearanceStrategy.h" />
+    <ClInclude Include="PlayerScale.h" />
+    <ClInclude Include="PlayerSoundStrategy.h" />
+    <ClInclude Include="PlayerSpawnStrategy.h" />
+    <ClInclude Include="ProjectileScale.h" />
+    <ClInclude Include="ProjectileSoundStrategy.h" />
+    <ClInclude Include="ProjectileSpawnStrategy.h" />
+    <ClInclude Include="ProjetileAppearanceStrategy.h" />
     <ClInclude Include="SplashState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
