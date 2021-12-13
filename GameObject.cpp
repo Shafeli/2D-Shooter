@@ -96,8 +96,15 @@ void GameObject::Update(float dt)
 ///////////////////////////////////////////
 void GameObject::Draw()
 {
-    if(m_isAlive)
-    m_data->window.draw(m_sprite);
+    if (m_isAlive)
+    {
+        m_data->window.draw(m_sprite);
+    }
+    if (m_pAppearanceStrategy.capacity() > 1)
+    {
+        m_data->window.draw(m_sprite);
+    }
+   
 }
 
 
@@ -129,6 +136,11 @@ bool GameObject::OnUse()
    return m_pControlType->FireShot();
 }
 
+bool GameObject::TargetMoveFlag()
+{
+    return m_pControlType->MoveDown();
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -140,7 +152,7 @@ const sf::Vector2f& GameObject::GetPOS()
     return m_sprite.getPosition();
 }
 //
-const sf::Sprite& GameObject::GetSprite()
+sf::Sprite& GameObject::GetSprite()
 {
     return m_sprite;
 }
@@ -148,12 +160,6 @@ const sf::Sprite& GameObject::GetSprite()
 void GameObject::MarkedForDeath()
 {
     m_isAlive = false;
-    m_DeathTimer.restart();
-    if (m_pAppearanceStrategy.capacity() > 1)
-    {
-        m_pAppearanceStrategy.at(1)->SetAppearance(&m_sprite);
-        MakeSound();
-    }
 }
 //
 //////////////////////////////////////////////////////////////////////////////////////

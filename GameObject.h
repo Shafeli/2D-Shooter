@@ -65,6 +65,7 @@ public:
     // returns if pControl has used action button
     ///////////////////////////////////////////
     bool OnUse();
+    bool TargetMoveFlag();
     /////////////////////////////////////////////////////
 
     ///////////////////////////////////////////
@@ -78,16 +79,11 @@ public:
     // Current Hit dectection 
     ///////////////////////////////////////////
     const sf::Vector2f& GetPOS();
-    const sf::Sprite& GetSprite();
+    sf::Sprite& GetSprite();
     void MarkedForDeath();
     bool IsDead() const
     {
-        bool isdead = false;
-
-        if (m_isAlive == false)
-            return isdead == true;
-
-        return isdead;
+        return m_isAlive;
     }
-    sf::Clock GetTimer() { return m_DeathTimer; }
+ 
 };

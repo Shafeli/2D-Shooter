@@ -28,7 +28,7 @@ ObjectFactory::ObjectFactory(GameDataRef data)
 
 void ObjectFactory::CounterReseter()
 {
-    if (m_counter == 10)
+    if (m_counter == 78)
     {
         m_counter = 0;
     }

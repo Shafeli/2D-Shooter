@@ -24,10 +24,11 @@ void GameState::Init()
 	}
 	m_roundCounter++;
 
-	for (size_t i = 0; i < 10; ++i)
+	for (size_t i = 0; i < gAISpawnAmount; ++i)
 	{
 		m_pTargetList.push_back(m_factory->MakeAI());
 	}
+	TargetMoveDown();
 	//////////////////////////////////////////////////////////////////////////////////
 	//TODO: Move to function
 	m_scoreText.setFont(m_data->assets.GetFont("Game Font"));
@@ -88,6 +89,7 @@ void GameState::Update(float dt)
 	CollisionDetection();
 	//CollisionDetection_Prototype();
 	//CollisionDetection_Prototype_Two();
+	TargetMoveDown();
 	////////////////////////////////////////////////////////
 	
 	// Projectile delete Manager
@@ -179,7 +181,7 @@ void GameState::EndGameCheck()
 
        
         std::cout << "Round Count is: " << m_roundCounter << '\n';
-		for (size_t i = 0; i < 10; ++i)
+		for (size_t i = 0; i < gAISpawnAmount; ++i)
 		{
 			m_pTargetList.push_back(m_factory->MakeAI());
 		}
@@ -278,15 +280,17 @@ void GameState::CollisionDetection()
 			const auto TargetNewEnd = std::remove_if
 			(
 				m_pTargetList.begin(), m_pTargetList.end(),
-				[bullet, this](const std::shared_ptr<GameObject>& tar)
+				[bullet, this](std::shared_ptr<GameObject>& tar)
 				{
-					if(!bullet->IsDead())
-					if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
+					if (!bullet->IsDead())
 					{
-						m_playerScore += m_roundCounter;
-						return true;
+						if (tar->GetSprite().getGlobalBounds().intersects(bullet->GetSprite().getGlobalBounds()))
+						{
+							m_playerScore += m_roundCounter;
+							return true;
+						}
+						
 					}
-
 					return false;
 				}
 			);
@@ -319,10 +323,7 @@ void GameState::CollisionDetection()
 ////////////////////////////////////////////////////////
 void GameState::CollisionDetection_Prototype()
 {
-	KillMarkMachine();
-	TargetClearner();
-	PlayerBulletCleaner();
-	PlayerCleaner();
+	//
 }
 
 void GameState::CollisionDetection_Prototype_Two()
@@ -384,9 +385,9 @@ void GameState::ProjectileOutOfBoundsCleaner()
 			m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
 			[this](const std::shared_ptr<GameObject>& tar)
 			{
-				if (tar->GetSprite().getPosition().y < m_data->window.getSize().y / m_data->window.getSize().y)
+				if (tar->GetSprite().getPosition().y <= m_data->window.getSize().y / m_data->window.getSize().y)
 				{
-					//std::cout << "Player Bullet removed \n";
+					std::cout << "Player Bullet Scrubbed \n";
 					return true;
 				}
 				return false;
@@ -422,99 +423,15 @@ void GameState::InGameMusic()
 	m_gameMusic.play();
 }
 
-void GameState::KillMarkMachine()
-{	//loops over sprites if two touch mark for death / deletion
-	for (const auto& i : m_pPlayerBulletList)
-	{
-		for (const auto& j : m_pTargetList)
-		{
-			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
-			{
-				i->MarkedForDeath();
-				j->MarkedForDeath();
-
-			}
-		}
-	}
-	//loops over sprites if two touch mark for death / deletion
-	for (auto& i : m_player)
-	{
-		for (auto& j : m_pAIBulletList)
-		{
-			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
-			{
-				i->MarkedForDeath();
-			}
-		}
-	}
-}
-
-void GameState::TargetClearner()
-{	//loops over targets / if any are marked remove
-	for (auto& target : m_pTargetList)
-	{
-		const auto TargetNewEnd = std::remove_if
-		(
-			m_pTargetList.begin(), m_pTargetList.end(),
-			[this, target](const std::shared_ptr<GameObject>tar)
-			{
-				//std::shared_ptr<GameObject> pTemp = tar->lock();
-				//allows for death sound to play
-				if (tar->GetSprite().getGlobalBounds().intersects(target->GetSprite().getGlobalBounds()))
-				{
-					m_playerScore += m_roundCounter;
-					return true;
-				}
-				return false;
-
-			}
-		);
-		//resize the vector after removale
-		m_pTargetList.erase(TargetNewEnd, m_pTargetList.end());
-	}
-}
-
-void GameState::PlayerBulletCleaner()
-{	//loops over player bullet vector / if any are marked remove
-	for (auto& PlayerBullet : m_pPlayerBulletList)
-	{
-		const auto PlayerBulletNewEnd = std::remove_if
-		(
-			m_pPlayerBulletList.begin(), m_pPlayerBulletList.end(),
-			[PlayerBullet](const std::shared_ptr<GameObject>& tar)
-			{
-
-				if (PlayerBullet->IsDead())
-				{
-					return true;
-				}
-				return false;
-			});
-		//resize the vector after removale
-		m_pPlayerBulletList.erase(PlayerBulletNewEnd, m_pPlayerBulletList.end());
-	}
-}
-
-void GameState::PlayerCleaner()
+void GameState::TargetMoveDown()
 {
-	//loops over player vector / if any are marked remove
-	for (auto& player : m_player)
+	for (auto i : m_pPlayerBulletList)
 	{
-		const auto PlayerLivesNewEnd = std::remove_if
-		(
-			m_player.begin(), m_player.end(),
-			[player](const std::shared_ptr<GameObject>& tar)
-			{
-				//allows for death sound to play
-				if (player->IsDead())
-				{
-					return true;
-				}
-				return false;
-			}
-		);
-		//resize the vector after removale
-		m_player.erase(PlayerLivesNewEnd, m_player.end());
+		if(!i->IsDead())
+		{
+			std::cout << "Player Bullet moved off screen \n";
+			i->GetSprite().setPosition(0, m_data->window.getSize().y / m_data->window.getSize().y);
+		}
 	}
 }
 
@@ -522,15 +439,40 @@ void GameState::PlayerCleaner()
 ////////////////////////////////////////////////////////
 void GameState::PlayerUpdate(float dt)
 {
-	if (!m_player.empty())
+    if (!m_player.empty())
 		m_player.at(0)->Update(dt);
 
 	if (!m_player.empty())
-		if (m_player.at(0)->OnUse())
-		{
-			m_pPlayerBulletList.push_back(std::shared_ptr<GameObject>(m_factory->MakeProjectile(m_player.at(0)->GetPOS(), -gPlayerBulletYAxisAmount)));
-			m_pPlayerBulletList.at(0)->MakeSound();
+	{
+        //static bool s_playerHasShot;
 
-		}
+       // if (s_playerHasShot)
+		//{
+			if (m_player.at(0)->OnUse())
+			{
+				//left side gun
+				m_pPlayerBulletList.push_back(std::shared_ptr<GameObject>(m_factory->MakeProjectile(m_player.at(0)->GetPOS(), -gPlayerBulletYAxisAmount)));
+				m_pPlayerBulletList.at(0)->MakeSound();
+
+				//right side gun
+				sf::Vector2f newBulletPos;
+				newBulletPos.x = m_player.at(0)->GetSprite().getGlobalBounds().width + (m_player.at(0)->GetPOS().x - 20);
+				newBulletPos.y = m_player.at(0)->GetPOS().y;
+				m_pPlayerBulletList.push_back(std::shared_ptr<GameObject>(m_factory->MakeProjectile(newBulletPos, -gPlayerBulletYAxisAmount)));
+				m_pPlayerBulletList.at(0)->MakeSound();
+				//s_playerHasShot = false;
+			}
+		//}
+		//{
+		//	if (!s_playerHasShot)
+		//	{
+		//		if (m_player.at(0)->OnUse())
+		//		{
+		//			
+		//			s_playerHasShot = true;
+		//		}
+		//	}
+		//}
+	}
 }
 

@@ -36,17 +36,17 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
  /////////////////////////////////////////////////////
  //              TODO:
  //- 
- //- Improve AI spawning system
+ //- Improve AI spawning system ---- good enough for now
  //- Improve Player Life count
  //- High Score Leaderboards and saving system with User Choice Name
  //- 
  //- Updated Collision System 
- //- AI Manager class 
+ //- 
  //- 
  //- Enum system for loading and retrieving assets  
  //- 
  //- Hit / step behavior
- //- Update srand for better distribution
+ //- Update srand for better distribution -----done
  /////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////

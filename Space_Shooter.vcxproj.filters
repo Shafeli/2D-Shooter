@@ -58,7 +58,7 @@
     <Filter Include="States\GameState\GameObjects\Strategies\SoundStrategies">
       <UniqueIdentifier>{4d4a26dd-5189-4e0d-9ba5-f460ada8e43f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\SpawnStrategies\DeathStrategies">
+    <Filter Include="States\GameState\GameObjects\Strategies\DeathStrategies">
       <UniqueIdentifier>{506dac92-86d0-4978-989e-b63f112fb694}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

@@ -70,9 +70,11 @@ constexpr float gPlayerBulletYAxisAmount = 660.f;
 constexpr auto gDeathSpriteFile = "Resources/res/Death.png";
 constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
 constexpr auto gDeathSoundFile = "Resources/res/Boom.wav";
-constexpr float gTargetSpeed = 399.f;
-constexpr float gTargetYAxisDecreaseAmount = 30.f;
-constexpr float gAIRateOfFireInSeconds = 0.4f;
+constexpr float gTargetSpeed = 100.f;
+constexpr float gTargetYAxisDecreaseAmount = 0.5f;
+
+constexpr float gAIRateOfFireInSeconds = .6f;
+constexpr int gAISpawnAmount = 78;
 //////////////////////////////////
 
 // TODO: animation system - save for later quite a lot of work in this

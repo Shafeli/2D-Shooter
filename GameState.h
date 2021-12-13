@@ -52,7 +52,7 @@ class GameState : public State
 
 	//Object Garbage
 	////////////////////////////////////////////////
-	std::vector<std::shared_ptr<GameObject>> m_pRemovalPile;
+	//std::vector<std::shared_ptr<GameObject>> m_pRemovalPile;
 	////////////////////////////////////////////////
 
 
@@ -76,19 +76,24 @@ private:
 	void AIUpdate(float dt);
 	void ProjectileUpdate(float dt);
 	void CollisionDetection();
-	void CollisionDetection_Prototype();
-	void CollisionDetection_Prototype_Two();
 	void ProjectileOutOfBoundsCleaner();
 	void InGameMusic();
-	void KillMarkMachine();
-	void TargetClearner();
-	void PlayerBulletCleaner();
-	void PlayerCleaner();
-    static sf::String toString(sf::Int64 integer)
+	void TargetMoveDown();
+
+	static sf::String toString(sf::Int64 integer)
 	{
 		std::ostringstream os;
 		os << integer;
 		return os.str();
 	}
+
+
+
+	/////////////////////////////////////////////////////////////////////
+	//TODO: come back to these still not happy with it 
+	void CollisionDetection_Prototype();
+	void CollisionDetection_Prototype_Two();
+	/////////////////////////////////////////////////////////////////////
+
 };
 

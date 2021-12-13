@@ -32,7 +32,7 @@
 		m_data->assets.LoadTexture("Target Sprite", gTargetSpriteFile);
 		m_data->assets.LoadTexture("Bullet Sprite", gBulletSpriteFile);
 		m_data->assets.LoadSound("Lazer Sound", gBulletSoundFile);
-		m_data->assets.LoadSound("Boom Sound", gDeathSoundFile);
+		this->m_data->assets.LoadSound("Boom Sound", gDeathSoundFile);
 		m_data->assets.LoadSound("PlayerDeath Sound", gPlayerSoundFile);
 	}
 

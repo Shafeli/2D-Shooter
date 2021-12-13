@@ -11,6 +11,7 @@ public:
     virtual ~IControls() = default;
     virtual void Execute(sf::Sprite& m_sprite, float dt) = 0;
     virtual bool FireShot() = 0;
+    virtual bool MoveDown() { return false; }
 };
 
 ///////////////////////////////////
@@ -37,11 +38,14 @@ class AIControls : public IControls
     sf::Clock m_rateOfFire;
     bool m_movementSwitch = false;
     bool m_fireShot = false;
-
+    static inline sf::Clock m_moveTimer;
+   static inline bool s_moveSwitch = false;
+   static inline bool s_moveDown = false;
 public:
     AIControls(GameDataRef data);
    virtual void Execute(sf::Sprite& m_sprite, float dt) override final;
    virtual bool FireShot()override final;
+   virtual bool MoveDown()override final;
 };
 
 //////////////////////////////////////
