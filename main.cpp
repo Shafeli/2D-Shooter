@@ -35,32 +35,34 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
  /////////////////////////////////////////////////////
  //              TODO:
- //- 
+ //- High score saving system / leaderboard
  //- Improve AI spawning system ---- good enough for now
- //- Improve Player Life count
+ //- Improve Player Life System -- better -- still not 100%
  //- High Score Leaderboards and saving system with User Choice Name
- //- 
+ //- Make a scrubber for failed AI spawns
  //- Updated Collision System 
  //- 
  //- 
  //- Enum system for loading and retrieving assets  
  //- 
  //- Hit / step behavior
- //- Update srand for better distribution -----done
+ //- refactor the mess in AI Controller
+ //- Power-Ups -Faster rate of fire -glitter bomb for the lol's
+ //-
  /////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////
 //              Bug Report:
-//- Player not getting hit until shoots first shot after that working normal
-//- Bullets keep traveling after they "hit something"
-//
-// 
-//
+//- spawn shield sometimes doesnt work
+//- 
+//-
+//-
+//-
 /////////////////////////////////////////////////////
 
 int main()
 {
-    srand(time(nullptr));
+  
 
     GameManager spaceShooter(gScreenWidth, gScreenHeight, "Space Shooter");
     return 0;

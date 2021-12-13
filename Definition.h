@@ -53,8 +53,11 @@ constexpr auto gGameOverFile = "Resources/res/Space.jpg";
 constexpr auto gPlayerSpriteFile = "Resources/res/Player.png";
 constexpr auto gPlayerSoundFile = "Resources/res/PlayerDeath.wav";
 constexpr float gPlayerSpeed = 360.f;
-constexpr float gRateOfFire = 1.f / 4;
+constexpr float gRateOfFire = .25f;
 /////////////////////////////////
+//1.f / 4;
+
+
 
 /////////////////////////////////
 //Bullet
@@ -70,8 +73,8 @@ constexpr float gPlayerBulletYAxisAmount = 660.f;
 constexpr auto gDeathSpriteFile = "Resources/res/Death.png";
 constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
 constexpr auto gDeathSoundFile = "Resources/res/Boom.wav";
-constexpr float gTargetSpeed = 100.f;
-constexpr float gTargetYAxisDecreaseAmount = 0.5f;
+constexpr float gTargetSpeed = 150.f;
+constexpr float gTargetYAxisDecreaseAmount = 1.f;
 
 constexpr float gAIRateOfFireInSeconds = .6f;
 constexpr int gAISpawnAmount = 78;

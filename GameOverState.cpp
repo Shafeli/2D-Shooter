@@ -38,8 +38,9 @@ void GameOverState::HandleInput()
 	}
 }
 
-
+#pragma warning(disable : 4100)
 void GameOverState::Update(float dt)
+#pragma warning(default : 4100)
 {
 	
 	if (this->m_clock.getElapsedTime().asSeconds() > 234)

@@ -18,6 +18,13 @@ class GameState : public State
 	GameDataRef m_data;
 	////////////////////////////////////////////////
 
+
+	//Primitives
+    ////////////////////////////////////////////////
+	bool m_isRespawning = false;
+	bool m_giveLife = false;
+	////////////////////////////////////////////////
+
 	//Clocks
 	////////////////////////////////////////////////
 	//second timer for AI shots without this only the one in the
@@ -39,12 +46,13 @@ class GameState : public State
 	sf::Text m_scoreText;
 	sf::Text m_livesText;
 	sf::Text m_roundText;
+	sf::Text m_spawnShieldTimer;
 	////////////////////////////////////////////////
 
 	//Objects
 	////////////////////////////////////////////////
     std::shared_ptr<ObjectFactory> m_factory;
-	std::vector<std::shared_ptr<GameObject>> m_player;
+	std::shared_ptr<GameObject> m_player;
 	std::vector<std::shared_ptr<GameObject>> m_pTargetList;
 	std::vector<std::shared_ptr<GameObject>> m_pPlayerBulletList;
 	std::vector<std::shared_ptr<GameObject>> m_pAIBulletList;
@@ -57,7 +65,7 @@ class GameState : public State
 
 
     sf::Int32 m_playerScore = 0;
-	sf::Int32 m_playerLives = 0;
+	sf::Int32 m_playerLives = 5;
 	sf::Int32 m_roundCounter = 0;
 public:
 
@@ -78,7 +86,7 @@ private:
 	void CollisionDetection();
 	void ProjectileOutOfBoundsCleaner();
 	void InGameMusic();
-	void TargetMoveDown();
+	void BulletSweeper();
 
 	static sf::String toString(sf::Int64 integer)
 	{
@@ -91,8 +99,8 @@ private:
 
 	/////////////////////////////////////////////////////////////////////
 	//TODO: come back to these still not happy with it 
-	void CollisionDetection_Prototype();
-	void CollisionDetection_Prototype_Two();
+	//void CollisionDetection_Prototype();
+	//void CollisionDetection_Prototype_Two();
 	/////////////////////////////////////////////////////////////////////
 
 };

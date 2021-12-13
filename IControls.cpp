@@ -86,8 +86,10 @@ void AIControls::Execute(sf::Sprite& m_sprite, float dt)
 
     if (s_moveSwitch == false)
     {
+#pragma warning(disable : 4804)
         // move to left then tell window edge then move right tell window edge repeat
         if (!m_sprite.getGlobalBounds().left <= 0.f)
+#pragma warning(default : 4804)
         {
             m_sprite.move(-gTargetSpeed * dt, 0.f);
         }
@@ -125,16 +127,10 @@ void AIControls::Execute(sf::Sprite& m_sprite, float dt)
 //left the old rand way of firing its kind of crazy to see the differences visually
 bool AIControls::FireShot()
 {
-    sf::Time time = m_rateOfFire.getElapsedTime();
-    //if (!m_fireShot && time > sf::seconds(static_cast<float>(rand() % gAISpawnAmount)))
-    //{
-    //    m_fireShot = true;
-    //    return true;
-    //}
-    unsigned seed;
-    seed = std::chrono::steady_clock::now().time_since_epoch().count();
+    const sf::Time time = m_rateOfFire.getElapsedTime();
+    const unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count();
     std::default_random_engine engine(seed);
-    std::uniform_int_distribution<int>distro(0, gAISpawnAmount);
+    const std::uniform_int_distribution<int>distro(0, gAISpawnAmount);
     if (!m_fireShot && time > sf::seconds(distro(engine)))
     {
         m_fireShot = true;
