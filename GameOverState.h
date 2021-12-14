@@ -4,7 +4,7 @@
 class GameOverState : public State
 {
 	//Ref to Game data local
-	GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
 
 	/////////////////////////////////////////////////
 	//clock to keep track of how much time has passed
@@ -21,7 +21,7 @@ class GameOverState : public State
 
 public:
 	//c'tor takes in reference to Game Data struct
-	GameOverState(GameDataRef data);
+	GameOverState(GameEngine::GameDataRef data);
 
 	virtual void Init()override final;
 	virtual void HandleInput()override final;

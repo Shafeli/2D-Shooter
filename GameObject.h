@@ -4,20 +4,16 @@
 
 class ISoundStrategy;
 class IAppearanceStrategy;
-class IScaleStrategy;
-class ISpawnStrategy;
 class IControls;
 
 class GameObject : std::enable_shared_from_this<GameObject>
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
     sf::Sprite m_sprite;
     sf::Clock m_rateOfFire;
     sf::Clock m_DeathTimer;
 
     std::shared_ptr<IControls> m_pControlType;
-    std::vector<std::shared_ptr<ISpawnStrategy>> m_pSpawnStrategy;
-    std::vector<std::shared_ptr<IScaleStrategy>> m_pSacleStrategy;
     std::vector<std::shared_ptr<IAppearanceStrategy>> m_pAppearanceStrategy;
     std::vector<std::shared_ptr<ISoundStrategy>> m_pSoundStrategy;
 
@@ -27,20 +23,8 @@ public:
     ///////////////////////////////////////////
     // Create Object
     ///////////////////////////////////////////
-    GameObject(GameDataRef data);
+    GameObject(GameEngine::GameDataRef data);
     void GameObjectInit();
-
-    ///////////////////////////////////////////
-    // Spawn Startegy
-    ///////////////////////////////////////////
-    void SetSpawn(std::shared_ptr<ISpawnStrategy>);
-    void Spawn();
-
-    ///////////////////////////////////////////
-    // Scale Startegy
-    ///////////////////////////////////////////
-    void SetScale(std::shared_ptr<IScaleStrategy>pSacleStrategy);
-    void Scale();
 
     //////////////////////////////////////////////////////
     ///////////////////////////////////////////
@@ -81,9 +65,6 @@ public:
     const sf::Vector2f& GetPOS();
     sf::Sprite& GetSprite();
     void MarkedForDeath();
-    bool IsDead() const
-    {
-        return m_isAlive;
-    }
+    bool isAlive() const { return m_isAlive; }
  
 };

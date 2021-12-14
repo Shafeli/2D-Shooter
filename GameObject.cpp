@@ -3,15 +3,13 @@
 #include <iostream>
 #include <memory>
 #include "IControls.h"
-#include "IScaleStrategy.h"
-#include "ISpawnStrategy.h"
 #include "IAppearanceStrategy.h"
 #include "ISoundStrategy.h"
 
 ///////////////////////////////////////////
 // Create Object
 ///////////////////////////////////////////
-GameObject::GameObject(GameDataRef data)
+GameObject::GameObject(GameEngine::GameDataRef data)
     :m_data(data)
 {
 }
@@ -19,39 +17,6 @@ GameObject::GameObject(GameDataRef data)
 void GameObject::GameObjectInit()
 {
     SetStartAppearance();
-    Scale();
-    Spawn();
-}
-
-///////////////////////////////////////////
-// Spawn Startegy
-///////////////////////////////////////////
-void GameObject::SetSpawn(std::shared_ptr<ISpawnStrategy> pSpawnStrategy)
-{
-    m_pSpawnStrategy.push_back(std::move(pSpawnStrategy));
-}
-
-void GameObject::Spawn()
-{
-    for(auto&i : m_pSpawnStrategy)
-    {
-        i->Spawn(&m_sprite);
-    }
-}
-
-///////////////////////////////////////////
-// Spawn Startegy
-///////////////////////////////////////////
-void GameObject::SetScale(std::shared_ptr<IScaleStrategy>pSacleStrategy)
-{
-    m_pSacleStrategy.push_back(std::move(pSacleStrategy));
-}
-void GameObject::Scale()
-{
-    for (auto& i : m_pSacleStrategy)
-    {
-        i->Scale(&m_sprite);
-    }
 }
 
 
@@ -89,8 +54,6 @@ void GameObject::Update(float dt)
     m_pControlType->Execute(m_sprite, dt);
 }
 
-
-
 ///////////////////////////////////////////
 // Draws Sprite to Window 
 ///////////////////////////////////////////
@@ -106,7 +69,6 @@ void GameObject::Draw()
     }
    
 }
-
 
 ///////////////////////////////////////////
 // Sound
@@ -140,7 +102,6 @@ bool GameObject::TargetMoveFlag()
 {
     return m_pControlType->MoveDown();
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////
 //

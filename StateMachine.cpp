@@ -2,7 +2,7 @@
 
 #include "StateMachine.h"
 
-void StateMachine::AddState(StateRef newState, bool isReplacing)
+void StateMachine::AddState(Machine::StateRef newState, bool isReplacing)
 {
     this->m_isAdding = true;
     this-> m_isReplacing = isReplacing;
@@ -50,7 +50,7 @@ void StateMachine::ProcessStateChanges()
     }
 }
 
-StateRef& StateMachine::GetActiveState()
+Machine::StateRef& StateMachine::GetActiveState()
 {
     return this->m_states.top();
 }

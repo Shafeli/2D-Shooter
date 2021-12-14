@@ -1,4 +1,7 @@
 #include "GameManager.h"
+
+//#include <iostream>
+
 #include "SplashState.h"
 
 GameManager::GameManager(int width, int height, std::string title)
@@ -33,13 +36,45 @@ void GameManager::Run()
 
         while (accumulator>= DeltaTime)
         {
+            accumulator -= DeltaTime;
             this->m_data->machine.GetActiveState()->HandleInput();
             this->m_data->machine.GetActiveState()->Update(DeltaTime);
 
-            accumulator -= DeltaTime;
+            
         }
 
         const float interpolation = accumulator / DeltaTime;
         this->m_data->machine.GetActiveState()->Draw();
     }
 }
+
+
+//void GameManager::Run()
+//{
+//    double CurrentTime;
+//    double Accumulator;
+//    double NewTime = m_clock.getElapsedTime().asSeconds();
+//    double FrameTime = NewTime - CurrentTime;
+//    CurrentTime = NewTime;
+//    
+//    Accumulator += FrameTime;
+//    
+//    while (Accumulator >= DeltaTime)
+//    {
+//        // Game Loop
+//           this->m_data->machine.GetActiveState()->HandleInput();
+//           this->m_data->machine.GetActiveState()->Update(DeltaTime);
+//    
+//        // AI
+//        // Physics
+//    
+//        Accumulator -= DeltaTime;
+//        Time += DeltaTime;
+//    }
+//    
+//    // Render Graphics
+//    this->m_data->machine.GetActiveState()->Draw();
+//    
+//    // FPS - Shows in Console Window
+//    std::cout << "FPS: " << 1.0f / FrameTime << std::endl;
+//}

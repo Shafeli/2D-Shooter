@@ -62,7 +62,7 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
 int main()
 {
-  
+    srand(time(nullptr));
 
     GameManager spaceShooter(gScreenWidth, gScreenHeight, "Space Shooter");
     return 0;

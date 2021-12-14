@@ -12,7 +12,7 @@
 ///////////////////////////////////
 //Movement Controls for a Player
 ///////////////////////////////////
-PlayerControls::PlayerControls(GameDataRef data)
+PlayerControls::PlayerControls(GameEngine::GameDataRef data)
     :m_data(data)
 {
 
@@ -65,7 +65,7 @@ bool PlayerControls::FireShot()
 /////////////////////////////////////
 //Movement Controls for a AI Enemy
 /////////////////////////////////////
-AIControls::AIControls(GameDataRef data)
+AIControls::AIControls(GameEngine::GameDataRef data)
     :m_data(data)
 {
 
@@ -150,7 +150,7 @@ bool AIControls::MoveDown()
 //////////////////////////////////////
 //Movement Controls for a Projectile
 /////////////////////////////////////
-ProjectileControls::ProjectileControls(GameDataRef data, float direction)
+ProjectileControls::ProjectileControls(GameEngine::GameDataRef data, float direction)
     :m_data(data)
     ,m_direction(direction)
 {

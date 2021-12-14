@@ -6,16 +6,17 @@
 #include "GameState.h"
 
 
-MainMenuState::MainMenuState(GameDataRef data)
+MainMenuState::MainMenuState(GameEngine::GameDataRef data)
 	: m_data(data)
 {
-	InMenuMusic();
+
 }
 
 // loads texture to asset manager
 void MainMenuState::Init()
 {
-
+	m_MenuSound.setVolume(m_data->jukebox.GetMasterVolume());
+	m_data->jukebox.initMusic();
 	m_MenuSound.setBuffer(m_data->assets.GetSound("Click Sound"));
 	m_background.setTexture(this->m_data->assets.GetTexture("Main menu Background"));
 	m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
@@ -74,8 +75,3 @@ void MainMenuState::Draw()
 	this->m_data->window.display();
 }
 
-void MainMenuState::InMenuMusic()
-{
-	m_menuMusic.openFromFile("Resources/res/MainMenuMusic.wav");
-	m_menuMusic.play();
-}

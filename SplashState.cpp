@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-	SplashState::SplashState(GameDataRef data)
+	SplashState::SplashState(GameEngine::GameDataRef data)
         : m_data(data)
 	{
 	}
@@ -55,7 +55,7 @@
 	{
 		if (soundSwitch)
 		{
-			m_sound.setVolume(50);
+			m_sound.setVolume(m_data->jukebox.GetMasterVolume());
 			m_sound.play();
 			soundSwitch = false;
 		}

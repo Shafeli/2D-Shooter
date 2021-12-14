@@ -1,6 +1,6 @@
 #include "ProjetileAppearanceStrategy.h"
 
-ProjetileAppearanceStrategy::ProjetileAppearanceStrategy(GameDataRef data)
+ProjetileAppearanceStrategy::ProjetileAppearanceStrategy(GameEngine::GameDataRef data)
     :m_data(data)
     ,m_sprite(nullptr)
 {

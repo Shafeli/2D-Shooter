@@ -1,6 +1,6 @@
 #include "DeathAppearanceStrategy.h"
 
-DeathAppearanceStrategy::DeathAppearanceStrategy(GameDataRef data)
+DeathAppearanceStrategy::DeathAppearanceStrategy(GameEngine::GameDataRef data)
     :m_data(data)
 {
 }

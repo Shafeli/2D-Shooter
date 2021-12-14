@@ -1,2 +1,41 @@
-﻿  GameState.cpp
+﻿  AIAppearanceStrategy.cpp
+  DeathAppearanceStrategy.cpp
+  GameManager.cpp
+  GameObject.cpp
+  GameOverState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameOverState.cpp(23,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  GameState.cpp
+  IControls.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\IControls.cpp(131,84): warning C4244: 'initializing': conversion from '_Rep' to 'unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\IControls.cpp(131,25): warning C4244: 'initializing': conversion from '_Rep' to 'const unsigned int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\IControls.cpp(134,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MainMenuState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(18,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MusicManager.cpp
+  ObjectCleaner.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ObjectCleaner.cpp(15,14): warning C4189: 'i': local variable is initialized but not referenced
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ObjectCleaner.cpp(35,14): warning C4189: 'i': local variable is initialized but not referenced
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ObjectCleaner.cpp(55,14): warning C4189: 'i': local variable is initialized but not referenced
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ObjectCleaner.cpp(79,13): warning C4189: 'i': local variable is initialized but not referenced
+  ObjectFactory.cpp
+  PlayerAppearanceStrategy.cpp
+  PlayerSoundStrategy.cpp
+  ProjectileSoundStrategy.cpp
+  ProjetileAppearanceStrategy.cpp
+  SizeManager.cpp
+  SpawnManager.cpp
+  SplashState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(58,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(54,33): warning C4100: 'dt': unreferenced formal parameter
+  main.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\main.cpp(65,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe

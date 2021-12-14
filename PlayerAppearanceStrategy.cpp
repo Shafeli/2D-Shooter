@@ -1,7 +1,9 @@
 #include "PlayerAppearanceStrategy.h"
 
-PlayerAppearanceStrategy::PlayerAppearanceStrategy(GameDataRef data)
-    :m_data(data)
+#include <utility>
+
+PlayerAppearanceStrategy::PlayerAppearanceStrategy(GameEngine::GameDataRef data)
+    :m_data(std::move(data))
 {
 }
 

@@ -15,7 +15,7 @@ class GameState : public State
 
 	//Ref to Game data local
 	////////////////////////////////////////////////
-	GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
 	////////////////////////////////////////////////
 
 
@@ -31,7 +31,7 @@ class GameState : public State
     //top of the list shoots
 	sf::Clock m_rateOfFire;
 	sf::Clock m_spawnTimer;
-	sf::Clock m_musicTimer;
+
 	
 	////////////////////////////////////////////////
 	
@@ -40,9 +40,8 @@ class GameState : public State
 	sf::Sprite m_background;
 	////////////////////////////////////////////////
 
-	//Sounds & Fonts
+	//Fonts
 	////////////////////////////////////////////////
-	sf::Music m_gameMusic;
 	sf::Text m_scoreText;
 	sf::Text m_livesText;
 	sf::Text m_roundText;
@@ -52,10 +51,11 @@ class GameState : public State
 	//Objects
 	////////////////////////////////////////////////
     std::shared_ptr<ObjectFactory> m_factory;
-	std::shared_ptr<GameObject> m_player;
-	std::vector<std::shared_ptr<GameObject>> m_pTargetList;
-	std::vector<std::shared_ptr<GameObject>> m_pPlayerBulletList;
-	std::vector<std::shared_ptr<GameObject>> m_pAIBulletList;
+	GameObject* m_player;
+	size_t m_amountOfAI = 1;
+	std::vector<GameObject*> m_pTargetList;
+	std::vector<GameObject*> m_pPlayerBulletList;
+	std::vector<GameObject*> m_pAIBulletList;
 	////////////////////////////////////////////////
 
 	//Object Garbage
@@ -70,8 +70,7 @@ class GameState : public State
 public:
 
 	//c'tor takes in reference to Game Data struct
-	GameState(GameDataRef data);
-
+	GameState(GameEngine::GameDataRef data);
 
 	virtual void Init() override final;
 	virtual void HandleInput()override final;
@@ -84,9 +83,6 @@ private:
 	void AIUpdate(float dt);
 	void ProjectileUpdate(float dt);
 	void CollisionDetection();
-	void ProjectileOutOfBoundsCleaner();
-	void InGameMusic();
-	void BulletSweeper();
 
 	static sf::String toString(sf::Int64 integer)
 	{

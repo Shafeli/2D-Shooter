@@ -1,50 +1,35 @@
 #include "ObjectFactory.h"
-#include "AISpawnStrategy.h"
 #include "GameObject.h"
 #include <memory>
 
 #include "AIAppearanceStrategy.h"
-#include "AIScale.h"
 #include "AISoundStrategy.h"
 #include "DeathAppearanceStrategy.h"
 #include "IControls.h"
-#include "IScaleStrategy.h"
-#include "PlayerSpawnStrategy.h"
 #include "IAppearanceStrategy.h"
 #include "PlayerAppearanceStrategy.h"
-#include "PlayerScale.h"
 #include "PlayerSoundStrategy.h"
-#include "ProjectileScale.h"
 #include "ProjectileSoundStrategy.h"
-#include "ProjectileSpawnStrategy.h"
 #include "ProjetileAppearanceStrategy.h"
 
 
-ObjectFactory::ObjectFactory(GameDataRef data)
+ObjectFactory::ObjectFactory(GameEngine::GameDataRef data)
     :m_data(data)
-    ,m_counter(0)
 {
 }
 
-void ObjectFactory::CounterReseter()
-{
-    if (m_counter == 78)
-    {
-        m_counter = 0;
-    }
-}
 
-std::shared_ptr<GameObject> ObjectFactory::MakeAI()
+GameObject* ObjectFactory::MakeAI(int spawnCounter)
 {
     //Spawn
-    auto AI = std::make_shared<GameObject>(m_data);
-    const std::shared_ptr<ISpawnStrategy> spawn = std::make_shared<AISpawnStrategy>(m_data, m_counter);
+    const auto AI = new GameObject(m_data);
+    m_data->Spawner.AISpawnPosition(AI, &m_data->window, spawnCounter);
 
     //Controls
     const std::shared_ptr<IControls> controls = std::make_shared<AIControls>(m_data);
 
     //Scale
-    const std::shared_ptr<IScaleStrategy> scale = std::make_shared<AIScale>();
+    m_data->Resizer.normalScale(AI);
 
     //Appearance
     const std::shared_ptr<IAppearanceStrategy> appearance = std::make_shared<AIAppearanceStrategy>(m_data);
@@ -56,28 +41,25 @@ std::shared_ptr<GameObject> ObjectFactory::MakeAI()
     AI->SetSound(sound);
     AI->SetAppearanceStrategy(appearance);
     AI->SetAppearanceStrategy(appearanceTwo);
-    AI->SetScale(scale);
-    AI->SetSpawn(spawn);
+
+ 
     AI->SetControls(controls);
 
     AI->GameObjectInit();
 
-    ++m_counter;
-    CounterReseter();
     return AI;
 }
 
-std::shared_ptr<GameObject>ObjectFactory::MakePlayer()
+GameObject* ObjectFactory::MakePlayer()
 {
-    //Spawn
-    auto player = std::make_shared<GameObject>(m_data);
-    const std::shared_ptr<ISpawnStrategy> spawn = std::make_shared<PlayerSpawnStrategy>(m_data);
+ 
+    auto player = new GameObject(m_data);
 
     //Controls
     const std::shared_ptr<IControls> controls = std::make_shared<PlayerControls>(m_data);
 
     //Scale
-    const std::shared_ptr<IScaleStrategy> scale = std::make_shared<PlayerScale>();
+    m_data->Resizer.normalScale(player);
 
     //Appearance
     const std::shared_ptr<IAppearanceStrategy> appearance = std::make_shared<PlayerAppearanceStrategy>(m_data);
@@ -87,25 +69,24 @@ std::shared_ptr<GameObject>ObjectFactory::MakePlayer()
 
     player->SetSound(sound);
     player->SetAppearanceStrategy(appearance);
-    player->SetScale(scale);
     player->SetControls(controls);
-    player->SetSpawn(spawn);
-
     player->GameObjectInit();
+    //Spawn TODO: look in to why only player needs to set spawn after init?
+    m_data->Spawner.PlayerSpawn(player, &m_data->window);
     return player;
 }
 
-std::shared_ptr<GameObject> ObjectFactory::MakeProjectile(const sf::Vector2f& pos, float direction)
+GameObject* ObjectFactory::MakeProjectile(const sf::Vector2f& pos, float direction)
 {
     //Spawn
-    auto projectile = std::make_shared<GameObject>(m_data);
-    const std::shared_ptr<ISpawnStrategy> spawn = std::make_shared<ProjectileSpawnStrategy>(pos);
+    auto projectile = new GameObject(m_data);
+    m_data->Spawner.ProjectileSpawn(pos, projectile);
 
     //Controls
     const std::shared_ptr<IControls> controls = std::make_shared<ProjectileControls>(m_data, direction);
 
     //Scale
-    const std::shared_ptr<IScaleStrategy> scale = std::make_shared<ProjectileScale>();
+    m_data->Resizer.RectangleScale(projectile);
 
     //Appearance
     const std::shared_ptr<IAppearanceStrategy> appearance = std::make_shared<ProjetileAppearanceStrategy>(m_data);
@@ -115,10 +96,7 @@ std::shared_ptr<GameObject> ObjectFactory::MakeProjectile(const sf::Vector2f& po
 
     projectile->SetSound(sound);
     projectile->SetAppearanceStrategy(appearance);
-    projectile->SetScale(scale);
     projectile->SetControls(controls);
-    projectile->SetSpawn(spawn);
-
     projectile->GameObjectInit();
     return projectile;
 }

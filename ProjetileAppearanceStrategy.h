@@ -3,10 +3,10 @@
 #include "IAppearanceStrategy.h"
 class ProjetileAppearanceStrategy : public IAppearanceStrategy
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
   sf::Sprite* m_sprite;
 public:
-    ProjetileAppearanceStrategy(GameDataRef data);
+    ProjetileAppearanceStrategy(GameEngine::GameDataRef data);
     void SetAppearance(sf::Sprite* toChange) override;
 
 };

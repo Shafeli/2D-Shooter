@@ -3,10 +3,10 @@
 #include "ISoundStrategy.h"
 class ProjectileSoundStrategy : public ISoundStrategy
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
     sf::Sound m_sound;
 public:
-    ProjectileSoundStrategy(GameDataRef data);
+    ProjectileSoundStrategy(GameEngine::GameDataRef data);
     virtual void MakeSound() override final;
 };
 

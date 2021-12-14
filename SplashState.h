@@ -8,7 +8,7 @@
 class SplashState : public State
 {
 	//Ref to Game data local
-	GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
 
 
 	bool soundSwitch = true;
@@ -27,7 +27,7 @@ class SplashState : public State
 public:
 
 	//c'tor takes in reference to Game Data struct
-	SplashState(GameDataRef data);
+	SplashState(GameEngine::GameDataRef data);
 
 	virtual void Init()override final;
 	virtual void HandleInput()override final;

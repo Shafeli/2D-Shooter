@@ -4,10 +4,10 @@
 #include "MainMenuState.h"
 
 
-GameOverState::GameOverState(GameDataRef data)
+GameOverState::GameOverState(GameEngine::GameDataRef data)
 	: m_data(data)
 {
-	EndGameMusic();
+
 }
 
 // loads texture to asset manager
@@ -20,8 +20,8 @@ void GameOverState::Init()
 	m_button.setTexture(this->m_data->assets.GetTexture("Play Button"));
 	m_button.setScale(sf::Vector2f(0.2f, 0.2f));
 	m_button.setPosition((gScreenWidth / 2) - (m_button.getGlobalBounds().width / 2), (gScreenHeight / 2) - (m_button.getGlobalBounds().height / 2));
-
-
+	m_MenuSound.setVolume(m_data->jukebox.GetMasterVolume());
+	m_data->jukebox.CheckMusic();
 }
 
 
@@ -42,7 +42,7 @@ void GameOverState::HandleInput()
 void GameOverState::Update(float dt)
 #pragma warning(default : 4100)
 {
-	
+	m_data->jukebox.CheckMusic();
 	if (this->m_clock.getElapsedTime().asSeconds() > 234)
 	{
 		std::cout << "Exiting Splash State\n";
@@ -75,12 +75,4 @@ void GameOverState::Draw()
 	this->m_data->window.draw(this->m_button);
 
 	this->m_data->window.display();
-}
-
-void GameOverState::EndGameMusic()
-{
-
-
-	m_gameOverMusic.openFromFile("Resources/res/EndGameMusic.wav");
-	m_gameOverMusic.play();
 }

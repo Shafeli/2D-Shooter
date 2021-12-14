@@ -4,10 +4,10 @@
 
 class PlayerSoundStrategy : public ISoundStrategy
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
     sf::Sound m_sound;
 public:
-    PlayerSoundStrategy(GameDataRef data);
+    PlayerSoundStrategy(GameEngine::GameDataRef data);
     virtual void MakeSound() override final;
 };
 

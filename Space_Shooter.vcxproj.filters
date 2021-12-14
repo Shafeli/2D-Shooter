@@ -43,15 +43,6 @@
     <Filter Include="States\GameState\GameObjects\Strategies\Controlls">
       <UniqueIdentifier>{5814f1d2-eed3-4175-8c03-3624f6e1368d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States\GameState\Prototyping">
-      <UniqueIdentifier>{c9c958d4-6124-466d-a9e4-d85ffb38b7f8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\SpawnStrategies">
-      <UniqueIdentifier>{08e6d065-2ea0-4f2e-8dec-61f05b1c5e27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\SizeStrategies">
-      <UniqueIdentifier>{805c9e61-fb4a-4e60-b5db-4f4c966bb739}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States\GameState\GameObjects\Strategies\AppearanceStrategies">
       <UniqueIdentifier>{2cea5c56-3b0b-4944-a575-542e3cac2ead}</UniqueIdentifier>
     </Filter>
@@ -60,6 +51,18 @@
     </Filter>
     <Filter Include="States\GameState\GameObjects\Strategies\DeathStrategies">
       <UniqueIdentifier>{506dac92-86d0-4978-989e-b63f112fb694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectCleaner">
+      <UniqueIdentifier>{41abf3e5-90ac-4735-9d0b-5d39e445c4de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpawnManager">
+      <UniqueIdentifier>{6e1cb190-d560-4a74-bfc1-3873eef783cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SizeManager">
+      <UniqueIdentifier>{c9c958d4-6124-466d-a9e4-d85ffb38b7f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MusicManager">
+      <UniqueIdentifier>{ebaa7f0d-ed81-452c-8497-dade827dc5d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -94,26 +97,8 @@
     <ClCompile Include="IControls.cpp">
       <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
     </ClCompile>
-    <ClCompile Include="AISpawnStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectFactory.cpp">
       <Filter>States\GameState\GameObjects\Factories</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerSpawnStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileSpawnStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
-    </ClCompile>
-    <ClCompile Include="AIScale.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerScale.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
-    </ClCompile>
-    <ClCompile Include="ProjectileScale.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAppearanceStrategy.cpp">
       <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
@@ -135,6 +120,18 @@
     </ClCompile>
     <ClCompile Include="DeathAppearanceStrategy.cpp">
       <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectCleaner.cpp">
+      <Filter>ObjectCleaner</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnManager.cpp">
+      <Filter>SpawnManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SizeManager.cpp">
+      <Filter>SizeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicManager.cpp">
+      <Filter>MusicManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,32 +171,8 @@
     <ClInclude Include="IControls.h">
       <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
     </ClInclude>
-    <ClInclude Include="AISpawnStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
-    </ClInclude>
-    <ClInclude Include="ISpawnStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectFactory.h">
       <Filter>States\GameState\GameObjects\Factories</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerSpawnStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectileSpawnStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SpawnStrategies</Filter>
-    </ClInclude>
-    <ClInclude Include="IScaleStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerScale.h">
-      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectileScale.h">
-      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
-    </ClInclude>
-    <ClInclude Include="AIScale.h">
-      <Filter>States\GameState\GameObjects\Strategies\SizeStrategies</Filter>
     </ClInclude>
     <ClInclude Include="IAppearanceStrategy.h">
       <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
@@ -227,6 +200,21 @@
     </ClInclude>
     <ClInclude Include="DeathAppearanceStrategy.h">
       <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectCleaner.h">
+      <Filter>ObjectCleaner</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingMacros.h">
+      <Filter>GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnManager.h">
+      <Filter>SpawnManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SizeManager.h">
+      <Filter>SizeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicManager.h">
+      <Filter>MusicManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

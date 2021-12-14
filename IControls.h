@@ -19,12 +19,12 @@ public:
 ///////////////////////////////////
 class PlayerControls : public IControls
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
     sf::Clock m_rateOfFire;
     bool m_fireShot = false;
    
 public:
-    PlayerControls(GameDataRef data);
+    PlayerControls(GameEngine::GameDataRef data);
     virtual void Execute(sf::Sprite& m_sprite, float dt) override final;
     virtual bool FireShot() override final;
 };
@@ -34,7 +34,7 @@ public:
 /////////////////////////////////////
 class AIControls : public IControls
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
     sf::Clock m_rateOfFire;
     bool m_movementSwitch = false;
     bool m_fireShot = false;
@@ -42,7 +42,7 @@ class AIControls : public IControls
    static inline bool s_moveSwitch = false;
    static inline bool s_moveDown = false;
 public:
-    AIControls(GameDataRef data);
+    AIControls(GameEngine::GameDataRef data);
    virtual void Execute(sf::Sprite& m_sprite, float dt) override final;
    virtual bool FireShot()override final;
    virtual bool MoveDown()override final;
@@ -53,10 +53,10 @@ public:
 /////////////////////////////////////
 class ProjectileControls : public IControls
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
     float m_direction;
 public:
-    ProjectileControls(GameDataRef data, float direction);
+    ProjectileControls(GameEngine::GameDataRef data, float direction);
     virtual void Execute(sf::Sprite& m_sprite, float dt) override final;
     virtual bool FireShot()override final;
 };

@@ -3,9 +3,9 @@
 #include "IAppearanceStrategy.h"
 class PlayerAppearanceStrategy : public IAppearanceStrategy
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
 public:
-    PlayerAppearanceStrategy(GameDataRef data);
+    PlayerAppearanceStrategy(GameEngine::GameDataRef data);
     virtual void SetAppearance(sf::Sprite* toChange) override final;
 
 };

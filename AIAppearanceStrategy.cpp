@@ -1,7 +1,7 @@
 #include "AIAppearanceStrategy.h"
 #include "GameObject.h"
 
-AIAppearanceStrategy::AIAppearanceStrategy(GameDataRef data)
+AIAppearanceStrategy::AIAppearanceStrategy(GameEngine::GameDataRef data)
     :m_data(data)
 {
 }

@@ -2,9 +2,9 @@
 #include "IAppearanceStrategy.h"
 class DeathAppearanceStrategy : public IAppearanceStrategy
 {
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
 public:
-    DeathAppearanceStrategy(GameDataRef data);
+    DeathAppearanceStrategy(GameEngine::GameDataRef data);
     virtual void SetAppearance(sf::Sprite* toChange) override final;
 };
 

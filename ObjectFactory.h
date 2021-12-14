@@ -2,19 +2,16 @@
 #include "GameManager.h"
 
 class GameObject;
-class AISpawnStragey;
-class ISpawnStragey;
 
 class ObjectFactory : std::enable_shared_from_this<ObjectFactory>
 {
-    int m_counter;
-    GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
 public:
-    ObjectFactory(GameDataRef data);
+    ObjectFactory(GameEngine::GameDataRef data);
     void CounterReseter();
 
-    std::shared_ptr<GameObject> MakeAI();
-    std::shared_ptr<GameObject> MakePlayer();
-    std::shared_ptr<GameObject> MakeProjectile(const sf::Vector2f& pos, float direction);
+    GameObject* MakeAI(int spawnCounter);
+    GameObject* MakePlayer();
+    GameObject* MakeProjectile(const sf::Vector2f& pos, float direction);
 };
 

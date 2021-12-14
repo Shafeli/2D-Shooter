@@ -4,14 +4,15 @@
 #include <stack>
 #include "State.h"
 
-
-using StateRef = std::unique_ptr<State>;
-
+namespace Machine
+{
+    using StateRef = std::unique_ptr<State>;
+}
 class StateMachine
 {
 private:
-    std::stack<StateRef> m_states;
-    StateRef m_newState;
+    std::stack<Machine::StateRef> m_states;
+    Machine::StateRef m_newState;
 
     bool m_isRemoving;
     bool m_isAdding;
@@ -19,10 +20,10 @@ private:
 
 public:
 
-    void AddState(StateRef newState, bool isReplacing = true);
+    void AddState(Machine::StateRef newState, bool isReplacing = true);
     void RemoveState();
     void ProcessStateChanges();
-    StateRef& GetActiveState();
+    Machine::StateRef& GetActiveState();
 
 
 };

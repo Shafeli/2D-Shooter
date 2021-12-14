@@ -5,7 +5,7 @@
 class MainMenuState : public State
 {
 	//Ref to Game data local
-	GameDataRef m_data;
+    GameEngine::GameDataRef m_data;
 
 	//sprites
 	sf::Sprite m_background;
@@ -20,12 +20,11 @@ class MainMenuState : public State
 
 public:
 	//c'tor takes in reference to Game Data struct
-	MainMenuState(GameDataRef data);
+	MainMenuState(GameEngine::GameDataRef data);
 
 	virtual void Init()override final;
 	virtual void HandleInput()override final;
 	virtual void Update(float dt)override final;
 	virtual void Draw()override final;
-	void InMenuMusic();
 };
 
