@@ -5,7 +5,7 @@ DeathAppearanceStrategy::DeathAppearanceStrategy(GameEngine::GameDataRef data)
 {
 }
 
-void DeathAppearanceStrategy::SetAppearance(sf::Sprite* toChange)
+void DeathAppearanceStrategy::SetAppearance(GameEngine::Sprite* toChange)
 {
     toChange->setTexture(m_data->assets.GetTexture("Death Sprite"));
 }

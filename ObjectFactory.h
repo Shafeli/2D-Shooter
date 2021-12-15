@@ -1,5 +1,6 @@
 #pragma once
 #include "GameManager.h"
+#include "ProjetileAppearanceStrategy.h"
 
 class GameObject;
 
@@ -12,6 +13,6 @@ public:
 
     GameObject* MakeAI(int spawnCounter);
     GameObject* MakePlayer();
-    GameObject* MakeProjectile(const sf::Vector2f& pos, float direction);
+    GameObject* MakeProjectile(const sf::Vector2f& pos, float direction, ProjetileAppearanceStrategy::ProjectileColor color);
 };
 

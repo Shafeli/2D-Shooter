@@ -6,7 +6,7 @@ AIAppearanceStrategy::AIAppearanceStrategy(GameEngine::GameDataRef data)
 {
 }
 
-void AIAppearanceStrategy::SetAppearance(sf::Sprite* toChange)
+void AIAppearanceStrategy::SetAppearance(GameEngine::Sprite* toChange)
 {
     toChange->setTexture(m_data->assets.GetTexture("Target Sprite"));
 }

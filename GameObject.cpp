@@ -108,12 +108,12 @@ bool GameObject::TargetMoveFlag()
 ///////////////////////////////////////////
 // Current Hit dectection 
 ///////////////////////////////////////////
-const sf::Vector2f& GameObject::GetPOS()
+const GameEngine::Vector2f& GameObject::GetPOS()
 {
     return m_sprite.getPosition();
 }
 //
-sf::Sprite& GameObject::GetSprite()
+GameEngine::Sprite& GameObject::GetSprite()
 {
     return m_sprite;
 }

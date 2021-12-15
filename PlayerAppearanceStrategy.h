@@ -6,7 +6,7 @@ class PlayerAppearanceStrategy : public IAppearanceStrategy
     GameEngine::GameDataRef m_data;
 public:
     PlayerAppearanceStrategy(GameEngine::GameDataRef data);
-    virtual void SetAppearance(sf::Sprite* toChange) override final;
+    virtual void SetAppearance(GameEngine::Sprite* toChange) override final;
 
 };
 

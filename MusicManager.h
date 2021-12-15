@@ -1,12 +1,10 @@
 #pragma once
-#include <map>
 #include <SFML/Audio/Music.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/System/Clock.hpp>
 
 class MusicManager
 {
-    int m_masterSound = 10;
+    int m_masterSound = 5;
     sf::Music m_music;
     sf::Clock m_musicTimer;
     bool m_onSwitch = false;

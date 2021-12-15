@@ -127,10 +127,10 @@ void AIControls::Execute(sf::Sprite& m_sprite, float dt)
 //left the old rand way of firing its kind of crazy to see the differences visually
 bool AIControls::FireShot()
 {
-    const sf::Time time = m_rateOfFire.getElapsedTime();
+    const GameEngine::Time time = m_rateOfFire.getElapsedTime();
     const unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count();
     std::default_random_engine engine(seed);
-    const std::uniform_int_distribution<int>distro(0, gAISpawnAmount);
+    const std::uniform_int_distribution<int>distro(0, gAIRandomFire);
     if (!m_fireShot && time > sf::seconds(distro(engine)))
     {
         m_fireShot = true;
@@ -156,7 +156,7 @@ ProjectileControls::ProjectileControls(GameEngine::GameDataRef data, float direc
 {
 }
 
-void ProjectileControls::Execute(sf::Sprite& m_sprite, float dt)
+void ProjectileControls::Execute(GameEngine::Sprite& m_sprite, float dt)
 {
     m_sprite.move(0, m_direction * dt);
 }

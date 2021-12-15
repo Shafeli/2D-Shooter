@@ -15,12 +15,12 @@ void GameOverState::Init()
 {
 	std::cout << "Entered Game Over State\n";
 
-	m_MenuSound.setBuffer(m_data->assets.GetSound("Click Sound"));
+	m_MenuSound.setBuffer(m_data->assets.GetSound("Vader Sound"));
 	m_background.setTexture(this->m_data->assets.GetTexture("Game Over State Background"));
 	m_button.setTexture(this->m_data->assets.GetTexture("Play Button"));
-	m_button.setScale(sf::Vector2f(0.2f, 0.2f));
+	m_button.setScale(GameEngine::Vector2f(0.2f, 0.2f));
 	m_button.setPosition((gScreenWidth / 2) - (m_button.getGlobalBounds().width / 2), (gScreenHeight / 2) - (m_button.getGlobalBounds().height / 2));
-	m_MenuSound.setVolume(m_data->jukebox.GetMasterVolume());
+	m_MenuSound.setVolume(25);
 	m_data->jukebox.CheckMusic();
 }
 
@@ -31,7 +31,7 @@ void GameOverState::HandleInput()
 
 	while (this->m_data->window.pollEvent(event))
 	{
-		if (sf::Event::Closed == event.type)
+		if (GameEngine::Event::Closed == event.type)
 		{
 			this->m_data->window.close();
 		}
@@ -56,9 +56,8 @@ void GameOverState::Update(float dt)
 
 		//plays click sound 
 		m_MenuSound.play();
-
 		//wait time for sound to go off boot leg but it works 
-		sf::Time time = sf::seconds(0.1f);
+		GameEngine::Time time = sf::seconds(2.1f);
 		sleep(time);
 
 		//after sleep move state
@@ -69,7 +68,7 @@ void GameOverState::Update(float dt)
 //renders state 
 void GameOverState::Draw()
 {
-	this->m_data->window.clear(sf::Color::Red);
+	this->m_data->window.clear(GameEngine::Color::Red);
 
 	this->m_data->window.draw(this->m_background);
 	this->m_data->window.draw(this->m_button);

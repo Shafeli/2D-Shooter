@@ -3,11 +3,15 @@
 #include "IAppearanceStrategy.h"
 class ProjetileAppearanceStrategy : public IAppearanceStrategy
 {
-    GameEngine::GameDataRef m_data;
-  sf::Sprite* m_sprite;
 public:
-    ProjetileAppearanceStrategy(GameEngine::GameDataRef data);
-    void SetAppearance(sf::Sprite* toChange) override;
+    enum class ProjectileColor { kPlayer, kEmey };
+private:
+    GameEngine::GameDataRef m_data;
+    GameEngine::Sprite* m_sprite;
+    ProjectileColor m_color;
+public:
+    ProjetileAppearanceStrategy(GameEngine::GameDataRef data, ProjectileColor color);
+    void SetAppearance(GameEngine::Sprite* toChange) override;
 
 };
 

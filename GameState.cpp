@@ -10,52 +10,30 @@ GameState::GameState(GameEngine::GameDataRef data)
 	: m_data(data)
     ,m_player(nullptr)
 {
-	m_factory = std::make_shared<ObjectFactory>(data);
+	m_factory = std::make_unique<ObjectFactory>(data);
 }
 
 // loads texture to asset manager
 void GameState::Init()
 {
-	std::cout << "Entered Game State\n";
-	
+	m_data->GameUI.Init(&m_data->window, m_data->assets.GetFont("Game Font"), 80);
 	m_background.setTexture(this->m_data->assets.GetTexture("Game State Background"));
 	m_roundCounter++;
 
 	for (size_t i = 0; i < m_amountOfAI; ++i)
 	{
-		m_pTargetList.push_back(m_factory->MakeAI(i));
+		m_pTargetList.push_back(m_factory->MakeAI(static_cast<int>(i)));
 	}
-	
-	//////////////////////////////////////////////////////////////////////////////////
-	//TODO: Move to function
-	m_scoreText.setFont(m_data->assets.GetFont("Game Font"));
-	m_scoreText.setCharacterSize(80);
-	m_scoreText.setPosition(static_cast<float>(m_data->window.getSize().x) / static_cast<float>(2) - 10, 0);
-
-	m_roundText.setFont(m_data->assets.GetFont("Game Font"));
-	m_roundText.setCharacterSize(80);
-	m_roundText.setPosition(static_cast<float>(m_data->window.getSize().x) - static_cast<float>(80), 0);
-
-	m_livesText.setFont(m_data->assets.GetFont("Game Font"));
-	m_livesText.setCharacterSize(80);
-	m_livesText.setPosition(40, 0);
-
-	m_spawnShieldTimer.setFont(m_data->assets.GetFont("Game Font"));
-	m_spawnShieldTimer.setCharacterSize(80);
-	m_spawnShieldTimer.setPosition(static_cast<float>(m_data->window.getSize().x) / static_cast<float>(2) - 10, 30);
-	//////////////////////////////////////////////////////////////////////////////////
-	
-
 }
 
 
 void GameState::HandleInput()
 {
-	sf::Event event;
+	GameEngine::Event event;
 
 	while (this->m_data->window.pollEvent(event))
 	{
-		if (sf::Event::Closed == event.type)
+		if (GameEngine::Event::Closed == event.type)
 		{
 			this->m_data->window.close();
 		}
@@ -90,20 +68,17 @@ void GameState::Update(float dt)
 	CollisionDetection();
 	////////////////////////////////////////////////////////
 	
-	// Projectile delete Manager
+	// Projectile clearner calls TODO: move to function
 	////////////////////////////////////////////////////////
 	m_data->grabage.Cleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
 	m_data->grabage.Cleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
 	m_data->grabage.Cleaner(m_pTargetList, &m_data->window, ObjectCleaner::Type::kEnemy);
 	////////////////////////////////////////////////////////
 
-	//TODO: Move to function
-	//Text
-    ////////////////////////////////////////////////////////
-	m_livesText.setString(toString(m_playerLives));
-	m_scoreText.setString(toString(m_playerScore));
-	m_roundText.setString(toString(m_roundCounter));
-
+	//TODO: UI move to function
+	m_data->GameUI.UpdatePlayerLivesText(m_playerLives);
+	m_data->GameUI.UpdateScoreText(m_playerScore);
+	m_data->GameUI.UpdateRoundText(m_roundCounter);
 	m_data->jukebox.CheckMusic();
 }
 
@@ -111,7 +86,7 @@ void GameState::Update(float dt)
 void GameState::Draw()
 {
 	//Error color
-	this->m_data->window.clear(sf::Color::Red);
+	this->m_data->window.clear(GameEngine::Color::Red);
 	//Background layer
 	this->m_data->window.draw(this->m_background);
 
@@ -151,9 +126,12 @@ void GameState::Draw()
 
 		i->Draw();
 	}
-	this->m_data->window.draw(m_scoreText);
-	this->m_data->window.draw(m_livesText);
-	this->m_data->window.draw(m_roundText);
+
+	//TODO: UI move to function
+	this->m_data->window.draw(m_data->GameUI.GetScoreText());
+	this->m_data->window.draw(m_data->GameUI.GetLiveCountText());
+	this->m_data->window.draw(m_data->GameUI.GetRoundText());
+
 	//Display Window
 	this->m_data->window.display();
 }
@@ -162,7 +140,19 @@ void GameState::Draw()
 //end game check
 ////////////////////////////////////////////////////////
 void GameState::EndGameCheck()
-{
+{	//boot leg way to sleep the thread and allow the deathsound to play 
+	GameEngine::Time time = sf::seconds(1.5f);
+	for(auto& i : m_pTargetList)
+	{
+	    if(i->GetSprite().getPosition().y == static_cast<float>(m_data->window.getSize().y))
+	    {
+			GameEngine::Sound loss;
+			loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
+			loss.play();
+
+			m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
+	    }
+	}
     if (m_pTargetList.empty())
 	{
 		//////////////////////////////////
@@ -176,9 +166,10 @@ void GameState::EndGameCheck()
 			i->MarkedForDeath();
 		}
 		//////////////////////////////////
+		m_data->grabage.MarkedObjectCleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
 		m_data->grabage.MarkedObjectCleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
-       
-        std::cout << "Round Count is: " << m_roundCounter << '\n';
+		m_data->Spawner.PlayerSpawn(m_player,&m_data->window);
+		
 		for (size_t i = 0; i < m_amountOfAI; ++i)
 		{
 			m_pTargetList.push_back(m_factory->MakeAI(i));
@@ -190,12 +181,10 @@ void GameState::EndGameCheck()
 
 	if (m_playerLives == -1)
 	{
-		sf::Sound loss;
-		loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
-		loss.play();
-
+		m_player->MakeSound();
+		sleep(time);
 		//////////////////////////////////
-		//Temp Clean up for projectiles
+		//Clean up for projectiles
 		for (auto& i : m_pAIBulletList)
 		{
 			i->MarkedForDeath();
@@ -205,12 +194,7 @@ void GameState::EndGameCheck()
 			i->MarkedForDeath();
 		}
 		//////////////////////////////////
-
-
-		//boot leg way to sleep the thread and allow the deathsound to play 
-		sf::Time time = sf::seconds(1.f);
-		sleep(time);
-
+	
 		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	}
 	else if (m_playerLives > -1)
@@ -238,7 +222,7 @@ void GameState::AIUpdate(float dt)
 			if (time > sf::seconds(gAIRateOfFireInSeconds))
 			{
 				//std::cout << "AI Shot!\n";
-				m_pAIBulletList.push_back(m_factory->MakeProjectile(i->GetPOS(), gAIBulletYAxisAmount));
+				m_pAIBulletList.push_back(m_factory->MakeProjectile(i->GetPOS(), gAIBulletYAxisAmount,ProjetileAppearanceStrategy::ProjectileColor::kEmey));
 				m_pAIBulletList.at(0)->MakeSound();
 				m_rateOfFire.restart();
 			}
@@ -310,6 +294,7 @@ void GameState::CollisionDetection()
 				m_playerLives -= 1;
 				m_spawnTimer.restart();
 				m_player->MakeSound();
+				m_data->Spawner.PlayerSpawn(m_player,&m_data->window);
 	    }
 	}
 }
@@ -333,35 +318,18 @@ void GameState::PlayerUpdate(float dt)
 
 	if (m_player != nullptr)
 	{
-        //static bool s_playerHasShot;
-
-       // if (s_playerHasShot)
-		//{
 			if (m_player->OnUse())
 			{
 				//left side gun
-				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(m_player->GetPOS(), -gPlayerBulletYAxisAmount));
-				m_pPlayerBulletList.at(0)->MakeSound();
-
+				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(m_player->GetPOS(), -gPlayerBulletYAxisAmount,ProjetileAppearanceStrategy::ProjectileColor::kPlayer));
 				//right side gun
-				sf::Vector2f newBulletPos;
+				GameEngine::Vector2f newBulletPos;
 				newBulletPos.x = m_player->GetSprite().getGlobalBounds().width + (m_player->GetPOS().x - 20);
 				newBulletPos.y = m_player->GetPOS().y;
-				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(newBulletPos, -gPlayerBulletYAxisAmount));
+				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(newBulletPos, -gPlayerBulletYAxisAmount,ProjetileAppearanceStrategy::ProjectileColor::kPlayer));
 				m_pPlayerBulletList.at(0)->MakeSound();
-				//s_playerHasShot = false;
+			
 			}
-		//}
-		//{
-		//	if (!s_playerHasShot)
-		//	{
-		//		if (m_player.at(0)->OnUse())
-		//		{
-		//			
-		//			s_playerHasShot = true;
-		//		}
-		//	}
-		//}
 	}
 }
 

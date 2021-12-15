@@ -1,136 +1,165 @@
 #include "ObjectCleaner.h"
-
-#include <cassert>
-
-#include "GameObject.h"
+#include "LoggingMacros.h"
+#include <string>
 #include <iostream>
-
-
+#include "GameObject.h"
 
 void ObjectCleaner::Cleaner(ObjectVector& list, sf::RenderWindow* window, Type type)const
 {
+#if SHOW_REMOVALS
+	std::string log;
 	switch (static_cast<int>(type))
 	{
-	case 0:
-		for (auto& i : list)
-		{
-			const auto NewEnd = std::remove_if
-			(
-				list.begin(), list.end(),
-				[window](GameObject* tar)
-				{
-					if (tar->GetSprite().getPosition().y <= static_cast<float>(window->getSize().y) / window->getSize().y)
-					{
-						std::cout << "Player Bullet Scrubbed \n";
-						delete tar;
-						return true;
-					}
-					return false;
-				}
-			);
-			list.erase(NewEnd, list.end());
-		}
-		break;
-	case 1:
-		for (auto& i : list)
-		{
-			const auto NewEnd = std::remove_if
-			(
-				list.begin(), list.end(),
-				[window](GameObject* tar)
-				{
-					if (tar->GetSprite().getPosition().y > static_cast<float>(window->getSize().y))
-					{
-						std::cout << "AI Bullet Scrubbed \n";
-						delete tar;
-						return true;
-					}
-					return false;
-				}
-			);
-			list.erase(NewEnd, list.end());
-		}
-		break;
-	case 2:
-		for (auto& i : list)
-		{
-			const auto NewEnd = std::remove_if
-			(
-				list.begin(), list.end(),
-				[window](GameObject* tar)
-				{
-					if (tar->GetSprite().getPosition().y > static_cast<float>(window->getSize().y))
-					{
-						std::cout << "AI Scrubbed \n";
-						delete tar;
-						return true;
-					}
-					return false;
-				}
-			);
-			list.erase(NewEnd, list.end());
-		}
+	case 0:log = "Player Bullet Scrubbed"; break;
+	case 1:log = "AI Bullet Scrubbed"; break;
+	case 2:log = "AI Scrubbed";
 	}
-}
 
-void ObjectCleaner::MarkedObjectCleaner(ObjectVector& list, sf::RenderWindow* window, Type type)const
-{
-	assert(type != Type::kEnemyBullet);
-	for (auto& i : list)
+	if (type == Type::kPlayerBullet)
 	{
-		const auto NewEnd = std::remove_if
+		const auto newEnd = std::remove_if
 		(
 			list.begin(), list.end(),
-			[window](GameObject* tar)
+			[window, log](GameObject* tar)
 			{
-				if (!tar->isAlive())
+				if (tar->GetSprite().getPosition().y <= static_cast<float>(window->getSize().y) / window->getSize().y)
 				{
-					std::cout << "Marked Object Scrubbed \n";
+					std::cout << log << "\n";
 					delete tar;
 					return true;
 				}
 				return false;
 			}
 		);
-		list.erase(NewEnd, list.end());
+		list.erase(newEnd, list.end());
 	}
+	if (type != Type::kPlayerBullet)
+	{
+		const auto newEnd = std::remove_if
+		(
+			list.begin(), list.end(),
+			[window, log](GameObject* tar)
+			{
+				if (tar->GetSprite().getPosition().y > static_cast<float>(window->getSize().y))
+				{
+					std::cout << log << "\n";
+					delete tar;
+					return true;
+				}
+				return false;
+			}
+		);
+		list.erase(newEnd, list.end());
+	}
+
+#else
+
+	if (type == Type::kPlayerBullet)
+	{
+		const auto newEnd = std::remove_if
+		(
+			list.begin(), list.end(),
+			[window](GameObject* tar)
+			{
+				if (tar->GetSprite().getPosition().y <= static_cast<float>(window->getSize().y) / window->getSize().y)
+				{
+					
+					delete tar;
+					return true;
+				}
+				return false;
+			}
+		);
+		list.erase(newEnd, list.end());
+	}
+	if (type != Type::kPlayerBullet)
+	{
+		const auto newEnd = std::remove_if
+		(
+			list.begin(), list.end(),
+			[window](GameObject* tar)
+			{
+				if (tar->GetSprite().getPosition().y > static_cast<float>(window->getSize().y) + window->getSize().y)
+				{
+				
+					delete tar;
+					return true;
+				}
+				return false;
+			}
+		);
+		list.erase(newEnd, list.end());
+	}
+#endif
+}
+
+void ObjectCleaner::MarkedObjectCleaner(ObjectVector& list, sf::RenderWindow* window, Type type)const
+{
+#if SHOW_MARKED_TARGET_REMOVAL
+	const auto newEnd = std::remove_if
+	(
+		list.begin(), list.end(),
+		[window](GameObject* tar)
+		{
+			if (!tar->isAlive())
+			{
+				std::cout << "Marked Object Scrubbed \n";
+				delete tar;
+				return true;
+			}
+			return false;
+		}
+	);
+	list.erase(newEnd, list.end());
+#else
+	const auto newEnd = std::remove_if
+	(
+		list.begin(), list.end(),
+		[window](GameObject* tar)
+		{
+			if (!tar->isAlive())
+			{
+				delete tar;
+				return true;
+			}
+			return false;
+		}
+	);
+	list.erase(newEnd, list.end());
+#endif
 
 }
 
 void ObjectCleaner::Sweeper(Object* object, sf::RenderWindow& window, Type type)const
 {
-
-	switch(static_cast<int>(type))
+#if SHOW_TARGET_MOVED
+	std::string log;
+	switch (static_cast<int>(type))
 	{
-	case 0:
-		std::cout << "Player Bullet moved off screen \n";
-		object->GetSprite().setPosition(0, static_cast<float>(window.getSize().y) / static_cast<float>(window.getSize().y));
-		break;
-	case 1:
-		std::cout << "AI Bullet moved off screen \n";
-		object->GetSprite().setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
-		break;
-	case 2:
-		std::cout << "Failed AI moved off screen \n";
-		object->GetSprite().setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
+	case 0:log = "Player Bullet moved off screen"; break;
+	case 1:log = "AI Bullet moved off screen"; break;
+	case 2:log = "AI moved off screen";
 	}
+	std::cout << log << '\n';
+#endif
+
+    object->GetSprite().setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
+
 
 }
 
 void ObjectCleaner::Sweeper(sf::Sprite* sprite, sf::RenderWindow& window, Type type)const
 {
+#if SHOW_TARGET_MOVED
+	std::string log;
 	switch (static_cast<int>(type))
 	{
-	case 0:
-		std::cout << "Player Bullet moved off screen \n";
-		sprite->setPosition(0, static_cast<float>(window.getSize().y) / static_cast<float>(window.getSize().y));
-		break;
-	case 1:
-		std::cout << "AI Bullet moved off screen \n";
-		sprite->setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
-		break;
-	case 2:
-		std::cout << "Failed AI moved off screen \n";
-		sprite->setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
+	case 0:log = "Player Bullet moved off screen"; break;
+	case 1:log = "AI Bullet moved off screen"; break;
+	case 2:log = "AI moved off screen";
 	}
+	std::cout << log << '\n';
+#endif
+    sprite->setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
+	
 }

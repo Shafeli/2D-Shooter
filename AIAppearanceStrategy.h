@@ -7,7 +7,7 @@ class AIAppearanceStrategy : public IAppearanceStrategy
     GameEngine::GameDataRef m_data;
 public:
     AIAppearanceStrategy(GameEngine::GameDataRef data);
-    void SetAppearance(sf::Sprite* toChange) override;
+    void SetAppearance(GameEngine::Sprite* toChange) override;
  
 };
 

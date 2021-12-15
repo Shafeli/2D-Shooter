@@ -169,6 +169,7 @@
     <ClCompile Include="SpawnManager.cpp" />
     <ClCompile Include="SplashState.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="UIDisplay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIAppearanceStrategy.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="SplashState.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="UIDisplay.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

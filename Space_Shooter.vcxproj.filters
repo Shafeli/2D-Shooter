@@ -49,9 +49,6 @@
     <Filter Include="States\GameState\GameObjects\Strategies\SoundStrategies">
       <UniqueIdentifier>{4d4a26dd-5189-4e0d-9ba5-f460ada8e43f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\DeathStrategies">
-      <UniqueIdentifier>{506dac92-86d0-4978-989e-b63f112fb694}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ObjectCleaner">
       <UniqueIdentifier>{41abf3e5-90ac-4735-9d0b-5d39e445c4de}</UniqueIdentifier>
     </Filter>
@@ -63,6 +60,9 @@
     </Filter>
     <Filter Include="MusicManager">
       <UniqueIdentifier>{ebaa7f0d-ed81-452c-8497-dade827dc5d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{dc0fb00d-3dad-4149-a700-a07bb1a21a2d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="MusicManager.cpp">
       <Filter>MusicManager</Filter>
+    </ClCompile>
+    <ClCompile Include="UIDisplay.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="MusicManager.h">
       <Filter>MusicManager</Filter>
+    </ClInclude>
+    <ClInclude Include="UIDisplay.h">
+      <Filter>UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

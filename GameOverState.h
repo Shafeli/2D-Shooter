@@ -10,14 +10,13 @@ class GameOverState : public State
 	//clock to keep track of how much time has passed
 	//TODO: after n time switch to main menu state & restart game
 	/////////////////////////////////////////////////
-	sf::Clock m_clock;
+	GameEngine::Clock m_clock;
 
-	sf::Sprite m_background;
-	sf::Clock m_screenClock;
-	sf::Music m_gameOverMusic;
-	sf::Sound m_MenuSound;
+	GameEngine::Sprite m_background;
+	GameEngine::Clock m_screenClock;
+	GameEngine::Sound m_MenuSound;
 	//sprites
-	sf::Sprite m_button;
+	GameEngine::Sprite m_button;
 
 public:
 	//c'tor takes in reference to Game Data struct

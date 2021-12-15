@@ -36,18 +36,13 @@ int SpawnManager::SpawnReset(int spawnCounter)
 
 void SpawnManager::YAxiesAdjustment(int spawnCounter)
 {
-
-    //if spawnCounter % 8 then reset to 0
-    //if spawnCounter is > 8 then
-    // spawnCounter - 8 / 10 * 30 = yAxis
-    //if spawnCounter < yAxis = 30
     if (spawnCounter < 8)
     {
         return;
     }
     if (spawnCounter % 8 == 0)
     {
-        m_yAxis += 30.f;
+        m_yAxis += 50.f;
     }
 }
 

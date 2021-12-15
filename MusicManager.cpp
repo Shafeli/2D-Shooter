@@ -2,9 +2,10 @@
 
 void MusicManager::initMusic()
 {
+    m_music.setVolume(m_masterSound);
     int random = rand() % 3;
 
-    if (m_musicTimer.getElapsedTime().asSeconds() > 234)
+    if (m_musicTimer.getElapsedTime().asSeconds() > 153)
     {
         switch (random)
         {
@@ -29,7 +30,7 @@ void MusicManager::CheckMusic()
 {
     int random = rand() % 3;
 
-    if (m_musicTimer.getElapsedTime().asSeconds() > 234)
+    if (m_musicTimer.getElapsedTime().asSeconds() > 153)
     {
         switch(random)
         {
@@ -45,15 +46,15 @@ void MusicManager::CheckMusic()
 
 void MusicManager::TrackOne()
 {
-    m_music.openFromFile("Resources/res/MainMenuMusic.wav");
+    m_music.openFromFile("Resources/res/ThePowerOfTheDarkSide.wav");
 }
 
 void MusicManager::TrackTwo()
 {
-    m_music.openFromFile("Resources/res/GameStateMusic.wav");
+    m_music.openFromFile("Resources/res/TheForce.wav");
 }
 
 void MusicManager::TrackThree()
 {
-    m_music.openFromFile("Resources/res/EndGameMusic.wav");
+    m_music.openFromFile("Resources/res/ImperialMarch.wav");
 }

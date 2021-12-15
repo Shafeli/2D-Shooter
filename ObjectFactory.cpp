@@ -10,8 +10,6 @@
 #include "PlayerAppearanceStrategy.h"
 #include "PlayerSoundStrategy.h"
 #include "ProjectileSoundStrategy.h"
-#include "ProjetileAppearanceStrategy.h"
-
 
 ObjectFactory::ObjectFactory(GameEngine::GameDataRef data)
     :m_data(data)
@@ -29,7 +27,7 @@ GameObject* ObjectFactory::MakeAI(int spawnCounter)
     const std::shared_ptr<IControls> controls = std::make_shared<AIControls>(m_data);
 
     //Scale
-    m_data->Resizer.normalScale(AI);
+    m_data->Resizer.TieSize(AI);
 
     //Appearance
     const std::shared_ptr<IAppearanceStrategy> appearance = std::make_shared<AIAppearanceStrategy>(m_data);
@@ -76,7 +74,7 @@ GameObject* ObjectFactory::MakePlayer()
     return player;
 }
 
-GameObject* ObjectFactory::MakeProjectile(const sf::Vector2f& pos, float direction)
+GameObject* ObjectFactory::MakeProjectile(const sf::Vector2f& pos, float direction, ProjetileAppearanceStrategy::ProjectileColor color)
 {
     //Spawn
     auto projectile = new GameObject(m_data);
@@ -89,7 +87,7 @@ GameObject* ObjectFactory::MakeProjectile(const sf::Vector2f& pos, float directi
     m_data->Resizer.RectangleScale(projectile);
 
     //Appearance
-    const std::shared_ptr<IAppearanceStrategy> appearance = std::make_shared<ProjetileAppearanceStrategy>(m_data);
+    const std::shared_ptr<IAppearanceStrategy> appearance = std::make_shared<ProjetileAppearanceStrategy>(m_data, color);
 
     //Sounds
     const std::shared_ptr<ISoundStrategy> sound = std::make_shared<ProjectileSoundStrategy>(m_data);

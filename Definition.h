@@ -35,11 +35,13 @@ constexpr auto gGameTitleFile = "Resources/res/title1.png";
 //Play Button
 constexpr auto gPlayButtonFile = "Resources/res/StartButton.png";
 constexpr auto gClickSoundFile = "Resources/res/MenuSound.ogg";
+constexpr auto gVaderSoundFile = "Resources/res/YouShouldNot.wav";
+constexpr auto gTrapSoundFile = "Resources/res/Trap.wav";
 /////////////////////////////////
 
 /////////////////////////////////
 //Game Background 
-constexpr auto gGameBackgroundFile = "Resources/res/Space.jpg";
+constexpr auto gGameBackgroundFile = "Resources/res/DeathStar.jpg";
 /////////////////////////////////
 
 /////////////////////////////////
@@ -66,6 +68,7 @@ constexpr auto gBulletSpriteFile = "Resources/res/Bullet.png";
 constexpr auto gBulletSoundFile = "Resources/res/Lazer.wav";
 constexpr float gAIBulletYAxisAmount = 500.f;
 constexpr float gPlayerBulletYAxisAmount = 660.f;
+constexpr int gBulletSoundLevel = 5;
 /////////////////////////////////
 
 //////////////////////////////////
@@ -75,9 +78,8 @@ constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
 constexpr auto gDeathSoundFile = "Resources/res/Boom.wav";
 constexpr float gTargetSpeed = 100.f;
 constexpr float gTargetYAxisDecreaseAmount = 2.f;
-
 constexpr float gAIRateOfFireInSeconds = .6f;
-constexpr int gAISpawnAmount = 20;
+constexpr int gAIRandomFire = 78;
 //////////////////////////////////
 
 // TODO: animation system - save for later quite a lot of work in this
