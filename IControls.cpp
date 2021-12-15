@@ -2,7 +2,7 @@
 
 #include <chrono>
 #include <random>
-#include <SFML/Window/Keyboard.hpp>
+
 
 #include "Definition.h"
 
@@ -29,15 +29,15 @@ void PlayerControls::Execute(sf::Sprite& m_sprite, float dt)
         m_sprite.move(-m_sprite.getGlobalBounds().width / 9, 0.f);
 
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if (m_data->input.AIsPressed())
     {
         m_sprite.move(-gPlayerSpeed * dt, 0.f);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    else if (m_data->input.DIsPressed())
     {
         m_sprite.move(+gPlayerSpeed * dt, 0.f);
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (m_data->input.SpaceIsPressed())
     {
         if (m_rateOfFire.getElapsedTime().asSeconds() > gRateOfFire)
         {
@@ -140,12 +140,6 @@ bool AIControls::FireShot()
     m_fireShot = false;
     return false;
 }
-
-bool AIControls::MoveDown()
-{
-    return m_movementSwitch;
-}
-
 
 //////////////////////////////////////
 //Movement Controls for a Projectile

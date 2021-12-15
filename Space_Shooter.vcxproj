@@ -150,6 +150,7 @@
     <ClCompile Include="AISoundStrategy.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="DeathAppearanceStrategy.cpp" />
+    <ClCompile Include="DeltaTime.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverState.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="DeathAppearanceStrategy.h" />
     <ClInclude Include="Definition.h" />
+    <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />

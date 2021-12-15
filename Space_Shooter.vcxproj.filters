@@ -64,6 +64,9 @@
     <Filter Include="UI">
       <UniqueIdentifier>{dc0fb00d-3dad-4149-a700-a07bb1a21a2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DeltaTime">
+      <UniqueIdentifier>{4cb70e8a-2324-44db-ac77-953016401bb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine.cpp">
@@ -135,6 +138,9 @@
     </ClCompile>
     <ClCompile Include="UIDisplay.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DeltaTime.cpp">
+      <Filter>DeltaTime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +227,9 @@
     </ClInclude>
     <ClInclude Include="UIDisplay.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DeltaTime.h">
+      <Filter>DeltaTime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

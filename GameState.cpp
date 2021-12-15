@@ -1,5 +1,4 @@
 #include "GameState.h"
-#include <iostream>
 #include "memory"
 #include "Definition.h"
 #include "GameOverState.h"
@@ -18,7 +17,7 @@ void GameState::Init()
 {
 	m_data->GameUI.Init(&m_data->window, m_data->assets.GetFont("Game Font"), 80);
 	m_background.setTexture(this->m_data->assets.GetTexture("Game State Background"));
-	m_roundCounter++;
+	m_data->GameUI.UpdateRound();
 
 	for (size_t i = 0; i < m_amountOfAI; ++i)
 	{
@@ -26,7 +25,7 @@ void GameState::Init()
 	}
 }
 
-
+// window closing
 void GameState::HandleInput()
 {
 	GameEngine::Event event;
@@ -43,7 +42,7 @@ void GameState::HandleInput()
 
 void GameState::Update(float dt)
 {
-	//end game check
+	//End Game Check
 	////////////////////////////////////////////////////////
 	EndGameCheck();
 	////////////////////////////////////////////////////////
@@ -68,17 +67,10 @@ void GameState::Update(float dt)
 	CollisionDetection();
 	////////////////////////////////////////////////////////
 	
-	// Projectile clearner calls TODO: move to function
+	// Projectile clearner calls
 	////////////////////////////////////////////////////////
-	m_data->grabage.Cleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
-	m_data->grabage.Cleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
-	m_data->grabage.Cleaner(m_pTargetList, &m_data->window, ObjectCleaner::Type::kEnemy);
+	ProjectileCleanUp();
 	////////////////////////////////////////////////////////
-
-	//TODO: UI move to function
-	m_data->GameUI.UpdatePlayerLivesText(m_playerLives);
-	m_data->GameUI.UpdateScoreText(m_playerScore);
-	m_data->GameUI.UpdateRoundText(m_roundCounter);
 	m_data->jukebox.CheckMusic();
 }
 
@@ -127,10 +119,8 @@ void GameState::Draw()
 		i->Draw();
 	}
 
-	//TODO: UI move to function
-	this->m_data->window.draw(m_data->GameUI.GetScoreText());
-	this->m_data->window.draw(m_data->GameUI.GetLiveCountText());
-	this->m_data->window.draw(m_data->GameUI.GetRoundText());
+
+	DrawUI();
 
 	//Display Window
 	this->m_data->window.display();
@@ -142,14 +132,14 @@ void GameState::Draw()
 void GameState::EndGameCheck()
 {	//boot leg way to sleep the thread and allow the deathsound to play 
 	GameEngine::Time time = sf::seconds(1.5f);
-	for(auto& i : m_pTargetList)
+	GameEngine::Sound loss;
+	loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
+	for (auto& i : m_pTargetList)
 	{
-	    if(i->GetSprite().getPosition().y == static_cast<float>(m_data->window.getSize().y))
+		if (i->GetSprite().getPosition().y >= (m_data->window.getSize().y - i->GetSprite().getGlobalBounds().height))
 	    {
-			GameEngine::Sound loss;
-			loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
 			loss.play();
-
+			sleep(time);
 			m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	    }
 	}
@@ -166,20 +156,19 @@ void GameState::EndGameCheck()
 			i->MarkedForDeath();
 		}
 		//////////////////////////////////
-		m_data->grabage.MarkedObjectCleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
-		m_data->grabage.MarkedObjectCleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
+		MarkedTargetCleanUp();
 		m_data->Spawner.PlayerSpawn(m_player,&m_data->window);
 		
 		for (size_t i = 0; i < m_amountOfAI; ++i)
 		{
 			m_pTargetList.push_back(m_factory->MakeAI(i));
 		}
-		m_roundCounter++;
-		m_amountOfAI += m_roundCounter;
+		m_data->GameUI.UpdateRound();
+		m_amountOfAI += m_data->GameUI.GetRoundCounter();
 		m_data->Spawner.AISpawnLocationReset();
 	}
 
-	if (m_playerLives == -1)
+	if (m_data->GameUI.GetLifeCounter() == -1)
 	{
 		m_player->MakeSound();
 		sleep(time);
@@ -197,7 +186,7 @@ void GameState::EndGameCheck()
 	
 		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	}
-	else if (m_playerLives > -1)
+	else if (m_data->GameUI.GetLifeCounter() > -1)
 	{
 		if(m_player == nullptr)
 		m_player = m_factory->MakePlayer();
@@ -221,7 +210,6 @@ void GameState::AIUpdate(float dt)
 		{
 			if (time > sf::seconds(gAIRateOfFireInSeconds))
 			{
-				//std::cout << "AI Shot!\n";
 				m_pAIBulletList.push_back(m_factory->MakeProjectile(i->GetPOS(), gAIBulletYAxisAmount,ProjetileAppearanceStrategy::ProjectileColor::kEmey));
 				m_pAIBulletList.at(0)->MakeSound();
 				m_rateOfFire.restart();
@@ -251,7 +239,7 @@ void GameState::ProjectileUpdate(float dt)
 	}
 }
 
-//Collision Dection TODO: Clean up
+//Collision Dection
 ////////////////////////////////////////////////////////
 void GameState::CollisionDetection()
 {
@@ -264,13 +252,13 @@ void GameState::CollisionDetection()
 			{
 				i->MarkedForDeath();
 				j->MarkedForDeath();
-				m_playerScore += m_roundCounter;
+
+				m_data->GameUI.UpdateScore();
 			}
 		}
 	}
-
-	m_data->grabage.MarkedObjectCleaner(m_pTargetList, &m_data->window, ObjectCleaner::Type::kEnemy);
-	m_data->grabage.MarkedObjectCleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
+	
+	MarkedTargetCleanUp();
 
 	//loops over sprites if two touch mark for death / deletion
 	for (const auto& i : m_pAIBulletList)
@@ -291,27 +279,50 @@ void GameState::CollisionDetection()
 					return;
 				}
 				i->MarkedForDeath();
-				m_playerLives -= 1;
+			
 				m_spawnTimer.restart();
 				m_player->MakeSound();
 				m_data->Spawner.PlayerSpawn(m_player,&m_data->window);
+				m_data->GameUI.UpdatePlayerLives(UIDisplay::UI::kTakeLife);
 	    }
 	}
+
 }
 
+// Projectile clearner calls
+////////////////////////////////////////////////////////
+void GameState::MarkedTargetCleanUp()
+{
+	m_data->grabage.MarkedObjectCleaner(m_pTargetList, &m_data->window, ObjectCleaner::Type::kEnemy);
+	m_data->grabage.MarkedObjectCleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
+	m_data->grabage.MarkedObjectCleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
+	
+}
+
+void GameState::ProjectileCleanUp()
+{
+	
+	m_data->grabage.Cleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
+	m_data->grabage.Cleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
+}
+
+void GameState::DrawUI()
+{
+	m_data->GameUI.Draw(&m_data->window);
+}
 
 //Player Update calls
 ////////////////////////////////////////////////////////
 void GameState::PlayerUpdate(float dt)
 {
-	if (m_roundCounter % 10 != 0)
+	if (m_data->GameUI.GetRoundCounter() % 10 != 0)
 		m_giveLife = true;
 
 	if(m_giveLife == true)
-	if (m_roundCounter % 10 == 0)
+	if (m_data->GameUI.GetRoundCounter() % 10 == 0)
 	{
 		m_giveLife = false;
-		m_playerLives += 2;
+	    m_data->GameUI.UpdatePlayerLives(UIDisplay::UI::kGiveExtraLife);
 	}
     if (m_player != nullptr)
 		m_player->Update(dt);

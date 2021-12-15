@@ -65,5 +65,6 @@ int main()
     srand(time(nullptr));
 
     GameManager spaceShooter(gScreenWidth, gScreenHeight, "Space Shooter");
+    spaceShooter.Run();
     return 0;
 }

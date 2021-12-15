@@ -4,7 +4,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
-#include "State.h"
+#include "DeltaTime.h"
 #include "InputManager.h"
 #include "MusicManager.h"
 #include "ObjectCleaner.h"
@@ -24,6 +24,7 @@
 
 struct GameData
 {
+    DeltaTime deltaTime;
     StateMachine machine;
     sf::RenderWindow window;
     AssetManager assets;
@@ -59,15 +60,12 @@ class GameManager
 {
     //double Time = 0.0;
     //const float DeltaTime = 0.01;
-    static constexpr float DeltaTime = 1.0f / 60.0f;
+    //static constexpr float DeltaTime = 1.0f / 60.0f;
     GameEngine::Clock m_clock;
     GameEngine::GameDataRef m_data = std::make_shared<GameData>();
+    float m_lastFrameTime = 0.f;
 
 public:
     GameManager(int width, int height, std::string title);
-
-
-private:
-
     void Run();
 };

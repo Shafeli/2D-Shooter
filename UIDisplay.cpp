@@ -1,10 +1,5 @@
 #include "UIDisplay.h"
 
-UIDisplay::UIDisplay()
-{
-
-}
-
 void UIDisplay::Init(const sf::RenderWindow* window, sf::Font& font, int size)
 {
 	m_scoreText.setCharacterSize(size);
@@ -18,17 +13,33 @@ void UIDisplay::Init(const sf::RenderWindow* window, sf::Font& font, int size)
 	m_livesText.setPosition(40, 0);
 }
 
-void UIDisplay::UpdateRoundText(sf::Int32 roundCounter)
+void UIDisplay::UpdateRound()
 {	
-	m_roundText.setString(toString(roundCounter));
+	m_roundCounter++;
 }
 
-void UIDisplay::UpdatePlayerLivesText(sf::Int32 playerLives)
+void UIDisplay::UpdatePlayerLives(UI update)
 {
-	m_livesText.setString(toString(playerLives));
+	switch (static_cast<int>(update))
+	{
+	case 0:m_playerLives -= 1; return;
+
+	case 1:m_playerLives += 2; break;
+	}
 }
 
-void UIDisplay::UpdateScoreText(sf::Int32 playerScore)
+void UIDisplay::UpdateScore()
 {
-	m_scoreText.setString(toString(playerScore));
+	m_playerScore += m_roundCounter;
+}
+
+void UIDisplay::Draw(sf::RenderWindow* window)
+{
+	m_roundText.setString(toString(m_roundCounter));
+	m_scoreText.setString(toString(m_playerScore));
+    m_livesText.setString(toString(m_playerLives));
+
+	window->draw(m_roundText);
+	window->draw(m_scoreText);
+	window->draw(m_livesText);
 }

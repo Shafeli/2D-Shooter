@@ -11,7 +11,6 @@ public:
     virtual ~IControls() = default;
     virtual void Execute(sf::Sprite& m_sprite, float dt) = 0;
     virtual bool FireShot() = 0;
-    virtual bool MoveDown() { return false; }
 };
 
 ///////////////////////////////////
@@ -45,7 +44,7 @@ public:
     AIControls(GameEngine::GameDataRef data);
    virtual void Execute(sf::Sprite& m_sprite, float dt) override final;
    virtual bool FireShot()override final;
-   virtual bool MoveDown()override final;
+ 
 };
 
 //////////////////////////////////////

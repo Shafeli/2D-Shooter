@@ -1,5 +1,5 @@
 #include "InputManager.h"
-
+#include <SFML/Window/Keyboard.hpp>
 
 bool InputManager::IsSpriteClicked(sf::Sprite& object, sf::Mouse::Button button, sf::RenderWindow& window)
 {
@@ -19,5 +19,32 @@ bool InputManager::IsSpriteClicked(sf::Sprite& object, sf::Mouse::Button button,
 sf::Vector2i InputManager::GetMousePosition(sf::RenderWindow& window)
 {
 	return sf::Mouse::getPosition(window);
+}
+
+bool InputManager::AIsPressed()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool InputManager::DIsPressed()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		return true;
+	}
+	return false;
+}
+
+bool InputManager::SpaceIsPressed()
+{
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		return true;
+	}
+	return false;
 }
 

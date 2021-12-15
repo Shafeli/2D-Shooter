@@ -77,7 +77,7 @@ constexpr auto gDeathSpriteFile = "Resources/res/Death.png";
 constexpr auto gTargetSpriteFile = "Resources/res/Target.png";
 constexpr auto gDeathSoundFile = "Resources/res/Boom.wav";
 constexpr float gTargetSpeed = 100.f;
-constexpr float gTargetYAxisDecreaseAmount = 2.f;
+constexpr float gTargetYAxisDecreaseAmount = .05f;
 constexpr float gAIRateOfFireInSeconds = .6f;
 constexpr int gAIRandomFire = 78;
 //////////////////////////////////

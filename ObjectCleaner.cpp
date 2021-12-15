@@ -40,7 +40,7 @@ void ObjectCleaner::Cleaner(ObjectVector& list, sf::RenderWindow* window, Type t
 			list.begin(), list.end(),
 			[window, log](GameObject* tar)
 			{
-				if (tar->GetSprite().getPosition().y > static_cast<float>(window->getSize().y))
+				if (tar->GetSprite().getPosition().y > window->getSize().y - tar->GetSprite().getGlobalBounds().height)
 				{
 					std::cout << log << "\n";
 					delete tar;
@@ -79,7 +79,7 @@ void ObjectCleaner::Cleaner(ObjectVector& list, sf::RenderWindow* window, Type t
 			list.begin(), list.end(),
 			[window](GameObject* tar)
 			{
-				if (tar->GetSprite().getPosition().y > static_cast<float>(window->getSize().y) + window->getSize().y)
+				if (tar->GetSprite().getPosition().y > static_cast<float>(window->getSize().y))
 				{
 				
 					delete tar;
@@ -142,10 +142,7 @@ void ObjectCleaner::Sweeper(Object* object, sf::RenderWindow& window, Type type)
 	}
 	std::cout << log << '\n';
 #endif
-
     object->GetSprite().setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
-
-
 }
 
 void ObjectCleaner::Sweeper(sf::Sprite* sprite, sf::RenderWindow& window, Type type)const
