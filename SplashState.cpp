@@ -2,7 +2,7 @@
 #include "SplashState.h"
 #include "Definition.h"
 #include "MainMenuState.h"
-#include <iostream>
+
 
 
 	SplashState::SplashState(GameEngine::GameDataRef data)
@@ -19,8 +19,8 @@
 	void SplashState::Init()
 	{
 		m_data->assets.Load(AssetManager::Texture::kGameTitle, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kGameTitleTexture));
-		m_data->assets.Load(AssetManager::Sound::kSplashScreenLoad, gSplashSoundFile);
-	    m_data->assets.Load(AssetManager::Texture::kBackground, gGameBackgroundFile);
+		m_data->assets.Load(AssetManager::Sound::kSplashScreenLoad, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kSplashScreenLoadSound));
+	    m_data->assets.Load(AssetManager::Texture::kBackground, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kBackgroundTexture));
 
 		m_title.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kGameTitle));
 		m_title.setPosition((gScreenWidth / 2) - (m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2);

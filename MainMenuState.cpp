@@ -22,9 +22,9 @@ MainMenuState::~MainMenuState()
 // loads texture to asset manager
 void MainMenuState::Init()
 {
-	m_data->assets.Load(AssetManager::Texture::kStartButton, gPlayButtonFile);
-	m_data->assets.Load(AssetManager::Texture::kGameTitle, gGameTitleFile);
-	m_data->assets.Load(AssetManager::Sound::kButtonClick, gClickSoundFile);
+	m_data->assets.Load(AssetManager::Texture::kStartButton, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kStartButtonTexture));
+	m_data->assets.Load(AssetManager::Texture::kGameTitle, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kGameTitleTexture));
+	m_data->assets.Load(AssetManager::Sound::kButtonClick, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kButtonClickSound));
 
 	m_MenuSound.setBuffer(m_data->assets.GetSound(AssetManager::Sound::kButtonClick));
 	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));

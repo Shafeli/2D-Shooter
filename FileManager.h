@@ -10,48 +10,48 @@ public:
     enum class FileData {
 
         //front
-        kGameFont, //0
+        kGameFont = 3000, //3000
 
         //texture
-        kPlayerTexture, //1
-        kBackgroundTexture, //2
-        kEnemyTexture, //3
-        kDeathTexture, //4
-        kLazerTexture, //5
-        kGameTitleTexture, //6 
-        kStartButtonTexture, //7
+        kPlayerTexture, //3001
+        kBackgroundTexture, //3002
+        kEnemyTexture, //3003
+        kDeathTexture, //3004
+        kLazerTexture, //3005
+        kGameTitleTexture, //3006 
+        kStartButtonTexture, //3007
          
         //sounds
-        kLazerSound, //8
-        kEnemyDeathSound, //9
-        kPlayerDeathSound, //10
-        kReturnButtonSound, //11
-        kSplashScreenLoadSound, //12
-        kButtonClickSound, //13
+        kLazerSound, //3008
+        kEnemyDeathSound, //3009
+        kPlayerDeathSound, //3010
+        kReturnButtonSound, //3011
+        kSplashScreenLoadSound, //3012
+        kButtonClickSound, //3013
 
         //ints
-        kScreenHight, //14
-        kScreenWidth, //15
-        kAIRandomFireDistro, //16
-        kBulletSoundLevel, //17
-        kMasterSoundLevel, //18
+        kScreenHight, //3014
+        kScreenWidth, //3015
+        kAIRandomFireDistro, //3016
+        kBulletSoundLevel, //3017
+        kMasterSoundLevel, //3018
 
         //floats
-        kSplashShowTime, //19
+        kSplashShowTime, //3019
 
         //player
-        kPlayerSpeed, //20
-        kPlayerRateOfFire, //21
-        kPlayerProjectileSpeed, //22
+        kPlayerSpeed, //3020
+        kPlayerRateOfFire, //3021
+        kPlayerProjectileSpeed, //3022
 
         //AI
-        kAISpeed, //23
-        kAIRateOfFire, //24
-        kAIProjectileSpeed, //25
-        kAIDecressTimer, //26
+        kAISpeed, //3023
+        kAIRateOfFire, //3024
+        kAIProjectileSpeed, //3025
+        kAIDecressTimer, //3026
 
         //HighScore
-        kHighScore, //27
+        kHighScore, //3027
 
         //size of list
         kSize
@@ -71,8 +71,9 @@ private:
 ///////////////////////////////
 /// File Manager stores constexpers to files
 ///
-/// enum for the data you want is passed in to Load function
-/// Load function parses the file top to bottom then looks up thru the enum in the map the file
+/// enum for the data you want is passed in to Get function
+/// Load function parses the file top to bottom then fills the hash up
+/// first number is cast to enum as the key the enum in the map the file
 /// was loaded to and gets the data for the enum
 /// 
 ///////////////////////////////

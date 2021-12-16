@@ -27,15 +27,15 @@ GameState::~GameState()
 // loads texture to asset manager
 void GameState::Init()
 {
-	m_data->assets.Load(AssetManager::Texture::kPlayer, gPlayerSpriteFile);
-	m_data->assets.Load(AssetManager::Texture::kEnemy, gTargetSpriteFile);
-	m_data->assets.Load(AssetManager::Texture::kLazer, gBulletSpriteFile);
-	m_data->assets.Load(AssetManager::Sound::kLazer, gBulletSoundFile);
-	m_data->assets.Load(AssetManager::Sound::kEnemyDeath, gDeathSoundFile);
-	m_data->assets.Load(AssetManager::Sound::kPlayerDeath, gPlayerSoundFile);
-	m_data->assets.Load(AssetManager::Texture::kDeath, gDeathSpriteFile);
+	m_data->assets.Load(AssetManager::Texture::kPlayer, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kPlayerTexture));
+	m_data->assets.Load(AssetManager::Texture::kEnemy, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kEnemyTexture));
+	m_data->assets.Load(AssetManager::Texture::kLazer, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kLazerTexture));
+	m_data->assets.Load(AssetManager::Sound::kLazer, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kLazerSound));
+	m_data->assets.Load(AssetManager::Sound::kEnemyDeath, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kEnemyDeathSound));
+	m_data->assets.Load(AssetManager::Sound::kPlayerDeath, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kPlayerDeathSound));
+	m_data->assets.Load(AssetManager::Texture::kDeath, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kDeathTexture));
 
-	m_data->assets.Load(AssetManager::Font::kGame, gGameFontFile);
+	m_data->assets.Load(AssetManager::Font::kGame, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kGameFont));
 
 	m_data->GameUI.Init(&m_data->window, m_data->assets.GetFont(AssetManager::Font::kGame), 80);
 	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));

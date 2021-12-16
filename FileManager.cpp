@@ -16,108 +16,109 @@ void FileManager::Load()
     std::string word;
     int intNumber;
     float floatNumber;
+    int enumKey;
     file.open(kGameConfigFile);
 
     if (file.is_open())
     {
-        for (size_t i = 0; i < static_cast<size_t>(FileData::kSize); ++i)
+        for (size_t i = 3000; i < static_cast<size_t>(FileData::kSize) - 1; ++i)
         {
-            int enumKey;
+     
             file >> enumKey;
-            if (enumKey < 14)
+            if (enumKey < 3014)
             {
                 //front file
                 //textures
                 //sounds
-                if (enumKey == 0)
+                if (enumKey == 3000)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                 }
-                else if (enumKey == 1)
+                else if (enumKey == 3001)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                 
                 }
 
-                else if (enumKey == 2)
+                else if (enumKey == 3002)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                
                 }
 
-                else if (enumKey == 3)
+                else if (enumKey == 3003)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
              
                 }
 
-                else if (enumKey == 4)
+                else if (enumKey == 3004)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
            
                 }
 
-                else if (enumKey == 5)
+                else if (enumKey == 3005)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                  
                 }
 
-                else if (enumKey == 6)
+                else if (enumKey == 3006)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                   
                 }
 
-                else if (enumKey == 7)
+                else if (enumKey == 3007)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                  
                 }
-                else if (enumKey == 8)
+                else if (enumKey == 3008)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                   
                 }
 
-                else  if (enumKey == 9)
+                else  if (enumKey == 3009)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                   
                 }
 
-                else  if (enumKey == 10)
+                else  if (enumKey == 3010)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                    
                 }
 
-                else if (enumKey == 11)
+                else if (enumKey == 3011)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                   
                 }
 
-                else if (enumKey == 12)
+                else if (enumKey == 3012)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
                     
                 }
 
-                else if (enumKey == 13)
+                else if (enumKey == 3013)
                 {
                     file >> word;
                     m_AssetFiles[static_cast<FileData>(enumKey)] = word;
@@ -126,37 +127,37 @@ void FileManager::Load()
                // FilePathLoader(enumKey, &file);
                 continue;
             }
-            else if (enumKey > 13)
+            else if (enumKey > 3013 && enumKey < 3018)
             {
-              if (enumKey == 14)
+              if (enumKey == 3014)
                 {
                     file >> intNumber;
                     m_FileConfigInts[static_cast<FileData>(enumKey)] = intNumber;
                  
                 }
 
-              else if (enumKey == 15)
+              else if (enumKey == 3015)
                 {
                     file >> intNumber;
                     m_FileConfigInts[static_cast<FileData>(enumKey)] = intNumber;
 
                 }
 
-              else  if (enumKey == 16)
+              else  if (enumKey == 3016)
                 {
                     file >> intNumber;
                     m_FileConfigInts[static_cast<FileData>(enumKey)] = intNumber;
             
                 }
 
-              else if (enumKey == 17)
+              else if (enumKey == 3017)
                 {
                     file >> intNumber;
                     m_FileConfigInts[static_cast<FileData>(enumKey)] = intNumber;
              
                 }
 
-              else if (enumKey == 18)
+              else if (enumKey == 3018)
                 {
                     file >> intNumber;
                     m_FileConfigInts[static_cast<FileData>(enumKey)] = intNumber;
@@ -166,58 +167,58 @@ void FileManager::Load()
                // IntLoader(enumKey, &file);
                 continue;
             }
-            else if (enumKey > 18)
+            else if (enumKey > 3018)
             {
-                if (enumKey == 19)
+                if (enumKey == 3019)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;
             
                 }
 
-                else if (enumKey == 20)
+                else if (enumKey == 3020)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;
               
                 }
 
-                else if (enumKey == 21)
+                else if (enumKey == 3021)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;
               
                 }
 
-                else if (enumKey == 22)
+                else if (enumKey == 3022)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;
                
                 }
 
-                else if (enumKey == 23)
+                else if (enumKey == 3023)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;
              
                 }
 
-                else if (enumKey == 24)
+                else if (enumKey == 3024)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;
             
                 }
 
-                else if (enumKey == 25)
+                else if (enumKey == 3025)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;
           
                 }
                 ;
-                 if (enumKey == 26)
+                 if (enumKey == 3026)
                 {
                     file >> floatNumber;
                     m_FileConfigFloats[static_cast<FileData>(enumKey)] = floatNumber;

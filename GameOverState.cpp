@@ -21,8 +21,8 @@ GameOverState::~GameOverState()
 // loads texture to asset manager
 void GameOverState::Init()
 {
-	m_data->assets.Load(AssetManager::Texture::kStartButton, gPlayButtonFile);
-	m_data->assets.Load(AssetManager::Sound::kReturnButton, gVaderSoundFile);
+	m_data->assets.Load(AssetManager::Texture::kStartButton, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kStartButtonTexture));
+	m_data->assets.Load(AssetManager::Sound::kReturnButton, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kReturnButtonSound));
 
 	m_MenuSound.setBuffer(m_data->assets.GetSound(AssetManager::Sound::kReturnButton));
 	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));
