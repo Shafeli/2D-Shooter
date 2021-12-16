@@ -4,6 +4,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "AssetManager.h"
+#include "CollisionDection.h"
 #include "DeltaTime.h"
 #include "InputManager.h"
 #include "MusicManager.h"
@@ -34,6 +35,7 @@ struct GameData
     SizeManager Resizer;
     MusicManager jukebox;
     UIDisplay GameUI;
+    CollisionDection collisionDection;
 };
 
 
@@ -58,9 +60,6 @@ namespace GameEngine
 
 class GameManager
 {
-    //double Time = 0.0;
-    //const float DeltaTime = 0.01;
-    //static constexpr float DeltaTime = 1.0f / 60.0f;
     GameEngine::Clock m_clock;
     GameEngine::GameDataRef m_data = std::make_shared<GameData>();
     float m_lastFrameTime = 0.f;

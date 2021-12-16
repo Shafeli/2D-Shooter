@@ -149,6 +149,7 @@
     <ClCompile Include="AIAppearanceStrategy.cpp" />
     <ClCompile Include="AISoundStrategy.cpp" />
     <ClCompile Include="AssetManager.cpp" />
+    <ClCompile Include="CollisionDection.cpp" />
     <ClCompile Include="DeathAppearanceStrategy.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="AIAppearanceStrategy.h" />
     <ClInclude Include="AISoundStrategy.h" />
     <ClInclude Include="AssetManager.h" />
+    <ClInclude Include="CollisionDection.h" />
     <ClInclude Include="DeathAppearanceStrategy.h" />
     <ClInclude Include="Definition.h" />
     <ClInclude Include="DeltaTime.h" />

@@ -67,6 +67,9 @@
     <Filter Include="DeltaTime">
       <UniqueIdentifier>{4cb70e8a-2324-44db-ac77-953016401bb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CollisionDection Manager">
+      <UniqueIdentifier>{31bed126-a58e-4c61-af22-17d6405d5471}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine.cpp">
@@ -142,6 +145,7 @@
     <ClCompile Include="DeltaTime.cpp">
       <Filter>DeltaTime</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionDection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -231,5 +235,6 @@
     <ClInclude Include="DeltaTime.h">
       <Filter>DeltaTime</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionDection.h" />
   </ItemGroup>
 </Project>

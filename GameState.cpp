@@ -127,7 +127,7 @@ void GameState::Draw()
 }
 
 
-//end game check
+//End game check
 ////////////////////////////////////////////////////////
 void GameState::EndGameCheck()
 {	//boot leg way to sleep the thread and allow the deathsound to play 
@@ -243,48 +243,16 @@ void GameState::ProjectileUpdate(float dt)
 ////////////////////////////////////////////////////////
 void GameState::CollisionDetection()
 {
-	//loops over sprites if two touch mark for death & sends to cleaner
-	for (const auto& i : m_pPlayerBulletList)
-	{
-		for (const auto& j : m_pTargetList)
-		{
-			if (i->GetSprite().getGlobalBounds().intersects(j->GetSprite().getGlobalBounds()))
-			{
-				i->MarkedForDeath();
-				j->MarkedForDeath();
 
-				m_data->GameUI.UpdateScore();
-			}
-		}
-	}
-	
+	if (m_data->collisionDection.DoesObjectOverlap(m_pPlayerBulletList, m_pTargetList))
+		m_data->GameUI.UpdateScore();
+
 	MarkedTargetCleanUp();
 
-	//loops over sprites if two touch mark for death / deletion
-	for (const auto& i : m_pAIBulletList)
+	if(m_data->collisionDection.IsPlayerHitDetection(m_pAIBulletList,m_player,m_spawnTimer))
 	{
-		if (i->GetSprite().getGlobalBounds().intersects(m_player->GetSprite().getGlobalBounds()))
-		{
-			i->MarkedForDeath();
-		}
-	}
-
-	for(auto& i : m_pAIBulletList)
-	{
-	    if(i->GetSprite().getGlobalBounds().intersects(m_player->GetSprite().getGlobalBounds()))
-	    {
-				if (m_spawnTimer.getElapsedTime().asSeconds() < 1.5f)
-				{
-
-					return;
-				}
-				i->MarkedForDeath();
-			
-				m_spawnTimer.restart();
-				m_player->MakeSound();
-				m_data->Spawner.PlayerSpawn(m_player,&m_data->window);
-				m_data->GameUI.UpdatePlayerLives(UIDisplay::UI::kTakeLife);
-	    }
+		m_data->Spawner.PlayerSpawn(m_player, &m_data->window);
+		m_data->GameUI.UpdatePlayerLives(UIDisplay::UI::kTakeLife);
 	}
 
 }

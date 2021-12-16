@@ -1,5 +1,5 @@
 #pragma once
-#include <memory>
+
 #include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
