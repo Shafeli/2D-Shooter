@@ -153,6 +153,7 @@
     <ClCompile Include="CollisionDection.cpp" />
     <ClCompile Include="DeathAppearanceStrategy.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverState.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="DeathAppearanceStrategy.h" />
     <ClInclude Include="Definition.h" />
     <ClInclude Include="DeltaTime.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameOverState.h" />

@@ -19,7 +19,6 @@ ObjectFactory::ObjectFactory(GameEngine::GameDataRef data)
 {
 }
 
-
 GameObject* ObjectFactory::MakeAI(int spawnCounter)
 {
     //Spawn

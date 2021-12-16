@@ -10,31 +10,22 @@
 	{
 	}
 
+	SplashState::~SplashState()
+	{
+		m_data->assets.Unload(AssetManager::Sound::kSplashScreenLoad);
+	}
+
     // loads texture to asset manager
 	void SplashState::Init()
 	{
-		this->m_data->assets.LoadSound("Vader Sound", gVaderSoundFile);
-		this->m_data->assets.LoadTexture("Death Sprite", gDeathSpriteFile);
-		this->m_data->assets.LoadTexture("Game TItle", gGameTitleFile);
-		this->m_data->assets.LoadSound("Splash Sound", gSplashSoundFile);
-		this->m_data->assets.LoadTexture("Game Over State Background", gGameOverFile);
-		this->m_data->assets.LoadFont("Game Font", gGameFontFile);
-		this->m_data->assets.LoadTexture("Main menu Background", gMainMenuBackgroundFile);
-		this->m_data->assets.LoadTexture("Play Button", gPlayButtonFile);
-		m_data->assets.LoadSound("Click Sound", gClickSoundFile);
-		m_title.setTexture(this->m_data->assets.GetTexture("Game TItle"));
+		m_data->assets.Load(AssetManager::Texture::kGameTitle, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kGameTitleTexture));
+		m_data->assets.Load(AssetManager::Sound::kSplashScreenLoad, gSplashSoundFile);
+	    m_data->assets.Load(AssetManager::Texture::kBackground, gGameBackgroundFile);
+
+		m_title.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kGameTitle));
 		m_title.setPosition((gScreenWidth / 2) - (m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2);
-		m_sound.setBuffer(m_data->assets.GetSound("Splash Sound"));
-		std::cout << "Entered Splash State\n";
-		this->m_data->assets.LoadTexture("Splash State Background", gSplahBackgroundFile);
-		m_background.setTexture(this->m_data->assets.GetTexture("Splash State Background"));
-		this->m_data->assets.LoadTexture("Game State Background", gGameBackgroundFile);
-		m_data->assets.LoadTexture("Player Sprite", gPlayerSpriteFile);
-		m_data->assets.LoadTexture("Target Sprite", gTargetSpriteFile);
-		m_data->assets.LoadTexture("Bullet Sprite", gBulletSpriteFile);
-		m_data->assets.LoadSound("Lazer Sound", gBulletSoundFile);
-		this->m_data->assets.LoadSound("Boom Sound", gDeathSoundFile);
-		m_data->assets.LoadSound("PlayerDeath Sound", gPlayerSoundFile);
+		m_sound.setBuffer(m_data->assets.GetSound(AssetManager::Sound::kSplashScreenLoad));
+		m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));
 	}
 
 	
@@ -63,8 +54,6 @@
 
 		if (this->m_clock.getElapsedTime().asSeconds() > gSplashShowTime)
 		{
-			std::cout << "Exiting Splash State\n";
-
 			m_data->machine.AddState(std::make_unique<MainMenuState>(m_data), true);
 		}
 	}
@@ -74,7 +63,6 @@
 	{
 		//If you see this consider it a error
 		this->m_data->window.clear(sf::Color::Red);
-
 		this->m_data->window.draw(this->m_background);
 		this->m_data->window.draw(this->m_title);
 		this->m_data->window.display();

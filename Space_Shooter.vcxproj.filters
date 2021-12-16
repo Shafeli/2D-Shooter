@@ -79,6 +79,9 @@
     <Filter Include="GameObjects\Strategies\Controlls\PlayerControls">
       <UniqueIdentifier>{28e06706-d12b-4b34-a863-9b86fa9a3613}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FileManager">
+      <UniqueIdentifier>{6a2bfcae-449e-458f-9547-f59a641a06d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StateMachine.cpp">
@@ -163,6 +166,7 @@
     <ClCompile Include="AIControls.cpp">
       <Filter>GameObjects\Strategies\Controlls\AIControls</Filter>
     </ClCompile>
+    <ClCompile Include="FileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -264,5 +268,6 @@
     <ClInclude Include="AIControls.h">
       <Filter>GameObjects\Strategies\Controlls\AIControls</Filter>
     </ClInclude>
+    <ClInclude Include="FileManager.h" />
   </ItemGroup>
 </Project>

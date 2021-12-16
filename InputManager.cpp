@@ -21,7 +21,7 @@ sf::Vector2i InputManager::GetMousePosition(sf::RenderWindow& window)
 	return sf::Mouse::getPosition(window);
 }
 
-bool InputManager::AIsPressed()
+bool InputManager::APressed()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
@@ -30,7 +30,7 @@ bool InputManager::AIsPressed()
 	return false;
 }
 
-bool InputManager::DIsPressed()
+bool InputManager::DPressed()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
@@ -39,7 +39,7 @@ bool InputManager::DIsPressed()
 	return false;
 }
 
-bool InputManager::SpaceIsPressed()
+bool InputManager::SpacePressed()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{

@@ -49,6 +49,7 @@ public:
 	//c'tor takes in reference to Game Data struct
     ////////////////////////////////////////////////////////
 	GameState(GameEngine::GameDataRef data);
+	~GameState();
 
 	// State calls
     ////////////////////////////////////////////////////////
@@ -71,11 +72,7 @@ private:
 	void ProjectileUpdate(float dt);
 	void PlayerUpdate(float dt);
 	void AIUpdate(float dt);
-
-	//TODO: CollisionDection Manager
 	void CollisionDetection();
-
-
 	void MarkedTargetCleanUp();
 	void ProjectileCleanUp();
 

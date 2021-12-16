@@ -24,15 +24,15 @@ void PlayerControls::Execute(GameObject* object, float dt)
         object->GetSprite().move(-object->GetSprite().getGlobalBounds().width / 9, 0.f);
 
 
-    if (m_data->input.AIsPressed())
+    if (m_data->input.APressed())
     {
         object->GetSprite().move(-gPlayerSpeed * dt, 0.f);
     }
-    else if (m_data->input.DIsPressed())
+    else if (m_data->input.DPressed())
     {
         object->GetSprite().move(+gPlayerSpeed * dt, 0.f);
     }
-    if (m_data->input.SpaceIsPressed())
+    if (m_data->input.SpacePressed())
     {
         if (m_rateOfFire.getElapsedTime().asSeconds() > gRateOfFire)
         {

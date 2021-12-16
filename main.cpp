@@ -35,9 +35,9 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
  /////////////////////////////////////////////////////
  //              TODO:
- //- Move window collision in to CollisionDection
+ //- finish file seting up file manager 
  //- High score saving system / leaderboard
- //- slit Controls strategy into classes
+ //- 
  //- 
  //- High Score Leaderboards and saving system with User Choice Name
  //- 
@@ -54,7 +54,7 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
 /////////////////////////////////////////////////////
 //              Bug Report:
-//- spawn shield sometimes doesnt work
+//- 
 //- 
 //-
 //-

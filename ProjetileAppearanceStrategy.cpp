@@ -9,7 +9,7 @@ ProjetileAppearanceStrategy::ProjetileAppearanceStrategy(GameEngine::GameDataRef
 
 void ProjetileAppearanceStrategy::SetAppearance(GameEngine::Sprite* toChange)
 {
-    toChange->setTexture(m_data->assets.GetTexture("Bullet Sprite"));
+    toChange->setTexture(m_data->assets.GetTexture(AssetManager::Texture::kLazer));
     m_sprite = toChange;
     switch(static_cast<int>(m_color))
     {

@@ -1,7 +1,4 @@
 #include "GameManager.h"
-
-//#include <iostream>
-
 #include "SplashState.h"
 
 GameManager::GameManager(int width, int height, std::string title)

@@ -12,11 +12,33 @@ GameState::GameState(GameEngine::GameDataRef data)
 	m_factory = std::make_unique<ObjectFactory>(data);
 }
 
+GameState::~GameState()
+{
+	m_data->assets.Unload(AssetManager::Texture::kPlayer);
+	m_data->assets.Unload(AssetManager::Texture::kEnemy);
+	m_data->assets.Unload(AssetManager::Texture::kLazer);
+	m_data->assets.Unload(AssetManager::Sound::kLazer);
+	m_data->assets.Unload(AssetManager::Sound::kEnemyDeath);
+	m_data->assets.Unload(AssetManager::Sound::kPlayerDeath);
+	m_data->assets.Unload(AssetManager::Texture::kDeath);
+	
+}
+
 // loads texture to asset manager
 void GameState::Init()
 {
-	m_data->GameUI.Init(&m_data->window, m_data->assets.GetFont("Game Font"), 80);
-	m_background.setTexture(this->m_data->assets.GetTexture("Game State Background"));
+	m_data->assets.Load(AssetManager::Texture::kPlayer, gPlayerSpriteFile);
+	m_data->assets.Load(AssetManager::Texture::kEnemy, gTargetSpriteFile);
+	m_data->assets.Load(AssetManager::Texture::kLazer, gBulletSpriteFile);
+	m_data->assets.Load(AssetManager::Sound::kLazer, gBulletSoundFile);
+	m_data->assets.Load(AssetManager::Sound::kEnemyDeath, gDeathSoundFile);
+	m_data->assets.Load(AssetManager::Sound::kPlayerDeath, gPlayerSoundFile);
+	m_data->assets.Load(AssetManager::Texture::kDeath, gDeathSpriteFile);
+
+	m_data->assets.Load(AssetManager::Font::kGame, gGameFontFile);
+
+	m_data->GameUI.Init(&m_data->window, m_data->assets.GetFont(AssetManager::Font::kGame), 80);
+	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));
 	m_data->GameUI.UpdateRound();
 
 	for (size_t i = 0; i < m_amountOfAI; ++i)
@@ -38,7 +60,6 @@ void GameState::HandleInput()
 		}
 	}
 }
-
 
 void GameState::Update(float dt)
 {
@@ -126,14 +147,14 @@ void GameState::Draw()
 	this->m_data->window.display();
 }
 
-
 //End game check
 ////////////////////////////////////////////////////////
 void GameState::EndGameCheck()
 {	//boot leg way to sleep the thread and allow the deathsound to play 
 	GameEngine::Time time = sf::seconds(1.5f);
 	GameEngine::Sound loss;
-	loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
+	loss.setBuffer(m_data->assets.GetSound(AssetManager::Sound::kPlayerDeath));
+	loss.setVolume(m_data->jukebox.GetMasterVolume());
 	for (const auto& i : m_pTargetList)
 	{
 		if (m_data->collisionDection.DoesObjectTouchWindowBottom(i, &m_data->window))
@@ -192,7 +213,6 @@ void GameState::EndGameCheck()
 		m_player = m_factory->MakePlayer();
 	}
 }
-
 
 //AI Update calls
 ////////////////////////////////////////////////////////

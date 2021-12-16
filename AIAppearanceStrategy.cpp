@@ -8,5 +8,5 @@ AIAppearanceStrategy::AIAppearanceStrategy(GameEngine::GameDataRef data)
 
 void AIAppearanceStrategy::SetAppearance(GameEngine::Sprite* toChange)
 {
-    toChange->setTexture(m_data->assets.GetTexture("Target Sprite"));
+    toChange->setTexture(m_data->assets.GetTexture(AssetManager::Texture::kEnemy));
 }

@@ -6,6 +6,7 @@
 #include "AssetManager.h"
 #include "CollisionDection.h"
 #include "DeltaTime.h"
+#include "FileManager.h"
 #include "InputManager.h"
 #include "MusicManager.h"
 #include "ObjectCleaner.h"
@@ -36,6 +37,7 @@ struct GameData
     MusicManager jukebox;
     UIDisplay GameUI;
     CollisionDection collisionDection;
+    FileManager FilingCabinet;
 };
 
 

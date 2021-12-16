@@ -9,5 +9,5 @@ PlayerAppearanceStrategy::PlayerAppearanceStrategy(GameEngine::GameDataRef data)
 
 void PlayerAppearanceStrategy::SetAppearance(GameEngine::Sprite* toChange)
 {
-    toChange->setTexture(m_data->assets.GetTexture("Player Sprite"));
+    toChange->setTexture(m_data->assets.GetTexture(AssetManager::Texture::kPlayer));
 }

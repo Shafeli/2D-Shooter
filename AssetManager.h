@@ -13,20 +13,41 @@
 
 class AssetManager
 {
+public:
+    enum class Font { kGame };
+    enum class Texture { kPlayer, kBackground, kEnemy, kDeath, kLazer, kGameTitle, kStartButton };
+    enum class Sound { kLazer, kEnemyDeath, kPlayerDeath, kReturnButton, kSplashScreenLoad, kButtonClick };
+
 private:
-    std::map<std::string, sf::Texture> m_textures;
-    std::map<std::string, sf::Font> m_fonts;
-    std::map<std::string, sf::SoundBuffer> m_sounds;
+    std::map<Texture, sf::Texture> m_textures;
+    std::map<Font, sf::Font> m_fonts;
+    std::map<Sound, sf::SoundBuffer> m_sounds;
 
 public:
 
-    void LoadTexture(std::string name, std::string fileName);
-    sf::Texture& GetTexture(std::string name);
+    //Loaders
+    ////////////////////////////////////////////////////
+    void Load(Texture name, std::string fileName);
+    void Load(Font name, std::string fileName);
+    void Load(Sound name, std::string fileName);
 
-    void LoadFont(std::string name, std::string fileName);
-    sf::Font& GetFont(std::string name);
+    //Retrievers
+    ////////////////////////////////////////////////////
+    sf::Texture& GetTexture(Texture name);
+    sf::Font& GetFont(Font name);
+    sf::SoundBuffer& GetSound(Sound name);
 
-    void LoadSound(std::string name, std::string fileName);
-    sf::SoundBuffer& GetSound(std::string name);
+    //unloaders
+    ////////////////////////////////////////////////////
+    void Unload(Sound name);
+    void Unload(Texture name);
+    void Unload(Font name);
 
+private:
+ 
+    //Checkers
+    /////////////////////////////////////////////////////
+    bool IsLoaded(Font key);
+    bool IsLoaded(Texture key);
+    bool IsLoaded(Sound key);
 };

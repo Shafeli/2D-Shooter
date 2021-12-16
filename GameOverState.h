@@ -5,13 +5,7 @@ class GameOverState : public State
 {
 	//Ref to Game data local
     GameEngine::GameDataRef m_data;
-
-	/////////////////////////////////////////////////
-	//clock to keep track of how much time has passed
-	//TODO: after n time switch to main menu state & restart game
-	/////////////////////////////////////////////////
 	GameEngine::Clock m_clock;
-
 	GameEngine::Sprite m_background;
 	GameEngine::Clock m_screenClock;
 	GameEngine::Sound m_MenuSound;
@@ -21,6 +15,7 @@ class GameOverState : public State
 public:
 	//c'tor takes in reference to Game Data struct
 	GameOverState(GameEngine::GameDataRef data);
+	~GameOverState();
 
 	virtual void Init()override final;
 	virtual void HandleInput()override final;

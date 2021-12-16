@@ -21,6 +21,8 @@ class MainMenuState : public State
 public:
 	//c'tor takes in reference to Game Data struct
 	MainMenuState(GameEngine::GameDataRef data);
+	~MainMenuState();
+
 
 	virtual void Init()override final;
 	virtual void HandleInput()override final;

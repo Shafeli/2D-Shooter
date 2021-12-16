@@ -28,6 +28,7 @@ public:
 
 	//c'tor takes in reference to Game Data struct
 	SplashState(GameEngine::GameDataRef data);
+	~SplashState();
 
 	virtual void Init()override final;
 	virtual void HandleInput()override final;

@@ -10,14 +10,23 @@ GameOverState::GameOverState(GameEngine::GameDataRef data)
 
 }
 
+GameOverState::~GameOverState()
+{
+	m_data->assets.Unload(AssetManager::Texture::kStartButton);
+	m_data->assets.Unload(AssetManager::Sound::kReturnButton);
+	m_data->assets.Unload(AssetManager::Font::kGame);
+	
+}
+
 // loads texture to asset manager
 void GameOverState::Init()
 {
-	std::cout << "Entered Game Over State\n";
+	m_data->assets.Load(AssetManager::Texture::kStartButton, gPlayButtonFile);
+	m_data->assets.Load(AssetManager::Sound::kReturnButton, gVaderSoundFile);
 
-	m_MenuSound.setBuffer(m_data->assets.GetSound("Vader Sound"));
-	m_background.setTexture(this->m_data->assets.GetTexture("Game Over State Background"));
-	m_button.setTexture(this->m_data->assets.GetTexture("Play Button"));
+	m_MenuSound.setBuffer(m_data->assets.GetSound(AssetManager::Sound::kReturnButton));
+	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));
+	m_button.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kStartButton));
 	m_button.setScale(GameEngine::Vector2f(0.2f, 0.2f));
 	m_button.setPosition((gScreenWidth / 2) - (m_button.getGlobalBounds().width / 2), (gScreenHeight / 2) - (m_button.getGlobalBounds().height / 2));
 	m_MenuSound.setVolume(25);
@@ -45,21 +54,18 @@ void GameOverState::Update(float dt)
 	m_data->jukebox.CheckMusic();
 	if (this->m_clock.getElapsedTime().asSeconds() > 234)
 	{
-		std::cout << "Exiting Splash State\n";
 		m_data->machine.AddState(std::make_unique<MainMenuState>(m_data), true);
 	}
 
 
 	if (m_data->input.IsSpriteClicked(m_button, sf::Mouse::Left, m_data->window))
 	{
-		std::cout << "Button CLicked :: Moving TO Game State\n";
 
 		//plays click sound 
 		m_MenuSound.play();
 		//wait time for sound to go off boot leg but it works 
 		GameEngine::Time time = sf::seconds(2.1f);
 		sleep(time);
-
 		//after sleep move state
 		m_data->machine.AddState(std::make_unique<MainMenuState>(m_data), true);
 	}
@@ -68,10 +74,10 @@ void GameOverState::Update(float dt)
 //renders state 
 void GameOverState::Draw()
 {
-	this->m_data->window.clear(GameEngine::Color::Red);
 
+	this->m_data->window.clear(GameEngine::Color::Red);
 	this->m_data->window.draw(this->m_background);
 	this->m_data->window.draw(this->m_button);
-
+	m_data->GameUI.Draw(&m_data->window);
 	this->m_data->window.display();
 }
