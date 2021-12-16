@@ -134,9 +134,9 @@ void GameState::EndGameCheck()
 	GameEngine::Time time = sf::seconds(1.5f);
 	GameEngine::Sound loss;
 	loss.setBuffer(m_data->assets.GetSound("PlayerDeath Sound"));
-	for (auto& i : m_pTargetList)
+	for (const auto& i : m_pTargetList)
 	{
-		if (i->GetSprite().getPosition().y >= (m_data->window.getSize().y - i->GetSprite().getGlobalBounds().height))
+		if (m_data->collisionDection.DoesObjectTouchWindowBottom(i, &m_data->window))
 	    {
 			loss.play();
 			sleep(time);
@@ -274,6 +274,8 @@ void GameState::ProjectileCleanUp()
 	m_data->grabage.Cleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
 }
 
+// Draw UI calls
+////////////////////////////////////////////////////////
 void GameState::DrawUI()
 {
 	m_data->GameUI.Draw(&m_data->window);

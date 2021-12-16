@@ -9,9 +9,9 @@ class IControls;
 class GameObject : std::enable_shared_from_this<GameObject>
 {
     GameEngine::GameDataRef m_data;
-    sf::Sprite m_sprite;
-    sf::Clock m_rateOfFire;
-    sf::Clock m_DeathTimer;
+    GameEngine::Sprite m_sprite;
+    GameEngine::Clock m_rateOfFire;
+    GameEngine::Clock m_DeathTimer;
 
     std::shared_ptr<IControls> m_pControlType;
     std::vector<std::shared_ptr<IAppearanceStrategy>> m_pAppearanceStrategy;

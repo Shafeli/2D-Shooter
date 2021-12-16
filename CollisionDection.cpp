@@ -24,7 +24,7 @@ bool CollisionDection::DoesObjectOverlap(const ObjectVector& listOne, const Obje
 
 //Did AI Hit Player
 ////////////////////////////////////////////////////////
-bool CollisionDection::IsPlayerHitDetection(ObjectVector& list, Object* object, Clock& timer)
+bool CollisionDection::IsPlayerHitDetection(const ObjectVector& list, Object* object, Clock& timer)
 {
 	//if player is not hit return false
 	//if player spawn timer is not over 1.5s return false
@@ -43,6 +43,42 @@ bool CollisionDection::IsPlayerHitDetection(ObjectVector& list, Object* object, 
 			object->MakeSound();
 			return true;
 		}
+	}
+	return false;
+}
+
+bool CollisionDection::DoesObjectTouchWindowLeft(Object* object)
+{
+	if (object->GetSprite().getGlobalBounds().left <= 0.f)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool CollisionDection::DoesObjectTouchWindowRight(Object* object, const sf::RenderWindow* window)
+{
+	if (object->GetSprite().getGlobalBounds().left + object->GetSprite().getGlobalBounds().width >= window->getSize().x)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool CollisionDection::DoesObjectTouchWindowTop(Object* object, const sf::RenderWindow* window)
+{
+	if (object->GetSprite().getPosition().y <= static_cast<float>(window->getSize().y) / window->getSize().y)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool CollisionDection::DoesObjectTouchWindowBottom(Object* object, const sf::RenderWindow* window)
+{
+	if (object->GetSprite().getPosition().y > static_cast<float>(window->getSize().y))
+	{
+		return true;
 	}
 	return false;
 }

@@ -16,6 +16,13 @@ public:
 
 	//Did AI Hit Player
 	////////////////////////////////////////////////////////
-	bool IsPlayerHitDetection(ObjectVector& list, Object* object, Clock& timer);
+	bool IsPlayerHitDetection(const ObjectVector& list, Object* object, Clock& timer);
+
+	//Window Collision
+    ////////////////////////////////////////////////////////
+	bool DoesObjectTouchWindowLeft(Object* object);
+	bool DoesObjectTouchWindowRight(Object* object, const sf::RenderWindow* window);
+	bool DoesObjectTouchWindowTop(Object* object, const sf::RenderWindow* window);
+	bool DoesObjectTouchWindowBottom(Object* object, const sf::RenderWindow* window);
 
 };

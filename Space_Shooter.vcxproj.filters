@@ -31,24 +31,6 @@
     <Filter Include="Definitions">
       <UniqueIdentifier>{2364e532-8951-465a-b3e4-c60096d8e1b9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="States\GameState\GameObjects">
-      <UniqueIdentifier>{150450be-887b-4944-99be-2887952a7613}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies">
-      <UniqueIdentifier>{174871b0-02de-44a6-ba9f-9aab8de8406e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Factories">
-      <UniqueIdentifier>{4124a6c9-ac8c-4a54-accd-6076c2091cae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\Controlls">
-      <UniqueIdentifier>{5814f1d2-eed3-4175-8c03-3624f6e1368d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\AppearanceStrategies">
-      <UniqueIdentifier>{2cea5c56-3b0b-4944-a575-542e3cac2ead}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="States\GameState\GameObjects\Strategies\SoundStrategies">
-      <UniqueIdentifier>{4d4a26dd-5189-4e0d-9ba5-f460ada8e43f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ObjectCleaner">
       <UniqueIdentifier>{41abf3e5-90ac-4735-9d0b-5d39e445c4de}</UniqueIdentifier>
     </Filter>
@@ -69,6 +51,33 @@
     </Filter>
     <Filter Include="CollisionDection Manager">
       <UniqueIdentifier>{31bed126-a58e-4c61-af22-17d6405d5471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{150450be-887b-4944-99be-2887952a7613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Strategies">
+      <UniqueIdentifier>{174871b0-02de-44a6-ba9f-9aab8de8406e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Strategies\Controlls">
+      <UniqueIdentifier>{5814f1d2-eed3-4175-8c03-3624f6e1368d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Strategies\AppearanceStrategies">
+      <UniqueIdentifier>{2cea5c56-3b0b-4944-a575-542e3cac2ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Strategies\SoundStrategies">
+      <UniqueIdentifier>{4d4a26dd-5189-4e0d-9ba5-f460ada8e43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Factories">
+      <UniqueIdentifier>{4124a6c9-ac8c-4a54-accd-6076c2091cae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Strategies\Controlls\ProjectileControls">
+      <UniqueIdentifier>{f8441548-fbd9-4e23-9a47-f186eb86de42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Strategies\Controlls\AIControls">
+      <UniqueIdentifier>{a513e554-afb0-47a7-a2d9-c84796561fe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Strategies\Controlls\PlayerControls">
+      <UniqueIdentifier>{28e06706-d12b-4b34-a863-9b86fa9a3613}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -98,34 +107,31 @@
       <Filter>States\GameOverState</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>States\GameState\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="IControls.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
+      <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="ObjectFactory.cpp">
-      <Filter>States\GameState\GameObjects\Factories</Filter>
+      <Filter>GameObjects\Factories</Filter>
     </ClCompile>
     <ClCompile Include="PlayerAppearanceStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClCompile>
     <ClCompile Include="AIAppearanceStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClCompile>
     <ClCompile Include="ProjetileAppearanceStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClCompile>
     <ClCompile Include="ProjectileSoundStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+      <Filter>GameObjects\Strategies\SoundStrategies</Filter>
     </ClCompile>
     <ClCompile Include="AISoundStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+      <Filter>GameObjects\Strategies\SoundStrategies</Filter>
     </ClCompile>
     <ClCompile Include="PlayerSoundStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+      <Filter>GameObjects\Strategies\SoundStrategies</Filter>
     </ClCompile>
     <ClCompile Include="DeathAppearanceStrategy.cpp">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClCompile>
     <ClCompile Include="ObjectCleaner.cpp">
       <Filter>ObjectCleaner</Filter>
@@ -145,7 +151,18 @@
     <ClCompile Include="DeltaTime.cpp">
       <Filter>DeltaTime</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionDection.cpp" />
+    <ClCompile Include="CollisionDection.cpp">
+      <Filter>CollisionDection Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileControls.cpp">
+      <Filter>GameObjects\Strategies\Controlls\ProjectileControls</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerControls.cpp">
+      <Filter>GameObjects\Strategies\Controlls\PlayerControls</Filter>
+    </ClCompile>
+    <ClCompile Include="AIControls.cpp">
+      <Filter>GameObjects\Strategies\Controlls\AIControls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -179,40 +196,40 @@
       <Filter>States\GameOverState</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>States\GameState\GameObjects</Filter>
+      <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="IControls.h">
-      <Filter>States\GameState\GameObjects\Strategies\Controlls</Filter>
+      <Filter>GameObjects\Strategies\Controlls</Filter>
     </ClInclude>
     <ClInclude Include="ObjectFactory.h">
-      <Filter>States\GameState\GameObjects\Factories</Filter>
+      <Filter>GameObjects\Factories</Filter>
     </ClInclude>
     <ClInclude Include="IAppearanceStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClInclude>
     <ClInclude Include="PlayerAppearanceStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClInclude>
     <ClInclude Include="AIAppearanceStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClInclude>
     <ClInclude Include="ProjetileAppearanceStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClInclude>
     <ClInclude Include="ISoundStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+      <Filter>GameObjects\Strategies\SoundStrategies</Filter>
     </ClInclude>
     <ClInclude Include="ProjectileSoundStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+      <Filter>GameObjects\Strategies\SoundStrategies</Filter>
     </ClInclude>
     <ClInclude Include="PlayerSoundStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+      <Filter>GameObjects\Strategies\SoundStrategies</Filter>
     </ClInclude>
     <ClInclude Include="AISoundStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\SoundStrategies</Filter>
+      <Filter>GameObjects\Strategies\SoundStrategies</Filter>
     </ClInclude>
     <ClInclude Include="DeathAppearanceStrategy.h">
-      <Filter>States\GameState\GameObjects\Strategies\AppearanceStrategies</Filter>
+      <Filter>GameObjects\Strategies\AppearanceStrategies</Filter>
     </ClInclude>
     <ClInclude Include="ObjectCleaner.h">
       <Filter>ObjectCleaner</Filter>
@@ -235,6 +252,17 @@
     <ClInclude Include="DeltaTime.h">
       <Filter>DeltaTime</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionDection.h" />
+    <ClInclude Include="CollisionDection.h">
+      <Filter>CollisionDection Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileControls.h">
+      <Filter>GameObjects\Strategies\Controlls\ProjectileControls</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerControls.h">
+      <Filter>GameObjects\Strategies\Controlls\PlayerControls</Filter>
+    </ClInclude>
+    <ClInclude Include="AIControls.h">
+      <Filter>GameObjects\Strategies\Controlls\AIControls</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

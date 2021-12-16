@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AIAppearanceStrategy.cpp" />
+    <ClCompile Include="AIControls.cpp" />
     <ClCompile Include="AISoundStrategy.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="CollisionDection.cpp" />
@@ -156,7 +157,6 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameOverState.cpp" />
     <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="IControls.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
@@ -164,7 +164,9 @@
     <ClCompile Include="ObjectCleaner.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="PlayerAppearanceStrategy.cpp" />
+    <ClCompile Include="PlayerControls.cpp" />
     <ClCompile Include="PlayerSoundStrategy.cpp" />
+    <ClCompile Include="ProjectileControls.cpp" />
     <ClCompile Include="ProjectileSoundStrategy.cpp" />
     <ClCompile Include="ProjetileAppearanceStrategy.cpp" />
     <ClCompile Include="SizeManager.cpp" />
@@ -175,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIAppearanceStrategy.h" />
+    <ClInclude Include="AIControls.h" />
     <ClInclude Include="AISoundStrategy.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="CollisionDection.h" />
@@ -195,7 +198,9 @@
     <ClInclude Include="ObjectCleaner.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="PlayerAppearanceStrategy.h" />
+    <ClInclude Include="PlayerControls.h" />
     <ClInclude Include="PlayerSoundStrategy.h" />
+    <ClInclude Include="ProjectileControls.h" />
     <ClInclude Include="ProjectileSoundStrategy.h" />
     <ClInclude Include="ProjetileAppearanceStrategy.h" />
     <ClInclude Include="SizeManager.h" />

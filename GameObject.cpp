@@ -51,7 +51,7 @@ void GameObject::SetControls(std::shared_ptr<IControls> controls)
 void GameObject::Update(float dt)
 {
     //if(m_isAlive)
-    m_pControlType->Execute(m_sprite, dt);
+    m_pControlType->Execute(this, dt);
 }
 
 ///////////////////////////////////////////

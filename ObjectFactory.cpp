@@ -3,12 +3,15 @@
 #include <memory>
 
 #include "AIAppearanceStrategy.h"
+#include "AIControls.h"
 #include "AISoundStrategy.h"
 #include "DeathAppearanceStrategy.h"
 #include "IControls.h"
 #include "IAppearanceStrategy.h"
 #include "PlayerAppearanceStrategy.h"
+#include "PlayerControls.h"
 #include "PlayerSoundStrategy.h"
+#include "ProjectileControls.h"
 #include "ProjectileSoundStrategy.h"
 
 ObjectFactory::ObjectFactory(GameEngine::GameDataRef data)
@@ -39,19 +42,14 @@ GameObject* ObjectFactory::MakeAI(int spawnCounter)
     AI->SetSound(sound);
     AI->SetAppearanceStrategy(appearance);
     AI->SetAppearanceStrategy(appearanceTwo);
-
- 
     AI->SetControls(controls);
-
     AI->GameObjectInit();
-
     return AI;
 }
 
 GameObject* ObjectFactory::MakePlayer()
 {
- 
-    auto player = new GameObject(m_data);
+    const auto player = new GameObject(m_data);
 
     //Controls
     const std::shared_ptr<IControls> controls = std::make_shared<PlayerControls>(m_data);

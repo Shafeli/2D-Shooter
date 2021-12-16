@@ -35,12 +35,13 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
  /////////////////////////////////////////////////////
  //              TODO:
+ //- Move window collision in to CollisionDection
  //- High score saving system / leaderboard
- //- Improve AI spawning system ---- good enough for now
- //- Improve Player Life System -- better -- still not 100%
+ //- slit Controls strategy into classes
+ //- 
  //- High Score Leaderboards and saving system with User Choice Name
- //- Make a scrubber for failed AI spawns
- //- Updated Collision System 
+ //- 
+ //-  
  //- 
  //- 
  //- Enum system for loading and retrieving assets  
