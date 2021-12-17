@@ -19,7 +19,7 @@ void AIControls::Execute(GameObject* object, float dt)
 {
     if (s_moveDown)
     {
-        object->GetSprite().move(0, gTargetYAxisDecreaseAmount);
+        object->GetSprite().move(0, m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAIDecressTimer));
     }
     // Check left side of the window
     if (m_data->collisionDection.DoesObjectTouchWindowLeft(object))
@@ -36,7 +36,7 @@ void AIControls::Execute(GameObject* object, float dt)
         if (!m_data->collisionDection.DoesObjectTouchWindowLeft(object))
 #pragma warning(default : 4804)
         {
-            object->GetSprite().move(-gTargetSpeed * dt, 0.f);
+            object->GetSprite().move(-m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAISpeed) * dt, 0.f);
         }
         if (m_data->collisionDection.DoesObjectTouchWindowLeft(object))
         {
@@ -52,7 +52,7 @@ void AIControls::Execute(GameObject* object, float dt)
     }
     if (s_moveSwitch == true)
     {
-        object->GetSprite().move(+gTargetSpeed * dt, 0.f);
+        object->GetSprite().move(+m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAISpeed) * dt, 0.f);
         if (object->GetSprite().getGlobalBounds().left + object->GetSprite().getGlobalBounds().width >= m_data->window.getSize().x)
         {
 
@@ -76,7 +76,7 @@ bool AIControls::FireShot()
     const GameEngine::Time time = m_rateOfFire.getElapsedTime();
     const unsigned seed = std::chrono::steady_clock::now().time_since_epoch().count();
     std::default_random_engine engine(seed);
-    const std::uniform_int_distribution<int>distro(0, gAIRandomFire);
+    const std::uniform_int_distribution<int>distro(0, m_data->FilingCabinet.GetConfigInt(FileManager::FileData::kAIRandomFireDistro));
     if (!m_fireShot && time > sf::seconds(distro(engine)))
     {
         m_fireShot = true;

@@ -21,6 +21,8 @@ GameState::~GameState()
 	m_data->assets.Unload(AssetManager::Sound::kEnemyDeath);
 	m_data->assets.Unload(AssetManager::Sound::kPlayerDeath);
 	m_data->assets.Unload(AssetManager::Texture::kDeath);
+	delete m_player;
+	m_player = nullptr;
 	
 }
 
@@ -228,9 +230,9 @@ void GameState::AIUpdate(float dt)
 		sf::Time time = m_rateOfFire.getElapsedTime();
 		if (i->OnUse())
 		{
-			if (time > sf::seconds(gAIRateOfFireInSeconds))
+			if (time > sf::seconds(m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAIRateOfFire)))
 			{
-				m_pAIBulletList.push_back(m_factory->MakeProjectile(i->GetPOS(), gAIBulletYAxisAmount,ProjetileAppearanceStrategy::ProjectileColor::kEmey));
+				m_pAIBulletList.push_back(m_factory->MakeProjectile(i->GetPOS(),m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAIProjectileSpeed), ProjetileAppearanceStrategy::ProjectileColor::kEmey));
 				m_pAIBulletList.at(0)->MakeSound();
 				m_rateOfFire.restart();
 			}
@@ -322,12 +324,12 @@ void GameState::PlayerUpdate(float dt)
 			if (m_player->OnUse())
 			{
 				//left side gun
-				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(m_player->GetPOS(), -gPlayerBulletYAxisAmount,ProjetileAppearanceStrategy::ProjectileColor::kPlayer));
+				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(m_player->GetPOS(), -m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kPlayerProjectileSpeed),ProjetileAppearanceStrategy::ProjectileColor::kPlayer));
 				//right side gun
 				GameEngine::Vector2f newBulletPos;
 				newBulletPos.x = m_player->GetSprite().getGlobalBounds().width + (m_player->GetPOS().x - 20);
 				newBulletPos.y = m_player->GetPOS().y;
-				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(newBulletPos, -gPlayerBulletYAxisAmount,ProjetileAppearanceStrategy::ProjectileColor::kPlayer));
+				m_pPlayerBulletList.push_back(m_factory->MakeProjectile(newBulletPos, -m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kPlayerProjectileSpeed), ProjetileAppearanceStrategy::ProjectileColor::kPlayer));
 				m_pPlayerBulletList.at(0)->MakeSound();
 			
 			}

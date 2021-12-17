@@ -52,7 +52,7 @@
 			soundSwitch = false;
 		}
 
-		if (this->m_clock.getElapsedTime().asSeconds() > gSplashShowTime)
+		if (this->m_clock.getElapsedTime().asSeconds() > m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kSplashShowTime))
 		{
 			m_data->machine.AddState(std::make_unique<MainMenuState>(m_data), true);
 		}

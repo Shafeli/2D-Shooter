@@ -15,7 +15,6 @@ GameOverState::~GameOverState()
 	m_data->assets.Unload(AssetManager::Texture::kStartButton);
 	m_data->assets.Unload(AssetManager::Sound::kReturnButton);
 	m_data->assets.Unload(AssetManager::Font::kGame);
-	
 }
 
 // loads texture to asset manager
@@ -28,7 +27,7 @@ void GameOverState::Init()
 	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));
 	m_button.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kStartButton));
 	m_button.setScale(GameEngine::Vector2f(0.2f, 0.2f));
-	m_button.setPosition((gScreenWidth / 2) - (m_button.getGlobalBounds().width / 2), (gScreenHeight / 2) - (m_button.getGlobalBounds().height / 2));
+	m_button.setPosition((m_data->FilingCabinet.GetConfigInt(FileManager::FileData::kScreenWidth) / 2) - (m_button.getGlobalBounds().width / 2), (m_data->FilingCabinet.GetConfigInt(FileManager::FileData::kScreenHight) / 2) - (m_button.getGlobalBounds().height / 2));
 	m_MenuSound.setVolume(25);
 	m_data->jukebox.CheckMusic();
 }
@@ -67,7 +66,7 @@ void GameOverState::Update(float dt)
 		GameEngine::Time time = sf::seconds(2.1f);
 		sleep(time);
 		//after sleep move state
-		m_data->machine.AddState(std::make_unique<MainMenuState>(m_data), true);
+		this->m_data->window.close();
 	}
 }
 

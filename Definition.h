@@ -11,7 +11,8 @@
 //
 /////////////////////////////////////////////////
 
-
+constexpr int gScreenHeight = 1024;
+constexpr int gScreenWidth = 768;
 
 /////////////////////////////////
 //size of window 
@@ -66,22 +67,22 @@ constexpr auto gBulletSoundFile = "Resources/res/Lazer.wav";
 
 
 
-constexpr int gScreenHeight = 1024;//-
-constexpr int gScreenWidth = 768;//-
-
-constexpr int gAIRandomFire = 78; //-
-constexpr int gBulletSoundLevel = 5; //-
-//             masterSoundLevel   10   //-
-
-
-
-constexpr float gSplashShowTime = 2.5f; //-
-
-constexpr float gPlayerSpeed = 360.f;//-
-constexpr float gRateOfFire = .25f;//-
-constexpr float gPlayerBulletYAxisAmount = 660.f; //-
-
-constexpr float gTargetSpeed = 100.f;//-
-constexpr float gAIRateOfFireInSeconds = .6f; //-
-constexpr float gAIBulletYAxisAmount = 500.f;//-
-constexpr float gTargetYAxisDecreaseAmount = .05f; //-
+//constexpr int gScreenHeight = 1024;//-
+//constexpr int gScreenWidth = 768;//-
+//
+//constexpr int gAIRandomFire = 78; //-
+//constexpr int gBulletSoundLevel = 5; //-
+////             masterSoundLevel   10   //-
+//
+//
+//
+//constexpr float gSplashShowTime = 2.5f; //-
+//
+//constexpr float gPlayerSpeed = 360.f;//-
+//constexpr float gRateOfFire = .25f;//-
+//constexpr float gPlayerBulletYAxisAmount = 660.f; //-
+//
+//constexpr float gTargetSpeed = 100.f;//-
+//constexpr float gAIRateOfFireInSeconds = .6f; //-
+//constexpr float gAIBulletYAxisAmount = 500.f;//-
+//constexpr float gTargetYAxisDecreaseAmount = .05f; //-

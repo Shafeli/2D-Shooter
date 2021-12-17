@@ -1,3 +1,2 @@
-﻿  FileManager.cpp
-C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\FileManager.cpp(3,37): warning C4100: 'data': unreferenced formal parameter
+﻿  GameOverState.cpp
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe

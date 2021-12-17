@@ -26,15 +26,15 @@ void PlayerControls::Execute(GameObject* object, float dt)
 
     if (m_data->input.APressed())
     {
-        object->GetSprite().move(-gPlayerSpeed * dt, 0.f);
+        object->GetSprite().move(-m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kPlayerSpeed) * dt, 0.f);
     }
     else if (m_data->input.DPressed())
     {
-        object->GetSprite().move(+gPlayerSpeed * dt, 0.f);
+        object->GetSprite().move(+m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kPlayerSpeed) * dt, 0.f);
     }
     if (m_data->input.SpacePressed())
     {
-        if (m_rateOfFire.getElapsedTime().asSeconds() > gRateOfFire)
+        if (m_rateOfFire.getElapsedTime().asSeconds() > m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kPlayerRateOfFire))
         {
             m_fireShot = true;
             m_rateOfFire.restart();
