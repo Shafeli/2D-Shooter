@@ -4,6 +4,11 @@
 
 void FileManager::SaveHighScore(int data)
 {
+    if(m_highScore > data)
+    {
+        return;
+    }
+    m_highScore = data;
 }
 
 std::string FileManager::GetFilePath(FileData name)
@@ -20,12 +25,16 @@ float FileManager::GetConfigFloat(FileData name)
 
 int FileManager::GetConfigInt(FileData name)
 {
-    if (IsLoaded(name))
-    return this->m_FileConfigInts.at(name);
+    if (name != FileData::kHighScore)
+    {
+        if (IsLoaded(name))
+            return this->m_FileConfigInts.at(name);
+    }
+    return m_highScore;
 }
 
 
-void FileManager::Load()
+void FileManager::StreamIn()
 {
     std::ifstream file;
     std::string word;
@@ -239,7 +248,30 @@ void FileManager::Load()
             }
         }
     }
+    file.close();
 
+
+    file.open(kGameHighScoreFile);
+    if (file.is_open())
+    {
+        file >> enumKey;
+        file >> intNumber;
+        m_highScore = intNumber;
+    }
+
+}
+
+void FileManager::StreamOut()
+{
+    std::fstream file;
+    file.open(kGameHighScoreFile);
+
+    if (file.is_open())
+    {
+        file << static_cast<int>(FileData::kHighScore) << ' ' << m_highScore;
+
+        file.close();
+    }
 }
 
 bool FileManager::IsLoaded(FileData key)
@@ -250,7 +282,7 @@ bool FileManager::IsLoaded(FileData key)
         {
             if (i.first == key)
             {
-                std::cout << "Sound File Failed" << " " << static_cast<int>(key) << "\n";
+                //std::cout << "Sound File Failed" << " " << static_cast<int>(key) << "\n";
                 return true;
             }
         }
@@ -263,7 +295,7 @@ bool FileManager::IsLoaded(FileData key)
         {
             if (i.first == key)
             {
-                std::cout << "Sound File Failed" << " " << static_cast<int>(key) << "\n";
+               //std::cout << "Sound File Failed" << " " << static_cast<int>(key) << "\n";
                 return true;
             }
         }
@@ -277,7 +309,7 @@ bool FileManager::IsLoaded(FileData key)
         {
             if (i.first == key)
             {
-                std::cout << "Sound File Failed" << " " << static_cast<int>(key) << "\n";
+                //std::cout << "Sound File Failed" << " " << static_cast<int>(key) << "\n";
                 return true;
             }
         }
@@ -290,7 +322,12 @@ bool FileManager::IsLoaded(FileData key)
 //  m_Assetfiles[ key ] = string;
 FileManager::FileManager()
 {
-    Load();
+    StreamIn();
+}
+
+FileManager::~FileManager()
+{
+    
 }
 
 

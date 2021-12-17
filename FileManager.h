@@ -52,23 +52,26 @@ private:
     std::map<FileData, std::string> m_AssetFiles;
     std::map<FileData, int> m_FileConfigInts;
     std::map<FileData, float> m_FileConfigFloats;
+    int m_highScore;
 ///////////////////////////////
 /// File Manager stores constexpers to files
 ///
 /// enum for the data you want is passed in to Get function
 /// Load function parses the file top to bottom then fills the hash up
-/// first number is cast to enum as the key the enum in the map the file
-/// was loaded to and gets the data for the enum
+/// first number is cast to enum as the key for the maps
+/// 
 /// 
 ///////////////////////////////
 public:
+    ~FileManager();
     FileManager();
     void SaveHighScore(int data);
     std::string GetFilePath(FileData name);
     float GetConfigFloat(FileData name);
     int GetConfigInt(FileData name);
-
+    void StreamOut();
+    void StreamIn();
 private:
-    void Load();
     bool IsLoaded(FileData key);
+   
 };

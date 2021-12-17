@@ -1,6 +1,5 @@
 #include "PlayerSoundStrategy.h"
 
-#include "Definition.h"
 
 PlayerSoundStrategy::PlayerSoundStrategy(GameEngine::GameDataRef data)
     :m_data(data)

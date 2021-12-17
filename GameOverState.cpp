@@ -20,6 +20,9 @@ GameOverState::~GameOverState()
 // loads texture to asset manager
 void GameOverState::Init()
 {
+	m_data->GameUI.InitGameUI(&m_data->window, m_data->assets.GetFont(AssetManager::Font::kGame), UIDisplay::UI::kEndGameUI);
+	m_data->GameUI.SetEndGameUIUp(m_data->FilingCabinet.GetConfigInt(FileManager::FileData::kHighScore));
+	m_data->FilingCabinet.StreamOut();
 	m_data->assets.Load(AssetManager::Texture::kStartButton, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kStartButtonTexture));
 	m_data->assets.Load(AssetManager::Sound::kReturnButton, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kReturnButtonSound));
 
@@ -77,6 +80,6 @@ void GameOverState::Draw()
 	this->m_data->window.clear(GameEngine::Color::Red);
 	this->m_data->window.draw(this->m_background);
 	this->m_data->window.draw(this->m_button);
-	m_data->GameUI.Draw(&m_data->window);
+	m_data->GameUI.Draw(&m_data->window, UIDisplay::UI::kEndGameUI);
 	this->m_data->window.display();
 }

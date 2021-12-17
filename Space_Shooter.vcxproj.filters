@@ -166,7 +166,9 @@
     <ClCompile Include="AIControls.cpp">
       <Filter>GameObjects\Strategies\Controlls\AIControls</Filter>
     </ClCompile>
-    <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="FileManager.cpp">
+      <Filter>FileManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="State.h">
@@ -268,6 +270,8 @@
     <ClInclude Include="AIControls.h">
       <Filter>GameObjects\Strategies\Controlls\AIControls</Filter>
     </ClInclude>
-    <ClInclude Include="FileManager.h" />
+    <ClInclude Include="FileManager.h">
+      <Filter>FileManager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

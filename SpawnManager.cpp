@@ -48,6 +48,8 @@ void SpawnManager::YAxiesAdjustment(int spawnCounter)
 
 void SpawnManager::AISpawnPosition(GameObject* toSpawn, sf::RenderWindow* window, int spawnCounter)
 {
+    if (spawnCounter > 100)
+        spawnCounter = 100;
 
     if (spawnCounter %  8 == 0)
         m_ticker = 0;

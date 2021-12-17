@@ -1,6 +1,5 @@
 #include "ProjectileSoundStrategy.h"
 
-#include "Definition.h"
 
 ProjectileSoundStrategy::ProjectileSoundStrategy(GameEngine::GameDataRef data)
     :m_data(data)

@@ -17,34 +17,45 @@ https://en.sfml-dev.org/forums/index.php?topic=16607.0 - SFML Resource Manager D
 https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderTexture.php - RenderTexture Documentation of SFML 2.5.1
 https://www.sfml-dev.org/tutorials/2.5/window-inputs.php - Keyboard, mouse and joystick Documentation of SFML 2.5.1
 https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and music Documentation of SFML 2.5.1
-
-
-
-
  */
 
  /////////////////////////////////////////////////
- //         Main & Gerneral Documentation
- // TODO: documentation
+ //         Gerneral Documentation              //
+ //                                             //
  /////////////////////////////////////////////////
 /*
+
+ State machine runs the flow of the game / app
  
+ a single struck holds the managers for various tasks
  
- 
+     -Asset Manager - > takes in a "FilePath" and a Key for the Asset overloads to Load are different key enum types - for data maps
+     -CollisionDection Manager - > Checks if two Objects have touched and if they did -> Calls Objects MarkForDeath function - or if touching window top/ bottom/ left/ right
+     -File Manager - deals with all things files reads in the config then store data in various maps and are accessed thruogh enum keys
+     -Input Manager - abstracts sf::Key out of game code so replace SFML is a little easyer
+     -Music Manager - plays music and loads music for the game currently does more with files then i would like 
+     -Object Cleaner - loops over vectors pass into it and if MarkedForDeath performs remove_if calls on them and resizes the vecotr
+     -Size Manager - takes in object and resizes their sprites
+     -Spawn Manager - takes in object and adjusts thier poition
+     
+ Eveything in game is a GameObject
+ UI Class is only responsable for drawing UI to the screen - Though arguments can be made that it also controls player live count and score
+ Delta TIme class - Still bouncing the Idea of making it a singlton or now holda (Master Delta time) that is caulculated in GameManager where a tertiary copy of delta time can be if desired
+ Definision holds g_Globals are currently only thing that needs to stay there is Screen Width / Screen Hieght that is only becuz File Manager is not a sigleton yet
  */
 
  /////////////////////////////////////////////////////
  //              TODO:
- //- finish file seting up file manager 
+ //- finish file seting up file manager -> needs refactor
  //- High score saving system / leaderboard
- //- 
- //- 
- //- High Score Leaderboards and saving system with User Choice Name
+ //- File Manager needs checks like Asset Manager has 
+ //- The rate of AI Growth is to much cap it and Maybe slow growth
+ //- move file stuff out of music manager
  //- 
  //-  
  //- 
  //- 
- //- Enum system for loading and retrieving assets  
+ //-  
  //- 
  //- Hit / step behavior
  //- refactor the mess in AI Controller
@@ -54,7 +65,7 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
 /////////////////////////////////////////////////////
 //              Bug Report:
-//- 
+//- moving from EndGameState -> MainMenu -> Game crashes // temp fix close window after game is over // feels bad -- "But time being a factor"
 //- 
 //-
 //-
@@ -63,6 +74,7 @@ https://www.sfml-dev.org/tutorials/2.5/audio-sounds.php - Playing sounds and mus
 
 int main()
 {
+    //only used for musicd
     srand(time(nullptr));
 
     GameManager spaceShooter(gScreenWidth, gScreenHeight, "Space Shooter");

@@ -1,6 +1,5 @@
 #include "GameState.h"
 #include "memory"
-#include "Definition.h"
 #include "GameOverState.h"
 #include "GameObject.h"
 
@@ -36,10 +35,9 @@ void GameState::Init()
 	m_data->assets.Load(AssetManager::Sound::kEnemyDeath, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kEnemyDeathSound));
 	m_data->assets.Load(AssetManager::Sound::kPlayerDeath, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kPlayerDeathSound));
 	m_data->assets.Load(AssetManager::Texture::kDeath, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kDeathTexture));
-
 	m_data->assets.Load(AssetManager::Font::kGame, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kGameFont));
+	m_data->GameUI.InitGameUI(&m_data->window, m_data->assets.GetFont(AssetManager::Font::kGame), UIDisplay::UI::kPlayGameUI);
 
-	m_data->GameUI.Init(&m_data->window, m_data->assets.GetFont(AssetManager::Font::kGame), 80);
 	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));
 	m_data->GameUI.UpdateRound();
 
@@ -187,7 +185,10 @@ void GameState::EndGameCheck()
 			m_pTargetList.push_back(m_factory->MakeAI(i));
 		}
 		m_data->GameUI.UpdateRound();
-		m_amountOfAI += m_data->GameUI.GetRoundCounter();
+
+        m_amountOfAI += m_data->GameUI.GetRoundCounter();
+
+
 		m_data->Spawner.AISpawnLocationReset();
 	}
 
@@ -206,7 +207,8 @@ void GameState::EndGameCheck()
 			i->MarkedForDeath();
 		}
 		//////////////////////////////////
-	
+		
+		m_data->FilingCabinet.SaveHighScore(m_data->GameUI.GetScore());
 		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	}
 	else if (m_data->GameUI.GetLifeCounter() > -1)
@@ -300,7 +302,7 @@ void GameState::ProjectileCleanUp()
 ////////////////////////////////////////////////////////
 void GameState::DrawUI()
 {
-	m_data->GameUI.Draw(&m_data->window);
+	m_data->GameUI.Draw(&m_data->window, UIDisplay::UI::kPlayGameUI);
 }
 
 //Player Update calls
