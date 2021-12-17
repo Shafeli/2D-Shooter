@@ -1,6 +1,6 @@
 #pragma once
 
-// TODO: documentation
+
 /////////////////////////////////////////////////
 //           Definition
 // place for constexpr & globals

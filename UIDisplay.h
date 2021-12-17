@@ -7,7 +7,7 @@ class UIDisplay
 {
 	bool m_inGameUI = false;
 	bool m_endGameUI = false;
-
+	sf::Text m_highScore;
 	sf::Text m_scoreText;
 	sf::Text m_livesText;
 	sf::Text m_roundText;
@@ -17,7 +17,7 @@ class UIDisplay
 	sf::Int32 m_roundCounter = 0;
 
 public:
-	//just in case i can get to power ups, this could help
+	
 	enum class UI{ kTakeLife, kGiveExtraLife, kEndGameUI, kPlayGameUI};
 
 	sf::Int32 GetScore() { return m_playerScore; }
