@@ -9,13 +9,13 @@
         : m_data(data)
 	{
 	}
-
+	//unloads data from the maps that are no longger in use
 	SplashState::~SplashState()
 	{
 		m_data->assets.Unload(AssetManager::Sound::kSplashScreenLoad);
 	}
 
-    // loads texture to asset manager
+	// loads texture to asset manager & sets textures 
 	void SplashState::Init()
 	{
 		m_data->assets.Load(AssetManager::Texture::kGameTitle, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kGameTitleTexture));

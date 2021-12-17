@@ -11,6 +11,7 @@ ProjectileControls::ProjectileControls(GameEngine::GameDataRef data, float direc
 {
 }
 
+//once spawning move m_direction * delta time
 void ProjectileControls::Execute(GameObject* object, float dt)
 {
     object->GetSprite().move(0, m_direction * dt);

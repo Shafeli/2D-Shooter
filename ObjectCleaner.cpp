@@ -4,6 +4,7 @@
 #include <iostream>
 #include "GameObject.h"
 
+// takes in a vecotr checks if sweeper has moved and object off screen and removes them
 void ObjectCleaner::Cleaner(ObjectVector& list, sf::RenderWindow* window, Type type)const
 {
 #if SHOW_REMOVALS
@@ -92,7 +93,7 @@ void ObjectCleaner::Cleaner(ObjectVector& list, sf::RenderWindow* window, Type t
 	}
 #endif
 }
-
+//takes in a vecotr and window + (type->for logging) removes marked objects and resizes the vector 
 void ObjectCleaner::MarkedObjectCleaner(ObjectVector& list, sf::RenderWindow* window, Type type)const
 {
 #if SHOW_MARKED_TARGET_REMOVAL
@@ -130,6 +131,7 @@ void ObjectCleaner::MarkedObjectCleaner(ObjectVector& list, sf::RenderWindow* wi
 
 }
 
+//moves an object off screen
 void ObjectCleaner::Sweeper(Object* object, sf::RenderWindow& window, Type type)const
 {
 #if SHOW_TARGET_MOVED
@@ -144,7 +146,7 @@ void ObjectCleaner::Sweeper(Object* object, sf::RenderWindow& window, Type type)
 #endif
     object->GetSprite().setPosition(0, static_cast<float>(window.getSize().y) * static_cast<float>(window.getSize().y));
 }
-
+//moves sprite off screen -- used to solve a bug -- should be replaced after -- fix 
 void ObjectCleaner::Sweeper(sf::Sprite* sprite, sf::RenderWindow& window, Type type)const
 {
 #if SHOW_TARGET_MOVED

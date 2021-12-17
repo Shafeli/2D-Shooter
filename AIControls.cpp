@@ -14,9 +14,14 @@ AIControls::AIControls(GameEngine::GameDataRef data)
     :m_data(data)
 {
 }
+// SFML doesnt compile on c++ 17 sad 
+ sf::Clock AIControls::m_moveTimer;
+ bool AIControls::s_moveSwitch = false;
+ bool AIControls::s_moveDown = false;
 
 void AIControls::Execute(GameObject* object, float dt)
 {
+    //if true move down x amount in y axis
     if (s_moveDown)
     {
         object->GetSprite().move(0, m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAIDecressTimer));
@@ -29,9 +34,11 @@ void AIControls::Execute(GameObject* object, float dt)
     if (m_data->collisionDection.DoesObjectTouchWindowRight(object, &m_data->window))
         object->GetSprite().move(-object->GetSprite().getGlobalBounds().width / 9, 0.f);
 
+    //if switch is false move left
     if (s_moveSwitch == false)
     {
 #pragma warning(disable : 4804)
+
         // move to left then tell window edge then move right tell window edge repeat
         if (!m_data->collisionDection.DoesObjectTouchWindowLeft(object))
 #pragma warning(default : 4804)
@@ -50,6 +57,7 @@ void AIControls::Execute(GameObject* object, float dt)
             return;
         }
     }
+    //if switch is true move right
     if (s_moveSwitch == true)
     {
         object->GetSprite().move(+m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAISpeed) * dt, 0.f);
@@ -64,6 +72,7 @@ void AIControls::Execute(GameObject* object, float dt)
             m_moveTimer.restart();
         }
     }
+    //timer resets move bool
     if (m_moveTimer.getElapsedTime().asSeconds() > .3f)
     {
         s_moveDown = false;
@@ -71,6 +80,8 @@ void AIControls::Execute(GameObject* object, float dt)
 }
 
 #pragma warning(disable : 4244)
+//fire shot works by useing a distribution sends down a flag true or false to game where a timer is for rate of fire that either allows the AI to shoot or not
+//the result is all AI randomly get to shoot and game blocks them if they have shot to soon so they "should not" be able to spam shots down
 bool AIControls::FireShot()
 {
     const GameEngine::Time time = m_rateOfFire.getElapsedTime();

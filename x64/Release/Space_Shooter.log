@@ -1,0 +1,82 @@
+﻿  AIAppearanceStrategy.cpp
+  AIControls.cpp
+  AISoundStrategy.cpp
+  AssetManager.cpp
+  CollisionDection.cpp
+  DeathAppearanceStrategy.cpp
+  DeltaTime.cpp
+  FileManager.cpp
+  GameManager.cpp
+  GameObject.cpp
+  GameOverState.cpp
+  GameState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(157,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(185,47): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  InputManager.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,134): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,102): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,74): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,50): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+  main.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\main.cpp(78,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  MainMenuState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(34,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MusicManager.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MusicManager.cpp(5,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ObjectCleaner.cpp
+  ObjectFactory.cpp
+  PlayerAppearanceStrategy.cpp
+  PlayerControls.cpp
+  Compiling...
+  PlayerSoundStrategy.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\PlayerSoundStrategy.cpp(8,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ProjectileControls.cpp
+  ProjectileSoundStrategy.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ProjectileSoundStrategy.cpp(8,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ProjetileAppearanceStrategy.cpp
+  SizeManager.cpp
+  SpawnManager.cpp
+  SplashState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(50,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  StateMachine.cpp
+  UIDisplay.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\FileManager.cpp(319): warning C4715: 'FileManager::IsLoaded': not all control paths return a value
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\FileManager.cpp(24): warning C4715: 'FileManager::GetConfigFloat': not all control paths return a value
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\FileManager.cpp(18): warning C4715: 'FileManager::GetFilePath': not all control paths return a value
+  All 1727 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\x64\Release\Space_Shooter.exe

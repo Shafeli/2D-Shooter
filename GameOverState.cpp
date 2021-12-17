@@ -9,7 +9,7 @@ GameOverState::GameOverState(GameEngine::GameDataRef data)
 {
 
 }
-
+//unloads data from the maps that are no longger in use
 GameOverState::~GameOverState()
 {
 	m_data->assets.Unload(AssetManager::Texture::kStartButton);
@@ -17,7 +17,7 @@ GameOverState::~GameOverState()
 	m_data->assets.Unload(AssetManager::Font::kGame);
 }
 
-// loads texture to asset manager
+// loads texture to asset manager & sets textures 
 void GameOverState::Init()
 {
 	m_data->GameUI.InitGameUI(&m_data->window, m_data->assets.GetFont(AssetManager::Font::kGame), UIDisplay::UI::kEndGameUI);
@@ -31,11 +31,12 @@ void GameOverState::Init()
 	m_button.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kStartButton));
 	m_button.setScale(GameEngine::Vector2f(0.2f, 0.2f));
 	m_button.setPosition((m_data->FilingCabinet.GetConfigInt(FileManager::FileData::kScreenWidth) / 2) - (m_button.getGlobalBounds().width / 2), (m_data->FilingCabinet.GetConfigInt(FileManager::FileData::kScreenHight) / 2) - (m_button.getGlobalBounds().height / 2));
+	//music init
 	m_MenuSound.setVolume(25);
 	m_data->jukebox.CheckMusic();
 }
 
-
+//pole even for closing window 
 void GameOverState::HandleInput()
 {
 	sf::Event event;
@@ -76,7 +77,6 @@ void GameOverState::Update(float dt)
 //renders state 
 void GameOverState::Draw()
 {
-
 	this->m_data->window.clear(GameEngine::Color::Red);
 	this->m_data->window.draw(this->m_background);
 	this->m_data->window.draw(this->m_button);

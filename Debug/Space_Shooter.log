@@ -1,2 +1,76 @@
-﻿  UIDisplay.cpp
+﻿  AIAppearanceStrategy.cpp
+  AISoundStrategy.cpp
+  AssetManager.cpp
+  CollisionDection.cpp
+  DeathAppearanceStrategy.cpp
+  GameManager.cpp
+  GameObject.cpp
+  GameOverState.cpp
+  GameState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\GameState.cpp(157,48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  InputManager.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,134): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,102): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,74): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\InputManager.cpp(8,50): warning C4244: 'argument': conversion from 'const T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+  MainMenuState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MainMenuState.cpp(34,55): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  MusicManager.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\MusicManager.cpp(5,23): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ObjectCleaner.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ObjectCleaner.cpp(96,92): warning C4100: 'type': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ObjectCleaner.cpp(133,76): warning C4100: 'type': unreferenced formal parameter
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ObjectCleaner.cpp(148,80): warning C4100: 'type': unreferenced formal parameter
+  PlayerAppearanceStrategy.cpp
+  PlayerControls.cpp
+  PlayerSoundStrategy.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\PlayerSoundStrategy.cpp(8,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ProjectileControls.cpp
+  ProjectileSoundStrategy.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\ProjectileSoundStrategy.cpp(8,57): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ProjetileAppearanceStrategy.cpp
+  SizeManager.cpp
+  Generating Code...
+  Compiling...
+  SpawnManager.cpp
+  SplashState.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(50,53): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\SplashState.cpp(46,33): warning C4100: 'dt': unreferenced formal parameter
+  UIDisplay.cpp
+  main.cpp
+C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\main.cpp(78,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  LINK : C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe not found or not built by the last incremental link; performing full link
   Space_Shooter.vcxproj -> C:\Users\Ghost\Desktop\SFML Group\Space_Shooter\Debug\Space_Shooter.exe

@@ -19,7 +19,7 @@ MainMenuState::~MainMenuState()
 	m_data->assets.Unload(AssetManager::Sound::kButtonClick);
 }
 
-// loads texture to asset manager
+// loads texture to asset manager & sets textures 
 void MainMenuState::Init()
 {
 	m_data->assets.Load(AssetManager::Texture::kStartButton, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kStartButtonTexture));
@@ -30,14 +30,10 @@ void MainMenuState::Init()
 	m_background.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kBackground));
 	m_title.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kGameTitle));
 	m_playButton.setTexture(this->m_data->assets.GetTexture(AssetManager::Texture::kStartButton));
-
+	
 	m_MenuSound.setVolume(m_data->jukebox.GetMasterVolume());
 	m_data->jukebox.initMusic();
-
-
-
 	m_playButton.setScale(sf::Vector2f(0.2f, 0.2f));
-
 	m_title.setPosition((gScreenWidth / 2) -(m_title.getGlobalBounds().width / 2), m_title.getGlobalBounds().height / 2 );
 	m_playButton.setPosition((gScreenWidth / 2) - (m_playButton.getGlobalBounds().width / 2), (gScreenHeight / 2) - (m_playButton.getGlobalBounds().height / 2));
 }

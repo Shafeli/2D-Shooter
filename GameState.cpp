@@ -11,6 +11,7 @@ GameState::GameState(GameEngine::GameDataRef data)
 	m_factory = std::make_unique<ObjectFactory>(data);
 }
 
+//unloads data from the maps that are no longger in use
 GameState::~GameState()
 {
 	m_data->assets.Unload(AssetManager::Texture::kPlayer);
@@ -25,7 +26,7 @@ GameState::~GameState()
 	
 }
 
-// loads texture to asset manager
+// loads texture to asset manager & sets textures plus builds first AI list & init UI
 void GameState::Init()
 {
 	m_data->assets.Load(AssetManager::Texture::kPlayer, m_data->FilingCabinet.GetFilePath(FileManager::FileData::kPlayerTexture));
@@ -155,6 +156,7 @@ void GameState::EndGameCheck()
 	GameEngine::Sound loss;
 	loss.setBuffer(m_data->assets.GetSound(AssetManager::Sound::kPlayerDeath));
 	loss.setVolume(m_data->jukebox.GetMasterVolume());
+	//checks list of AI to see if any touch the widnow bottom
 	for (const auto& i : m_pTargetList)
 	{
 		if (m_data->collisionDection.DoesObjectTouchWindowBottom(i, &m_data->window))
@@ -164,6 +166,7 @@ void GameState::EndGameCheck()
 			m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	    }
 	}
+	//if AI list is empty
     if (m_pTargetList.empty())
 	{
 		//////////////////////////////////
@@ -176,25 +179,31 @@ void GameState::EndGameCheck()
 		{
 			i->MarkedForDeath();
 		}
-		//////////////////////////////////
 		MarkedTargetCleanUp();
+		//////////////////////////////////
+
+		//reset player to Spawn
 		m_data->Spawner.PlayerSpawn(m_player,&m_data->window);
-		
+
+		//make more AI
 		for (size_t i = 0; i < m_amountOfAI; ++i)
 		{
 			m_pTargetList.push_back(m_factory->MakeAI(i));
 		}
+		//Updata UI
 		m_data->GameUI.UpdateRound();
-
+		//changes about of AI to Spawn next round 
         m_amountOfAI += m_data->GameUI.GetRoundCounter();
 
-
+		//sets new AI to Spawn locations
 		m_data->Spawner.AISpawnLocationReset();
 	}
-
+	//if player live is less then 0 end game
 	if (m_data->GameUI.GetLifeCounter() == -1)
 	{
+		//do player noise 
 		m_player->MakeSound();
+		//sleep thred for noise to play
 		sleep(time);
 		//////////////////////////////////
 		//Clean up for projectiles
@@ -206,11 +215,15 @@ void GameState::EndGameCheck()
 		{
 			i->MarkedForDeath();
 		}
+		MarkedTargetCleanUp();
 		//////////////////////////////////
-		
+
+		//push score to file system 
 		m_data->FilingCabinet.SaveHighScore(m_data->GameUI.GetScore());
+		//move to game over state
 		m_data->machine.AddState(std::make_unique<GameOverState>(m_data), true);
 	}
+	//if player has lifes always make sure it is created
 	else if (m_data->GameUI.GetLifeCounter() > -1)
 	{
 		if(m_player == nullptr)
@@ -222,14 +235,15 @@ void GameState::EndGameCheck()
 ////////////////////////////////////////////////////////
 void GameState::AIUpdate(float dt)
 {
+	//runs every AI's Update 
 	for (const auto& i : m_pTargetList)
 	{
 		i->Update(dt);
 	}
-
+	//checks for AI's fire flag and if time is > then thier Rate of Fire make new projectile 
 	for (const auto& i : m_pTargetList)
 	{
-		sf::Time time = m_rateOfFire.getElapsedTime();
+		GameEngine::Time time = m_rateOfFire.getElapsedTime();
 		if (i->OnUse())
 		{
 			if (time > sf::seconds(m_data->FilingCabinet.GetConfigFloat(FileManager::FileData::kAIRateOfFire)))
@@ -247,6 +261,7 @@ void GameState::AIUpdate(float dt)
 ////////////////////////////////////////////////////////
 void GameState::ProjectileUpdate(float dt)
 {
+	//runs ever projectiles update
 	if (!m_pPlayerBulletList.empty())
 	{
 		for (const auto& i : m_pPlayerBulletList)
@@ -254,6 +269,7 @@ void GameState::ProjectileUpdate(float dt)
 			i->Update(dt);
 		}
 	}
+	//runs ever projectiles update
 	if (!m_pAIBulletList.empty())
 	{
 		for (const auto& i : m_pAIBulletList)
@@ -267,12 +283,12 @@ void GameState::ProjectileUpdate(float dt)
 ////////////////////////////////////////////////////////
 void GameState::CollisionDetection()
 {
-
+	//checks sends to collisionDection & if true update UI
 	if (m_data->collisionDection.DoesObjectOverlap(m_pPlayerBulletList, m_pTargetList))
 		m_data->GameUI.UpdateScore();
 
 	MarkedTargetCleanUp();
-
+	//check sends to collisionDection & if true move player to spawn take a life from UI
 	if(m_data->collisionDection.IsPlayerHitDetection(m_pAIBulletList,m_player,m_spawnTimer))
 	{
 		m_data->Spawner.PlayerSpawn(m_player, &m_data->window);
@@ -285,6 +301,7 @@ void GameState::CollisionDetection()
 ////////////////////////////////////////////////////////
 void GameState::MarkedTargetCleanUp()
 {
+	//Marked target clean up calls 
 	m_data->grabage.MarkedObjectCleaner(m_pTargetList, &m_data->window, ObjectCleaner::Type::kEnemy);
 	m_data->grabage.MarkedObjectCleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
 	m_data->grabage.MarkedObjectCleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
@@ -293,7 +310,7 @@ void GameState::MarkedTargetCleanUp()
 
 void GameState::ProjectileCleanUp()
 {
-	
+	//projectile cleaner calls
 	m_data->grabage.Cleaner(m_pPlayerBulletList, &m_data->window, ObjectCleaner::Type::kPlayerBullet);
 	m_data->grabage.Cleaner(m_pAIBulletList, &m_data->window, ObjectCleaner::Type::kEnemyBullet);
 }
@@ -302,6 +319,7 @@ void GameState::ProjectileCleanUp()
 ////////////////////////////////////////////////////////
 void GameState::DrawUI()
 {
+	//draws UI for game
 	m_data->GameUI.Draw(&m_data->window, UIDisplay::UI::kPlayGameUI);
 }
 
@@ -309,18 +327,20 @@ void GameState::DrawUI()
 ////////////////////////////////////////////////////////
 void GameState::PlayerUpdate(float dt)
 {
+	//if round ! mods 10 giveLife = true 
 	if (m_data->GameUI.GetRoundCounter() % 10 != 0)
 		m_giveLife = true;
-
+	//if giveLive = true and round mods 10 update UI
 	if(m_giveLife == true)
 	if (m_data->GameUI.GetRoundCounter() % 10 == 0)
 	{
 		m_giveLife = false;
 	    m_data->GameUI.UpdatePlayerLives(UIDisplay::UI::kGiveExtraLife);
 	}
+	//if player is not null run update
     if (m_player != nullptr)
 		m_player->Update(dt);
-
+	//if player is not null & player on use flag is true make projectiles
 	if (m_player != nullptr)
 	{
 			if (m_player->OnUse())

@@ -7,6 +7,7 @@ class UIDisplay
 {
 	bool m_inGameUI = false;
 	bool m_endGameUI = false;
+
 	sf::Text m_highScore;
 	sf::Text m_scoreText;
 	sf::Text m_livesText;

@@ -2,13 +2,13 @@
 
 #include <iostream>
 #include "GameObject.h"
-
+//takes in an object and window moves object to a spot on the window
 void SpawnManager::PlayerSpawn(GameObject* toSpawn, const sf::RenderWindow* window)
 {
     toSpawn->GetSprite().setPosition((window->getSize().x / static_cast<float>(2)) - (toSpawn->GetSprite().getGlobalBounds().width / 2),
         window->getSize().y - toSpawn->GetSprite().getGlobalBounds().height);
 }
-
+// helper function for AI assits in spawning loaction scaling
 int SpawnManager::SpawnReset(int spawnCounter)
 {
     int counter = spawnCounter;
@@ -33,7 +33,7 @@ int SpawnManager::SpawnReset(int spawnCounter)
     std::cout << spawnCounter << " : counter was " << counter << '\n';
         return counter;
 }
-
+// helper function for AI assits in spawning loaction scaling
 void SpawnManager::YAxiesAdjustment(int spawnCounter)
 {
     if (spawnCounter < 8)
@@ -45,7 +45,7 @@ void SpawnManager::YAxiesAdjustment(int spawnCounter)
         m_yAxis += 50.f;
     }
 }
-
+// function for AI assits in spawning loaction scaling -- if failed default marks the target for next clean up 
 void SpawnManager::AISpawnPosition(GameObject* toSpawn, sf::RenderWindow* window, int spawnCounter)
 {
     if (spawnCounter > 100)
@@ -89,7 +89,7 @@ void SpawnManager::AISpawnPosition(GameObject* toSpawn, sf::RenderWindow* window
 
     ++m_ticker;
 }
-
+//takes in object and a vecotor2f& of another to spawn on them 
 void SpawnManager::ProjectileSpawn(const sf::Vector2f& pos, GameObject* newObject)
 {
     newObject->GetSprite().setPosition(pos);

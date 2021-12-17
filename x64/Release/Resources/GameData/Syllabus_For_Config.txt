@@ -1,0 +1,27 @@
+3000 Resources/fonts/ARCADE.TTF                 kGameFont
+3001 Resources/res/Player.png                   kPlayerTexture
+3002 Resources/res/DeathStar.jpg                kBackgroundTexture
+3003 Resources/res/Target.png                   kEnemyTexture
+3004 Resources/res/Death.png                    kDeathTexture
+3005 Resources/res/Bullet.png                   kLazerTexture
+3006 Resources/res/title1.png                   kGameTitleTexture
+3007 Resources/res/StartButton.png              kStartButtonTexture
+3008 Resources/res/Lazer.wav                    kLazerSound
+3009 Resources/res/Boom.wav                     kEnemyDeathSound
+3010 Resources/res/PlayerDeath.wav              kPlayerDeathSound
+3011 Resources/res/YouShouldNot.wav             kReturnButtonSound
+3012 Resources/res/SplashScreen.wav             kSplashScreenLoadSound
+3013 Resources/res/MenuSound.ogg                kButtonClickSound
+3014 1024                                       kScreenHight --- not fully supported messing with 
+3015 768                                        kScreenWidth --- not fully supported messing with
+3016 78                                         kAIRandomFireDistro
+3017 5                                          kBulletSoundLevel
+3018 10                                         kMasterSoundLevel
+3019 2.5                                        kSplashShowTime
+3020 360.0                                      kPlayerSpeed
+3021 0.25                                       kPlayerRateOfFire
+3022 660.0                                      kPlayerProjectileSpeed
+3023 100.0                                      kAISpeed
+3024 0.6                                        kAIRateOfFire
+3025 500.0                                      kAIProjectileSpeed
+3026 0.050                                      kAIDecressTimer
